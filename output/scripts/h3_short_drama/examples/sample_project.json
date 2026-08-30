@@ -1,0 +1,86 @@
+{
+  "title": "落魄画师逆袭 · 第一集",
+  "what_if": "一个被同学嘲笑的落魄画师，其实竟是 M 国顶级富豪。",
+  "target_feeling": "爽感 + 反转 + 打脸",
+  "aspect": "9:16",
+  "duration_s": 45,
+  "dialogue_mode": "有对白",
+  "dialogue_language": "中文",
+  "visual_style": "cinematic photorealistic 3D render, warm tungsten interior light, shallow depth of field, film grain",
+  "characters": [
+    {"name": "陈锋", "identity_note": "male 32, lean build, black tousled hair, worn grey hoodie over a plain tee, paint-stained fingertips, calm confident posture; do-not-change: face, haircut, grey hoodie", "image_path": "assets/chen.png", "do_not_change": ["face", "haircut", "grey hoodie"]},
+    {"name": "王总", "identity_note": "male 45, heavy set, slicked hair, loud red silk shirt, gold chain, smug posture; do-not-change: face, red silk shirt", "image_path": "assets/wang.png", "do_not_change": ["face", "red silk shirt"]}
+  ],
+  "scenes": [
+    {"name": "同学聚会餐厅", "description": "upscale restaurant, round table, warm chandeliers, night, other guests blurred in background", "landmarks": ["chandelier: top center", "round-table: center bottom", "red-lamp: right third"], "light_baseline": "key: warm overhead chandelier, fill: soft bounce, mood: slightly smug", "image_path": "assets/scene_restaurant.png"}
+  ],
+  "shots": [
+    {
+      "shot_id": "S01", "duration_s": 15,
+      "continuity_handoff": "Open on Wang's smug close-up; sets up Chen as the target of mockery for the next shot.",
+      "fixed_landmarks": ["chandelier: top center", "round-table: center bottom"],
+      "char_positions": {"王总": "center, midground, facing left, smug", "陈锋": "off-frame-left initially"},
+      "exited_chars": [],
+      "lighting_baseline": "key: warm overhead chandelier, fill: soft bounce",
+      "hook_type": "suspense",
+      "shot_description": "medium close-up of Wang leaning back, sneering at someone off-frame; table chatter blurs behind.",
+      "per_second": [
+        {"rng": "0-3s", "action": "Wang leans back, gold chain sways, smug smile", "camera": "slow push-in", "spatial": "Wang center, chandelier top, table bottom", "audio": "table chatter low + laugh", "handoff": "locks Wang center smug"},
+        {"rng": "3-7s", "action": "Wang gestures dismissively toward frame-left", "camera": "hold, slight pan left", "spatial": "hand enters frame-left, pointing off-screen", "audio": "Wang's laugh", "handoff": "eye-line toward Chen"},
+        {"rng": "7-11s", "action": "Chen's shoulder + back of grey hoodie enter frame-left", "camera": "rack focus to Chen's back", "spatial": "Chen left third, Wang right third", "audio": "chatter drops", "handoff": "two-shot established"},
+        {"rng": "11-15s", "action": "Wang taps table mockingly", "camera": "push to Wang's face", "spatial": "Wang center close", "audio": "table-tap + sneer SFX", "handoff": "end on Wang's mocking line"}
+      ],
+      "dialogue": [{"text": "就这？画个画糊口，也好意思坐我们这桌？", "speaker_id": "王总", "tone": "sneer", "time_range": "12-15s", "is_diegetic": true}],
+      "sfx": ["chair-creak", "table-tap", "low-table-chatter"],
+      "mode": "I2VA", "video_model": "H3", "resolution_tier": "768P",
+      "references": [{"label": "<Picture 1>", "kind": "person", "char": "陈锋", "retention": "fully_preserved", "retention_note": "retain face + grey hoodie of Chen", "path": "assets/chen.png", "description": "the man in the worn grey hoodie, paint-stained fingertips"}],
+      "first_frame": "assets/chen.png"
+    },
+    {
+      "shot_id": "S02", "duration_s": 15,
+      "continuity_handoff": "Chen turns from Wang's mockery; same table/landmarks; his calm face reveals the reversal is coming.",
+      "fixed_landmarks": ["chandelier: top center", "round-table: center bottom"],
+      "char_positions": {"陈锋": "center, midground, facing camera, calm", "王总": "right third, midground, off-balance"},
+      "exited_chars": [],
+      "lighting_baseline": "key: warm overhead, fill: soft bounce; modifier: Chen rim-lit by chandelier",
+      "hook_type": "reversal",
+      "shot_description": "Chen turns slowly, unbothered, a faint smile; Wang's smug cracks.",
+      "per_second": [
+        {"rng": "0-3s", "action": "Chen turns head toward camera, calm", "camera": "slow reveal push", "spatial": "Chen center, Wang right", "audio": "chatter cuts to near-silence", "handoff": "eye contact locked"},
+        {"rng": "3-7s", "action": "Chen's faint smile, eyes flat", "camera": "hold on Chen's face", "spatial": "Chen center close", "audio": "a beat of silence", "handoff": "smile holds"},
+        {"rng": "7-11s", "action": "Wang leans forward confused, smug breaks", "camera": "quick cut to Wang", "spatial": "Wang right third, leaning in", "audio": "Wang's breath catches", "handoff": "Wang unsettled"},
+        {"rng": "11-15s", "action": "Chen raises one hand, slow, controlled", "camera": "low angle on Chen's hand", "spatial": "hand center, phone not yet shown", "audio": "low drone in", "handoff": "hand raised, phone off-frame"}
+      ],
+      "dialogue": [{"text": "坐下。我打个电话，你们就懂了我为什么不来。", "speaker_id": "陈锋", "tone": "calm, flat", "time_range": "4-8s", "is_diegetic": true}],
+      "sfx": ["low-drone-rise"],
+      "mode": "I2VA", "video_model": "H3", "resolution_tier": "768P",
+      "references": [{"label": "<Picture 1>", "kind": "person", "char": "陈锋", "retention": "fully_preserved", "retention_note": "retain face + grey hoodie of Chen", "path": "assets/chen.png", "description": "the man in the worn grey hoodie"}],
+      "first_frame": "assets/chen.png",
+      "continuity_type": "latent_pin", "airlock_s": 1.5
+    },
+    {
+      "shot_id": "S03", "duration_s": 15,
+      "continuity_handoff": "Phone connects; cut on the moment of the 'click' to the reveal — the strong closing hook.",
+      "fixed_landmarks": ["chandelier: top center", "round-table: center bottom"],
+      "char_positions": {"陈锋": "center, holding phone, calm", "王总": "left third, pale, recoiling"},
+      "exited_chars": [],
+      "lighting_baseline": "key: warm overhead; modifier: screen glow on Wang's face",
+      "hook_type": "reveal",
+      "shot_description": "The phone connects to a head office; an operator's voice over the loudspeaker; Wang goes pale; end on the reveal.",
+      "per_second": [
+        {"rng": "0-3s", "action": "Chen holds phone to speaker, calm", "camera": "close on phone + Chen's jaw", "spatial": "phone center, chin below", "audio": "phone connect tone + operator voice 'Mr. Chen, the M Group board awaits your return'", "handoff": "reveal audio lands"},
+        {"rng": "3-7s", "action": "Wang's face drains of colour, hand drops", "camera": "snap to Wang close", "spatial": "Wang left third, recoiling", "audio": "operator voice continues, table silent", "handoff": "Wang realizes"},
+        {"rng": "7-11s", "action": "Other guests turn, gasp", "camera": "pan across blurred faces", "spatial": "blurred guests background", "audio": "collective gasp SFX", "handoff": "room reacts"},
+        {"rng": "11-15s", "action": "Chen lowers phone, looks at camera, faint smile", "camera": "slow pull to medium", "spatial": "Chen center, Wang small in background", "audio": "operator 'we will arrange the jet' + music sting", "handoff": "end on Chen's confident close-up + sting"}
+      ],
+      "dialogue": [
+        {"text": "陈先生，M 集团董事会等您回来主持，专机正在安排。", "speaker_id": "S3", "tone": "operator, formal, over speakerphone", "time_range": "0-3s", "is_diegetic": false}
+      ],
+      "sfx": ["phone-connect", "collective-gasp", "music-sting"],
+      "mode": "I2VA", "video_model": "H3", "resolution_tier": "768P",
+      "references": [{"label": "<Picture 1>", "kind": "person", "char": "陈锋", "retention": "fully_preserved", "retention_note": "retain face + grey hoodie of Chen", "path": "assets/chen.png", "description": "the man in the worn grey hoodie"}, {"label": "<Picture 2>", "kind": "person", "char": "王总", "retention": "fully_preserved", "retention_note": "retain face + red silk shirt of Wang", "path": "assets/wang.png", "description": "the man in the red silk shirt and gold chain"}],
+      "first_frame": "assets/chen.png",
+      "continuity_type": "latent_pin", "airlock_s": 1.0
+    }
+  ]
+}

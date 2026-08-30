@@ -1,0 +1,64 @@
+{
+  "title": "午夜来电 · 第一集",
+  "what_if": "一个深夜女主播，突然收到她三年前失踪姐姐的直播私信。",
+  "target_feeling": "悬疑 + 惊悚 + 反转钩子",
+  "aspect": "9:16",
+  "duration_s": 30,
+  "dialogue_mode": "有对白",
+  "dialogue_language": "中文",
+  "visual_style": "dark moody live-streaming setup, single warm desk lamp vs cold screen glow, shallow depth, subtle grain",
+  "characters": [
+    {"name": "小满", "identity_note": "female 24, round face, black hair in a loose bun, oversized cream hoodie, soft makeup, tired but alert; do-not-change: face, bun, cream hoodie", "image_path": "assets/xaoman.png", "do_not_change": ["face", "bun", "cream hoodie"]}
+  ],
+  "scenes": [
+    {"name": "直播房间", "description": "small bedroom studio, ring light off, single warm desk lamp, laptop with live camera, dark window behind showing city night", "landmarks": ["desk-lamp: left third", "laptop-screen: center", "city-window: top"], "light_baseline": "key: warm desk lamp from left, fill: cold laptop screen, mood: uneasy", "image_path": "assets/scene_room.png"}
+  ],
+  "shots": [
+    {
+      "shot_id": "S01", "duration_s": 10,
+      "continuity_handoff": "Open on Xiaoman mid-stream, calm; her phone buzz is the seed for the reveal next shot.",
+      "fixed_landmarks": ["desk-lamp: left third", "laptop-screen: center", "city-window: top"],
+      "char_positions": {"小满": "center, midground, facing camera, relaxed"},
+      "exited_chars": [],
+      "lighting_baseline": "key: warm desk lamp left, fill: cold laptop screen",
+      "hook_type": "suspense",
+      "shot_description": "Xiaoman talking to camera mid-stream, warm and chatty; her phone lights up on the desk and buzzes.",
+      "per_second": [
+        {"rng": "0-3s", "action": "Xiaoman talks to camera, smiling, gestures", "camera": "static, medium", "spatial": "Xiaoman center, lamp left, laptop center", "audio": "her voice + soft room tone", "handoff": "chatty baseline"},
+        {"rng": "3-6s", "action": "phone screen lights up on desk, buzzes", "camera": "slow rack focus to phone", "spatial": "phone lower third, Xiaoman behind soft", "audio": "phone buzz cuts the room tone", "handoff": "viewer notices phone"},
+        {"rng": "6-10s", "action": "Xiaoman glances at phone, smile freezes", "camera": "push to her face", "spatial": "Xiaoman center close", "audio": "buzz stops, heartbeat low in", "handoff": "frozen, stares at phone"}
+      ],
+      "dialogue": [
+        {"text": "家人们，今天的礼物我全收下了啊，谢谢！", "speaker_id": "小满", "tone": "cheerful, to camera", "time_range": "0-3s", "is_diegetic": true},
+        {"text": "诶？这谁啊……", "speaker_id": "小满", "tone": "confused, low", "time_range": "7-9s", "is_diegetic": true}
+      ],
+      "sfx": ["phone-buzz", "soft-room-tone", "low-heartbeat-in"],
+      "mode": "I2VA", "video_model": "H3", "resolution_tier": "768P",
+      "references": [{"label": "<Picture 1>", "kind": "person", "char": "小满", "retention": "fully_preserved", "retention_note": "retain face + bun + cream hoodie of Xiaoman", "path": "assets/xaoman.png", "description": "the young female streamer in the cream hoodie"}],
+      "first_frame": "assets/xaoman.png"
+    },
+    {
+      "shot_id": "S02", "duration_s": 10,
+      "continuity_handoff": "Phone in hand; same room/landmarks; the DM preview lands the twist — sender is her 'dead' sister.",
+      "fixed_landmarks": ["desk-lamp: left third", "laptop-screen: center", "city-window: top"],
+      "char_positions": {"小满": "center, holding phone, face drained"},
+      "exited_chars": [],
+      "lighting_baseline": "key: warm desk lamp left; modifier: phone glow on face, colder",
+      "hook_type": "reveal",
+      "shot_description": "Xiaoman brings the phone close; the DM preview shows a name she hasn't seen in three years; her breath catches; end on the name.",
+      "per_second": [
+        {"rng": "0-3s", "action": "Xiaoman brings phone to eye level, thumbs still", "camera": "close on phone + her eyes", "spatial": "phone center, her eyes above", "audio": "heartbeat continues, her breath", "handoff": "reads the notification"},
+        {"rng": "3-7s", "action": "phone screen: a DM preview name glows, Xiaoman's pupils dilate", "camera": "slow push to her face", "spatial": "her face center, phone low", "audio": "a sharp inhale SFX", "handoff": "recognition dawns"},
+        {"rng": "7-10s", "action": "Xiaoman's hand trembles, phone nearly slips", "camera": "hold tight close", "spatial": "her face + trembling hand", "audio": "silence, then a faint sting", "handoff": "end on her horror close-up + sting"}
+      ],
+      "dialogue": [
+        {"text": "姐姐？你怎么……你不是……", "speaker_id": "小满", "tone": "hushed, trembling, barely a whisper", "time_range": "3-6s", "is_diegetic": true}
+      ],
+      "sfx": ["sharp-inhale", "phone-near-slip", "eerie-sting"],
+      "mode": "I2VA", "video_model": "H3", "resolution_tier": "768P",
+      "references": [{"label": "<Picture 1>", "kind": "person", "char": "小满", "retention": "fully_preserved", "retention_note": "retain face + bun + cream hoodie of Xiaoman", "path": "assets/xaoman.png", "description": "the young female streamer in the cream hoodie"}],
+      "first_frame": "assets/xaoman.png",
+      "continuity_type": "latent_pin", "airlock_s": 1.0
+    }
+  ]
+}

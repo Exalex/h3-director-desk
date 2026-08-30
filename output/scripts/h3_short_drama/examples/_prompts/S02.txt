@@ -1,0 +1,19 @@
+For the target video, at 0.00 seconds into the target video, <Picture 1> (from [Shot 1]) is fully referenced.
+
+integrated_multimodal_description:
+Style: cinematic photorealistic 3D render, warm tungsten interior light, shallow depth of field, film grain
+[Shot 1] Chen turns slowly, unbothered, a faint smile; Wang's smug cracks.
+Per-second directives:
+  0-3s: Chen turns head toward camera, calm; camera: slow reveal push; spatial: Chen center, Wang right; audio: chatter cuts to near-silence; handoff: eye contact locked
+  3-7s: Chen's faint smile, eyes flat; camera: hold on Chen's face; spatial: Chen center close; audio: a beat of silence; handoff: smile holds
+  7-11s: Wang leans forward confused, smug breaks; camera: quick cut to Wang; spatial: Wang right third, leaning in; audio: Wang's breath catches; handoff: Wang unsettled
+  11-15s: Chen raises one hand, slow, controlled; camera: low angle on Chen's hand; spatial: hand center, phone not yet shown; audio: low drone in; handoff: hand raised, phone off-frame
+Fixed landmarks: chandelier: top center; round-table: center bottom
+Character positions: 陈锋=center, midground, facing camera, calm; 王总=right third, midground, off-balance
+Lighting baseline: key: warm overhead, fill: soft bounce; modifier: Chen rim-lit by chandelier
+Continuity handoff: Chen turns from Wang's mockery; same table/landmarks; his calm face reveals the reversal is coming.
+Dialogue: <Picture 1> (S2) says, <d>[Chinese] 坐下。我打个电话，你们就懂了我为什么不来。</d>
+
+overall_soundscape: low-drone-rise; hook: reversal
+
+non_diegetic_music: diegetic ambient only; no score unless the shot calls for it

@@ -1,0 +1,19 @@
+For the target video, at 0.00 seconds into the target video, <Picture 1> (from [Shot 1]) is fully referenced.
+
+integrated_multimodal_description:
+Style: cinematic photorealistic 3D render, warm tungsten interior light, shallow depth of field, film grain
+[Shot 1] medium close-up of Wang leaning back, sneering at someone off-frame; table chatter blurs behind.
+Per-second directives:
+  0-3s: Wang leans back, gold chain sways, smug smile; camera: slow push-in; spatial: Wang center, chandelier top, table bottom; audio: table chatter low + laugh; handoff: locks Wang center smug
+  3-7s: Wang gestures dismissively toward frame-left; camera: hold, slight pan left; spatial: hand enters frame-left, pointing off-screen; audio: Wang's laugh; handoff: eye-line toward Chen
+  7-11s: Chen's shoulder + back of grey hoodie enter frame-left; camera: rack focus to Chen's back; spatial: Chen left third, Wang right third; audio: chatter drops; handoff: two-shot established
+  11-15s: Wang taps table mockingly; camera: push to Wang's face; spatial: Wang center close; audio: table-tap + sneer SFX; handoff: end on Wang's mocking line
+Fixed landmarks: chandelier: top center; round-table: center bottom
+Character positions: 王总=center, midground, facing left, smug; 陈锋=off-frame-left initially
+Lighting baseline: key: warm overhead chandelier, fill: soft bounce
+Continuity handoff: Open on Wang's smug close-up; sets up Chen as the target of mockery for the next shot.
+Dialogue: <Picture 1> (S1) says, <d>[Chinese] 就这？画个画糊口，也好意思坐我们这桌？</d>
+
+overall_soundscape: chair-creak; table-tap; low-table-chatter; hook: suspense
+
+non_diegetic_music: diegetic ambient only; no score unless the shot calls for it

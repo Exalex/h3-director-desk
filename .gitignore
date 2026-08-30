@@ -1,0 +1,48 @@
+# Python/cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local environments and secrets
+.env
+.env.*
+!.env.example
+app_private_key.pem
+private_key.pem
+*.key
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Local runtime outputs that are not project assets
+*.log
+*.tmp
+*.swp
+
+# Generated media, local archives, and runtime configuration
+gen/
+h3Movie/
+libraries/
+gen/
+projects/
+notes/
+research/
+AGENTS.md
+MEMORY.md
+start_director.bat
+_join_*.mp4
+_norm_*.mp4
+director/llm_config.json
+syncenv/
+output/scripts/h3_short_drama/__pycache__/
+director/__pycache__/

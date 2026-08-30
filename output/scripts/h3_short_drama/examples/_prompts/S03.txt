@@ -1,0 +1,19 @@
+For the target video, at 0.00 seconds into the target video, <Picture 1> (from [Shot 1]) is fully referenced.
+
+integrated_multimodal_description:
+Style: cinematic photorealistic 3D render, warm tungsten interior light, shallow depth of field, film grain
+[Shot 1] The phone connects to a head office; an operator's voice over the loudspeaker; Wang goes pale; end on the reveal.
+Per-second directives:
+  0-3s: Chen holds phone to speaker, calm; camera: close on phone + Chen's jaw; spatial: phone center, chin below; audio: phone connect tone + operator voice 'Mr. Chen, the M Group board awaits your return'; handoff: reveal audio lands
+  3-7s: Wang's face drains of colour, hand drops; camera: snap to Wang close; spatial: Wang left third, recoiling; audio: operator voice continues, table silent; handoff: Wang realizes
+  7-11s: Other guests turn, gasp; camera: pan across blurred faces; spatial: blurred guests background; audio: collective gasp SFX; handoff: room reacts
+  11-15s: Chen lowers phone, looks at camera, faint smile; camera: slow pull to medium; spatial: Chen center, Wang small in background; audio: operator 'we will arrange the jet' + music sting; handoff: end on Chen's confident close-up + sting
+Fixed landmarks: chandelier: top center; round-table: center bottom
+Character positions: 陈锋=center, holding phone, calm; 王总=left third, pale, recoiling
+Lighting baseline: key: warm overhead; modifier: screen glow on Wang's face
+Continuity handoff: Phone connects; cut on the moment of the 'click' to the reveal — the strong closing hook.
+Dialogue: narration (<Picture 1>, voice over, mouth closed): 陈先生，M 集团董事会等您回来主持，专机正在安排。
+
+overall_soundscape: phone-connect; collective-gasp; music-sting; hook: reveal
+
+non_diegetic_music: diegetic ambient only; no score unless the shot calls for it
