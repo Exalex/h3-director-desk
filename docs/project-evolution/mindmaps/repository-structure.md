@@ -4,54 +4,33 @@
 
 ```mermaid
 mindmap
-  root((aiDirector))
+  root((h3-director-desk))
     Git 基线
-      分支 detached/no git
-      提交 no git commit
-      未提交条目 0
+      分支 main
+      提交 c54e08e
+      未提交条目 11
     顶层模块
-      libraries
-        文件数 1891
-      gen
-        文件数 119
       output
-        文件数 51
-      projects
-        文件数 25
-      notes
-        文件数 23
-      research
-        文件数 15
+        文件数 45
       director
         文件数 6
       root
-        文件数 5
+        文件数 3
       docs
         文件数 2
     主要文件类型
-      .py 735
-      .ts 295
-      .md 276
-      .json 227
-      .png 130
-      .txt 69
-      .tsx 63
-      no extension 51
-      .mp4 51
-      .js 46
+      .md 27
+      .py 17
+      .txt 3
+      .js 2
+      .json 2
+      no extension 1
+      .bat 1
+      .html 1
+      .css 1
+      .sh 1
     清单与构建
-      libraries/AIMixer-ComfyUI_MiniMaxH3_Director-main/pyproject.toml
-      libraries/AIMixer-ComfyUI_MiniMaxH3_Director-main/requirements.txt
-      libraries/ComfyUI-H3-FaceRefine-main/pyproject.toml
-      libraries/ComfyUI-H3-FaceRefine-main/requirements.txt
-      libraries/ComfyUI-H3-Motion-Context-main/pyproject.toml
-      libraries/ComfyUI-MiniMax-H3-Promptor-main/pyproject.toml
-      libraries/ComfyUI-MiniMax-H3-Promptor-main/requirements.txt
-      libraries/ComfyUI-MiniMax-H3-Turbo-main/pyproject.toml
-      libraries/ComfyUI-MiniMaxH3-Director-main/pyproject.toml
-      libraries/ComfyUI-MiniMaxH3-Easy-main/pyproject.toml
-      libraries/ComfyUI-Spectrum-MiniMax-H3-main/pyproject.toml
-      libraries/ComfyUI_MiniMaxH3_Director-main/pyproject.toml
+      未发现
 ```
 
 ## 说明

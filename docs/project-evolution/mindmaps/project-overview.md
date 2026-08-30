@@ -2,7 +2,7 @@
 
 ```mermaid
 mindmap
-  root((aiDirector))
+  root((H3 Director Desk))
     项目目标
       H3短剧生产工作台
       结构化输入到成片
@@ -21,8 +21,8 @@ mindmap
       外部模型与推理服务
       ffmpeg运行时
     当前阶段
-      文档与GitHub基线
-      Odyssey示例已验证
+      源码克隆与本地部署
+      无项目数据的空仓库基线
 ```
 
 ## 项目事实

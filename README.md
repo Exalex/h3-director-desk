@@ -20,6 +20,22 @@ The director desk does not install or run ComfyUI on spark1.
 
 ## Start
 
+### Windows local
+
+From PowerShell:
+
+```powershell
+python director\serve.py --host 127.0.0.1 --port 8088 --comfy http://127.0.0.1:8188
+```
+
+Or double-click `start_local.bat`. Open <http://127.0.0.1:8088/> in a browser.
+Stop the service with `Ctrl+C` in the service window.
+
+The desk itself uses only the Python standard library. ComfyUI is optional for
+opening and editing the desk; it must be running at the configured address for
+GPU generation. This checkout intentionally does not include project JSON,
+generated media, model weights, or runtime LLM configuration.
+
 Keep an SSH tunnel from spark1 to spark2:
 
 ```bash
@@ -73,6 +89,20 @@ and mirrored locally on spark1 under:
 - `director/assets/style.css`: desk styling
 - `output/scripts/h3_short_drama/`: H3 project model, prompt compiler,
   validation, ComfyUI generation and assembly
+
+## Local verification
+
+The local desk can be checked without ComfyUI:
+
+```powershell
+python -m compileall -q director output\scripts\h3_short_drama
+Invoke-WebRequest -UseBasicParsing http://127.0.0.1:8088/
+Invoke-WebRequest -UseBasicParsing http://127.0.0.1:8088/api/projects
+```
+
+With no `projects/` directory or project JSON, `/api/projects` returns an empty
+project list. Create a project from the desk or provide project data from the
+production environment.
 
 ## Configuration
 

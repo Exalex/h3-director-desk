@@ -2,7 +2,7 @@
 
 ```mermaid
 mindmap
-  root((aiDirector 架构))
+  root((H3 Director Desk 架构))
     入口与参与者
       浏览器导演台
       CLI管线
@@ -38,6 +38,7 @@ mindmap
       QC与装配
     部署与运行边界
       本地Windows Web服务
+      Linux spark1部署
       ComfyUI独立运行
       模型权重外置
 ```

@@ -2,7 +2,7 @@
 
 ```mermaid
 mindmap
-  root((aiDirector 技术实现))
+  root((H3 Director Desk 技术实现))
     入口点
       director/serve.py main
       h3_short_drama pipeline.main
@@ -34,6 +34,7 @@ mindmap
       ACCEL_BASE
       OPENAI/DEEPSEEK key
       ffmpeg与模型权重
+      start_local.bat
     测试与可观测性
       check命令
       hardware plan
