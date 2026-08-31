@@ -41,6 +41,7 @@ mindmap
       Linux spark1部署
       ComfyUI独立运行
       模型权重外置
+      5800H控制机与GPU推理机分离
 ```
 
 ## 组件职责与依赖

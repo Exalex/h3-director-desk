@@ -12,11 +12,15 @@ mindmap
       I-0002 克隆并完成 Windows 本地部署
         状态 completed
         日期 2026-08-31
+      I-0003 明确控制机与 H3 推理机分离架构
+        状态 completed
+        日期 2026-08-31
 ```
 
 ## 迭代索引
 
 | 迭代 | 日期 | 状态 | 标题 |
 |---|---|---|---|
+| [I-0003](../iterations/I-0003-明确控制机与-h3-推理机分离架构.md) | 2026-08-31 | completed | 明确控制机与 H3 推理机分离架构 |
 | [I-0002](../iterations/I-0002-克隆并完成-windows-本地部署.md) | 2026-08-31 | completed | 克隆并完成 Windows 本地部署 |
 | [I-0001](../iterations/I-0001-项目架构文档与-github-基线.md) | 2026-08-28 | completed | 项目架构文档与 GitHub 基线 |

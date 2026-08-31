@@ -2,13 +2,13 @@
 
 > 本文件由脚本生成。它只陈述可扫描事实，不代表完整架构分析。
 
-- 扫描时间：`2026-08-31T02:46:17+08:00`
+- 扫描时间：`2026-08-31T11:58:28+08:00`
 - 项目：`h3-director-desk`
 - 根目录：`D:\workspace\deepseekSpace\h3-director-desk`
 - Git 分支：`main`
-- Git 提交：`c54e08e`
-- Git 变更条目：`11`
-- 扫描文件数：`56`
+- Git 提交：`091c5bc`
+- Git 变更条目：`9`
+- 扫描文件数：`58`
 - 是否截断：`否`
 
 ## 顶层模块/目录
@@ -17,14 +17,14 @@
 |---|---:|
 | `output` | 45 |
 | `director` | 6 |
+| `docs` | 4 |
 | `(root)` | 3 |
-| `docs` | 2 |
 
 ## 文件类型
 
 | 扩展名 | 文件数 |
 |---|---:|
-| `.md` | 27 |
+| `.md` | 29 |
 | `.py` | 17 |
 | `.txt` | 3 |
 | `.js` | 2 |
@@ -53,9 +53,7 @@
 - ` M docs/project-evolution/README.md`
 - ` M docs/project-evolution/evidence/repository-snapshot.md`
 - ` M docs/project-evolution/mindmaps/architecture.md`
-- ` M docs/project-evolution/mindmaps/iterations.md`
-- ` M docs/project-evolution/mindmaps/project-overview.md`
 - ` M docs/project-evolution/mindmaps/repository-structure.md`
-- ` M docs/project-evolution/mindmaps/technical-implementation.md`
-- `?? "docs/project-evolution/iterations/I-0002-\345\205\213\351\232\206\345\271\266\345\256\214\346\210\220-windows-\346\234\254\345\234\260\351\203\250\347\275\262.md"`
-- `?? start_local.bat`
+- `?? docs/DEPLOYMENT_ARCHITECTURE.md`
+- `?? docs/project-evolution/decisions/ADR-0003-split-control-and-inference-hosts.md`
+- `?? "docs/project-evolution/iterations/I-0003-\346\230\216\347\241\256\346\216\247\345\210\266\346\234\272\344\270\216-h3-\346\216\250\347\220\206\346\234\272\345\210\206\347\246\273\346\236\266\346\236\204.md"`

@@ -37,6 +37,10 @@ opening and editing the desk, but it must be running at the configured address
 for GPU generation. This checkout intentionally does not include project JSON,
 generated media, model weights, or runtime LLM configuration.
 
+For a small local machine such as a 5800H PC, keep the desk on the local
+machine and run ComfyUI + H3 on a separate LAN GPU host. See
+[`docs/DEPLOYMENT_ARCHITECTURE.md`](docs/DEPLOYMENT_ARCHITECTURE.md).
+
 Keep an SSH tunnel from spark1 to spark2:
 
 ```bash
