@@ -24,37 +24,27 @@
 
 ## 5800H 控制 spark1 的 ComfyUI
 
-如果 Director Desk 要从 5800H 运行，而 ComfyUI 入口位于 spark1 的
-`127.0.0.1:8188`，需要在 5800H 建立第二段 SSH 转发：
+当前 spark1 已将 spark2 的 ComfyUI 转发到 Wi-Fi 地址
+`192.168.3.75:8188`。5800H 上的 Director Desk 直接调用这个地址，不需要
+再建立第二层 SSH 隧道：
 
 ```text
-5800H 127.0.0.1:8188
-    -> SSH
-spark1 127.0.0.1:8188
-    -> spark1 已有隧道或本地转发
-spark2 ComfyUI/H3 127.0.0.1:8188
+5800H Director Desk
+    -> http://192.168.3.75:8188
+spark1 Wi-Fi 192.168.3.75:8188
+    -> spark1 到 spark2 的转发
+spark2 127.0.0.1:8188 ComfyUI/H3
 ```
 
-双击仓库根目录的 `start_spark1_tunnel.bat`，或在 PowerShell 运行：
+先验证 spark1 的转发：
 
 ```powershell
-ssh -N -L 8188:127.0.0.1:8188 yang1992@192.168.3.75 `
-  -o ExitOnForwardFailure=yes `
-  -o ServerAliveInterval=30 `
-  -o ServerAliveCountMax=3
+Invoke-WebRequest -UseBasicParsing http://192.168.3.75:8188/system_stats
 ```
 
-隧道保持运行后，先验证本机：
-
-```powershell
-Invoke-WebRequest -UseBasicParsing http://127.0.0.1:8188/system_stats
-```
-
-返回 ComfyUI JSON 后，再双击 `start_local.bat` 启动导演台。导演台调用地址
-保持为 `http://127.0.0.1:8188`，不需要在 5800H 安装 H3 模型或 GPU 版 ComfyUI。
-
-当前检查中 `yang1992@192.168.3.75` 的 SSH 公钥认证尚未授权，因此脚本已准备好，
-但需要先在 spark1 为该账号加入 5800H 的公钥。
+返回 ComfyUI JSON 后，再从本目录双击 `start_local.bat` 启动新版导演台。
+导演台调用地址为 `http://192.168.3.75:8188`，不需要在 5800H 安装 H3
+模型或 GPU 版 ComfyUI。
 
 ## 远程 GPU 方案
 
