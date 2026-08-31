@@ -92,6 +92,22 @@ python director\serve.py --host 127.0.0.1 --port 8088 --comfy http://<gpu-host-i
 - `8188` 无法访问：ComfyUI 没启动、SSH 隧道没建立、远程地址错误或 GPU 主机防火墙阻断。
 - `8088` 正常而 `8188` 离线：项目编辑和部分本地校验仍可用，但不能执行 H3 视频生成。
 
+## 当前实测状态（2026-08-31）
+
+已从 5800H 通过 spark1 的导演台接口验证完整的服务连接：
+
+| 检查项 | 结果 |
+|---|---|
+| spark1 导演台 `192.168.3.75:8088` | 在线，HTTP 200 |
+| spark1 Qwen/SGLang `192.168.3.75:8888` | 在线 |
+| spark1 → ComfyUI 本地转发 `127.0.0.1:8188` | 导演台报告在线 |
+| ComfyUI 版本 | `0.31.0` |
+| PyTorch | `2.11.0+cu130` |
+| GPU | `NVIDIA GB10`，设备 `cuda:0` |
+| GPU 显存 | 总量约 130.7 GB，检测时空闲约 114.3 GB |
+
+直接从 5800H 访问 `spark1:8188` 或 `spark2:8188` 不通是预期现象：ComfyUI 监听 `127.0.0.1:8188`，SSH 隧道终点在 spark1，5800H 只需要访问 `http://192.168.3.75:8088`。本次验证只读取 `/api/director` 和 ComfyUI `/system_stats`，没有提交实际视频生成任务。
+
 ## 对 5800H 本机的建议
 
 5800H 只承担浏览器、Python 标准库服务、项目 JSON、Prompt 编译、任务轮询和轻量 ffmpeg/QC。不要把 H3 模型权重或 ComfyUI 的 GPU 推理放在这台机器上，除非它另外具备可用的 NVIDIA GPU、CUDA 和足够显存。

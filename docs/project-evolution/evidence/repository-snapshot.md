@@ -2,12 +2,12 @@
 
 > 本文件由脚本生成。它只陈述可扫描事实，不代表完整架构分析。
 
-- 扫描时间：`2026-08-31T11:58:28+08:00`
+- 扫描时间：`2026-08-31T15:39:16+08:00`
 - 项目：`h3-director-desk`
 - 根目录：`D:\workspace\deepseekSpace\h3-director-desk`
 - Git 分支：`main`
-- Git 提交：`091c5bc`
-- Git 变更条目：`9`
+- Git 提交：`f05a837`
+- Git 变更条目：`7`
 - 扫描文件数：`58`
 - 是否截断：`否`
 
@@ -48,12 +48,10 @@
 
 ## 当前 Git 状态
 
-- ` M README.md`
+- ` M docs/DEPLOYMENT_ARCHITECTURE.md`
 - ` M docs/project-evolution/.project-evolution.json`
 - ` M docs/project-evolution/README.md`
 - ` M docs/project-evolution/evidence/repository-snapshot.md`
-- ` M docs/project-evolution/mindmaps/architecture.md`
+- ` M docs/project-evolution/mindmaps/iterations.md`
 - ` M docs/project-evolution/mindmaps/repository-structure.md`
-- `?? docs/DEPLOYMENT_ARCHITECTURE.md`
-- `?? docs/project-evolution/decisions/ADR-0003-split-control-and-inference-hosts.md`
-- `?? "docs/project-evolution/iterations/I-0003-\346\230\216\347\241\256\346\216\247\345\210\266\346\234\272\344\270\216-h3-\346\216\250\347\220\206\346\234\272\345\210\206\347\246\273\346\236\266\346\236\204.md"`
+- `?? "docs/project-evolution/iterations/I-0004-\351\252\214\350\257\201-spark1-\345\257\274\346\274\224\345\217\260\345\210\260-spark2-comfyui-h3-\351\223\276\350\267\257.md"`
