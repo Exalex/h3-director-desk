@@ -31,9 +31,10 @@ python director\serve.py --host 127.0.0.1 --port 8088 --comfy http://127.0.0.1:8
 Or double-click `start_local.bat`. Open <http://127.0.0.1:8088/> in a browser.
 Stop the service with `Ctrl+C` in the service window.
 
-The desk itself uses only the Python standard library. ComfyUI is optional for
-opening and editing the desk; it must be running at the configured address for
-GPU generation. This checkout intentionally does not include project JSON,
+The desk itself uses only the Python standard library. `8088` is the desk UI
+port; `8188` is ComfyUI's separate generation port. ComfyUI is optional for
+opening and editing the desk, but it must be running at the configured address
+for GPU generation. This checkout intentionally does not include project JSON,
 generated media, model weights, or runtime LLM configuration.
 
 Keep an SSH tunnel from spark1 to spark2:
@@ -103,6 +104,25 @@ Invoke-WebRequest -UseBasicParsing http://127.0.0.1:8088/api/projects
 With no `projects/` directory or project JSON, `/api/projects` returns an empty
 project list. Create a project from the desk or provide project data from the
 production environment.
+
+## Troubleshooting ComfyUI port 8188
+
+If `http://127.0.0.1:8188/` refuses the connection, ComfyUI is not running on
+the local machine. Starting `director/serve.py` only starts the desk on `8088`;
+it does not install or start ComfyUI.
+
+For the documented remote setup, start ComfyUI on `spark2` first, then create
+the tunnel from the control machine:
+
+```bash
+ssh -f -N -L 8188:127.0.0.1:8188 exalex@192.168.3.153 \
+  -o ExitOnForwardFailure=yes -o ServerAliveInterval=30
+```
+
+The SSH account must have an authorized key/password and ComfyUI must already
+be listening on `spark2:127.0.0.1:8188`. Without that external service, the
+desk remains usable for project editing and validation, but video generation
+will stay offline.
 
 ## Configuration
 
