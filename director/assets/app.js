@@ -1,466 +1,156 @@
-/* ============ 导演台 app.js — 核心框架 ============ */
 "use strict";
 
 const API = {
   async j(url, opts) {
     const r = await fetch(url, opts);
-    if (!r.ok) {
-      const t = await r.text().catch(() => "");
-      throw new Error(`${r.status} ${t.slice(0, 200)}`);
-    }
+    if (!r.ok) throw new Error(`${r.status} ${(await r.text().catch(() => "")).slice(0, 180)}`);
     return r.json();
   },
-  get(u) { return this.j(u); },
-  post(u, body) {
-    return this.j(u, { method: "POST", headers: { "Content-Type": "application/json" },
-                       body: JSON.stringify(body || {}) });
-  },
+  get(url) { return this.j(url); },
+  post(url, body) { return this.j(url, {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(body || {})}); }
 };
+const $ = (s, root=document) => root.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>\"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const MEDIA = p => p ? `/api/media?path=${encodeURIComponent(p)}` : "";
+const dirname = p => (p || "").split("/").slice(0,-1).join("/");
+function toast(message, kind="info") { const el=document.createElement("div"); el.className=`toast ${kind}`; el.textContent=message; $("#toast-wrap").appendChild(el); setTimeout(()=>el.remove(), 4000); }
 
-// media path -> absolute browser URL
-const MEDIA = (p) => p ? `/api/media?path=${encodeURIComponent(p)}` : "";
-
-const $ = (sel, root) => (root || document).querySelector(sel);
-const $$ = (sel, root) => Array.from((root || document).querySelectorAll(sel));
-const esc = (s) => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-
-function toast(msg, kind = "info") {
-  const w = $("#toast-wrap");
-  const el = document.createElement("div");
-  el.className = `toast ${kind}`;
-  el.textContent = msg;
-  w.appendChild(el);
-  setTimeout(() => el.remove(), 4200);
-}
-
-/* ---------------- global state ---------------- */
-const S = {
-  director: null,     // /api/director payload (summary etc.)
-  projectPath: "projects/odyssey/ep01.json",
-  activeStage: "bible",
-  progress: null,   // per-stage readiness + next-step advice
-  config: { comfy: "http://127.0.0.1:8188" },
-};
-
-/* ---------------- stage registry ---------------- */
-const STAGES = [
-  { id: "bible",   num: "01", name: "设定 · Bible",      stateOf: () => p("bible") },
-  { id: "board",   num: "02", name: "分镜表 · Board",    stateOf: () => S.director && S.director.summary ? `×${S.director.summary.n_shots}` : "" },
-  { id: "check",   num: "03", name: "自检 · Check",      stateOf: () => p("check") },
-  { id: "cards",   num: "04", name: "角色卡 · Cards",    stateOf: () => p("cards") },
-  { id: "scene",   num: "05", name: "场景卡 · Scene",    stateOf: () => p("scene") },
-  { id: "prompts", num: "06", name: "提示词 · Prompts",  stateOf: () => p("prompts") },
-  { id: "deploy",  num: "07", name: "部署 · ComfyUI",    stateOf: () => p("deploy") },
-  { id: "gen",     num: "08", name: "生成 · Generate",   stateOf: () => p("gen") },
-  { id: "qc",      num: "09", name: "质检 · QC",         stateOf: () => p("qc") },
-  { id: "final",   num: "10", name: "成片 · Assemble",   stateOf: () => p("final") },
+const S = {projects:[], activeProject:null, activeEpisode:null, episodeDoc:null, director:null, selectedShot:"", busy:false, comfy:"http://127.0.0.1:8188"};
+const PLAN = [
+  {id:"brief", label:"制作简案", detail:"从项目概念开始"},
+  {id:"assets", label:"资产", detail:"角色与场景参考"},
+  {id:"storyboard", label:"分镜图", detail:"镜头结构与提示词"},
+  {id:"generate", label:"视频生成", detail:"调用 ComfyUI + H3"},
+  {id:"final", label:"后期合成", detail:"成片与质量检查"}
 ];
-const STAGE_RENDER = {};   // id -> fn(bodyEl)
-const STATECH = { done: "✓", warn: "!", pending: "" };
-function p(id) { return (S.progress && S.progress.stages) ? (S.progress.stages[id] || "pending") : "pending"; }
 
-/* ---------------- nav ---------------- */
-function buildNav() {
-  const nav = $("#stages");
-  nav.innerHTML = "";
-  for (const st of STAGES) {
-    const el = document.createElement("div");
-    el.className = "stage" + (st.id === S.activeStage ? " active" : "");
-    el.dataset.id = st.id;
-    const stt = st.stateOf();
-    const mark = stt === "done" ? '<span class="s-state pass">✓</span>'
-                : stt === "warn" ? '<span class="s-state fail">!</span>' : "";
-    el.innerHTML = `<span class="s-num">${st.num}</span>
-                    <span class="s-name">${st.name}</span>${mark}`;
-    el.onclick = () => go(st.id);
-    nav.appendChild(el);
-  }
-  renderAdvice();
+function activeFolder() { return S.activeEpisode ? dirname(S.activeEpisode.path) : ""; }
+function assetPath(p) {
+  if (!p) return "";
+  return p.replace(/^gen\/[^/]+\/card_/, `${activeFolder()}/references/card_`);
 }
+function episodeTitle(ep) { return ep ? (ep.name || ep.folder.split("/").pop()) : "选择一集开始"; }
+function projectTitle() { return S.activeProject ? S.activeProject.name : "未选择项目"; }
 
-// Jellyfish-style single next-step CTA + progress dots
-function renderAdvice() {
-  const bar = $("#advice-bar"), body = $("#advice-body");
-  if (!body) return;
-  if (!S.progress) { bar.style.display = "none"; return; }
-  bar.style.display = "";
-  const seq = ["bible","board","check","cards","scene","prompts","deploy","gen","qc","final"];
-  const dots = seq.map(s => `<span class="ap ${p(s)}" title="${s}"></span>`).join("");
-  const a = S.progress.advice || { target: "", label: "就绪", note: "" };
-  body.innerHTML = `
-    <div class="advice-prog">${dots}</div>
-    <div class="advice-btns">
-      <button class="btn-sm" id="advice-go">${esc(a.label || "下一步")}</button>
-      <span class="advice-note">${esc(a.note || "")}</span>
-    </div>`;
-  $("#advice-go").onclick = () => { if (a.target && STAGE_RENDER[a.target]) go(a.target); };
-}
-
-async function go(id) {
-  S.activeStage = id;
-  $$(".stage").forEach(e => e.classList.toggle("active", e.dataset.id === id));
-  const st = STAGES.find(x => x.id === id);
-  $("#stage-badge").textContent = st.num;
-  $("#stage-title").textContent = st.name.replace(/^.*?·\s*/, "");
-  const body = $("#stage-body");
-  body.innerHTML = `<div class="empty">载入 ${st.name} …</div>`;
+async function loadWorkspace() {
   try {
-    if (STAGE_RENDER[id]) {
-      await STAGE_RENDER[id](body);
-    } else {
-      body.innerHTML = `<div class="empty">「${st.name}」尚未实现。</div>`;
-    }
-  } catch (e) {
-    console.error(e);
-    body.innerHTML = `<div class="empty" style="color:var(--bad)">载入失败: ${esc(e.message)}</div>`;
-  }
+    const result = await API.get("/api/projects");
+    S.projects = (result.projects || []).map(p => typeof p === "string" ? {path:p,name:p,folder:dirname(p),episodes:[]} : p);
+    const saved = localStorage.getItem("director-project");
+    const project = S.projects.find(p => p.path === saved) || S.projects[0];
+    if (project) await selectProject(project.path, false);
+    else renderAll();
+  } catch (e) { $("#project-library").innerHTML=`<div class="library-empty">项目读取失败<br>${esc(e.message)}</div>`; toast("项目读取失败", "bad"); }
 }
 
-function pbody() { return $("#stage-body"); }
-
-/* ---------------- header actions ---------------- */
-function setActions(html) { $("#work-actions").innerHTML = html; }
-
-/* ---------------- monitor ---------------- */
-let MON_TAB = "chars";
-async function refreshMonitor() {
-  const panes = $("#mon-panes");
-  const d = S.director;
-  // video: pick final candidate
-  const videoMap = window._finalVideo || "";
-  const vid = $("#mon-video");
-  if (videoMap) { vid.src = videoMap; vid.style.display = "block"; $("#empty-player").style.display = "none"; }
-  else { vid.style.display = "none"; $("#empty-player").style.display = "flex"; }
-
-  if (!d || !d.summary) { panes.innerHTML = `<div class="empty-note">暂无项目数据</div>`; return; }
-  const s = d.summary;
-  if (MON_TAB === "chars") {
-    if (!s.characters?.length) { panes.innerHTML = `<div class="empty-note">无角色卡</div>`; return; }
-    panes.innerHTML = `<div class="mon-grid">` + s.characters.map(c =>
-      `<div class="mon-card"><img src="${MEDIA(c.image_path)}" onerror="this.style.visibility='hidden'">
-        <div class="lbl"><b>${esc(c.name)}</b><span class="mut">${esc((c.do_not_change||[]).join(" · "))}</span></div></div>`
-    ).join("") + `</div>`;
-  } else if (MON_TAB === "scenes") {
-    if (!s.scenes?.length) { panes.innerHTML = `<div class="empty-note">无场景卡</div>`; return; }
-    panes.innerHTML = `<div class="mon-grid">` + s.scenes.map(sc =>
-      `<div class="mon-card"><img src="${MEDIA(sc.image_path)}" onerror="this.style.visibility='hidden'">
-        <div class="lbl"><b>${esc(sc.name)}</b></div></div>`).join("") + `</div>`;
-  } else if (MON_TAB === "shots") {
-    panes.innerHTML = `<div class="mon-shots">` + (s.shots || []).map(sh =>
-      `<div class="shot-thumb" onclick="playShotClip('${sh.id}')">
-         <div class="top"><span class="id">${sh.id}</span><span class="mode">${sh.mode}</span></div>
-         <div class="muted" style="font-size:11px">${esc((sh.desc||"").slice(0,80))}</div>
-         <div class="mut" style="font-size:10.5px;margin-top:3px">${sh.duration_s}s · edit ${sh.edit_target_s}s · ${sh.hook}</div>
-       </div>`).join("") + `</div>`;
-  } else if (MON_TAB === "tasks") {
-    refreshTasks(panes);
-  }
+async function selectProject(path, remember=true) {
+  const project = S.projects.find(p => p.path === path);
+  if (!project) return;
+  S.activeProject = project;
+  if (remember) localStorage.setItem("director-project", path);
+  const savedEp = localStorage.getItem(`director-episode:${path}`);
+  const ep = project.episodes?.find(e => e.path === savedEp) || project.episodes?.[0];
+  S.activeEpisode = ep || null; S.episodeDoc = null; S.director = null; S.selectedShot = "";
+  renderAll();
+  if (ep) await loadEpisode(ep.path);
 }
 
-function playShotClip(id) {
-  // try common clip location
-  const base = (S.director?.output_dir || "") + "/" + id + ".mp4";
-  const vid = $("#mon-video");
-  vid.src = MEDIA(base); vid.style.display = "block";
-  $("#empty-player").style.display = "none";
-  vid.play().catch(() => {});
+async function selectEpisode(path) {
+  if (!S.activeProject) return;
+  const ep = S.activeProject.episodes.find(e => e.path === path);
+  if (!ep) return;
+  S.activeEpisode = ep; S.episodeDoc = null; S.director = null; S.selectedShot = "";
+  localStorage.setItem(`director-episode:${S.activeProject.path}`, path);
+  renderAll();
+  await loadEpisode(path);
 }
 
-async function refreshTasks(panes) {
-  panes = panes || $("#mon-panes");
-  let tasks;
-  try { tasks = (await API.get("/api/tasks")).tasks || []; } catch (e) { tasks = []; }
-  if (!tasks.length) { panes.innerHTML = `<div class="empty-note">暂无后台任务</div>`; return; }
-  panes.innerHTML = tasks.map(t =>
-    `<div class="task" data-tid="${t.id}">
-       <div class="t-head"><b>${esc(t.title)}</b><span class="status ${t.status}">${t.status}</span></div>
-       <div class="bar"><i style="width:${pct(t)}%"></i></div>
-       <div class="log"></div>
-     </div>`).join("");
-}
-const pct = (t) => t.total ? Math.round((t.cur || 0) / t.total * 100) : (t.status === "done" ? 100 : 8);
-
-/* detail of a task (poll fills log) */
-async function monitorTask(tid) {
+async function loadEpisode(path) {
   try {
-    const t = await API.get("/api/task/" + tid);
-    const el = $(`.task[data-tid="${tid}"]`);
-    if (!el) return;
-    const logEl = $(".log", el);
-    if (logEl) logEl.textContent = (t.log || []).join("\n");
-    const bar = $(".bar>i", el); if (bar) bar.style.width = pct(t) + "%";
-    if (t.status === "done") {
-      el.querySelector(".t-head .status").textContent = "done ✓";
-      el.classList.add("done");
-      // auto-play result if it's a clip
-      if (t.result && t.result.clip) { window._finalVideo = MEDIA(t.result.clip); refreshMonitor(); }
-      if (t.kind === "series" && t.result) {
-        const records = Array.isArray(t.result) ? t.result : (t.result.records || []);
-        const ep = records.find(r => r.episode);
-        if (ep) { window._finalVideo = MEDIA(ep.episode); refreshMonitor(); }
-      }
-    } else if (t.status === "error") {
-      el.querySelector(".t-head .status").textContent = "✕ " + (t.error || "error");
-    }
-  } catch (e) { /* ignore */ }
+    S.episodeDoc = await API.get(`/api/project?path=${encodeURIComponent(path)}`);
+    renderAll();
+    // The hardware probe can be slow while ComfyUI is starting, so it never blocks the workspace shell.
+    API.get(`/api/director?path=${encodeURIComponent(path)}`).then(d => { if (S.activeEpisode?.path === path) { S.director=d; renderAll(); } }).catch(e => console.warn(e));
+  } catch (e) { toast("集数读取失败: " + e.message, "bad"); }
 }
 
-/* ---------------- boot ---------------- */
-async function boot() {
-  buildNav();
-  // project select
-  try {
-    const ps = (await API.get("/api/projects")).projects || [];
-    const sel = $("#project-select");
-    sel.innerHTML = ps.map(p => `<option value="${p}">${p}</option>`).join("");
-    S.projectPath = S.projectPath && ps.includes(S.projectPath) ? S.projectPath : (ps[0] || "");
-    sel.value = S.projectPath;
-    sel.onchange = async () => {
-      S.projectPath = sel.value;
-      window._finalVideo = "";
-      await loadDirector();
-      await go(S.activeStage);
-    };
-  } catch (e) { console.error(e); }
-
-  // monitor tabs
-  $$(".mon-tab").forEach(b => b.onclick = () => {
-    $$(".mon-tab").forEach(x => x.classList.remove("active"));
-    b.classList.add("active"); MON_TAB = b.dataset.tab; refreshMonitor();
-  });
-  $("#btn-collapse").onclick = () => {
-    const m = $("#monitor"); m.classList.toggle("collapsed");
-    $("#btn-collapse").textContent = m.classList.contains("collapsed") ? "«" : "»";
-  };
-  // config drawer
-  $("#btn-config").onclick = () => openDrawer(true);
-  $("#btn-drawer-close").onclick = () => openDrawer(false);
-  $("#drawer-mask").onclick = () => openDrawer(false);
-  $("#btn-save-config").onclick = async () => {
-    S.config.comfy = $("#cfg-comfy").value.trim();
-    $("#cfg-status").textContent = "配置已保存（生效需重启后端 --comfy，或手动指定）。";
-    toast("配置已保存", "ok");
-    openDrawer(false);
-  };
-  $("#btn-save-llm").onclick = async () => {
-    try {
-      const r = await API.post("/api/config/llm", {
-        provider: $("#cfg-llm-provider").value.trim(),
-        name: $("#cfg-llm-name").value.trim(),
-        base_url: $("#cfg-llm-base").value.trim(),
-        model: $("#cfg-llm-model").value.trim(),
-        display_name: $("#cfg-llm-display").value.trim(),
-        api_key: $("#cfg-llm-key").value,
-      });
-      $("#llm-status").textContent = `已保存：${r.display_name}`;
-      toast("LLM Provider 已保存", "ok");
-    } catch (e) { toast("LLM 配置保存失败: " + e.message, "bad"); }
-  };
-  // new-project modal
-  $("#btn-new-project").onclick = () => openNewProject();
-  $("#np-close").onclick = () => closeNewProject();
-  $("#np-mask").onclick = () => closeNewProject();
-  $$(".np-method").forEach(b => b.onclick = () => {
-    $$(".np-method").forEach(x => x.classList.remove("active"));
-    b.classList.add("active");
-    $("#np-spsec-wrap").style.display = "";
-  });
-  $("#np-create").onclick = () => submitNewProject();
-  // chat iteration
-  $("#btn-chat-iter").onclick = () => openChatIter();
-  $("#chat-close").onclick = () => closeChatIter();
-  $("#chat-mask").onclick = () => closeChatIter();
-  $("#chat-send").onclick = () => sendChatIter();
-  $("#chat-feedback").addEventListener("keydown", (e) => {
-    if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendChatIter(); }
-  });
-
-  await loadDirector();
-  await go(S.activeStage);
-  // poll tasks while on monitor or gen stage
-  setInterval(async () => {
-    if (MON_TAB === "tasks") refreshMonitor();
-    // poll running tasks
-    try {
-      const ts = (await API.get("/api/tasks")).tasks || [];
-      ts.filter(t => t.status === "running").forEach(t => monitorTask(t.id));
-    } catch (e) {}
-  }, 1800);
+function renderProjectLibrary() {
+  const root=$("#project-library");
+  if (!S.projects.length) { root.innerHTML='<div class="library-empty">还没有项目<br>点击“开始创作”建立第一个项目</div>'; return; }
+  root.innerHTML=S.projects.map(p => {
+    const active=S.activeProject?.path === p.path;
+    const episodes=(p.episodes || []).map(ep => `<button class="episode-row ${S.activeEpisode?.path===ep.path?"selected":""}" data-episode="${esc(ep.path)}"><span class="episode-pin"></span><span class="episode-copy"><span class="episode-name">${esc(ep.name)}</span><span class="episode-info">${ep.shots || 0} 个镜头 · ${ep.duration_s || 0}s</span></span></button>`).join("");
+    return `<div class="project-item"><button class="project-row ${active?"selected":""}" data-project="${esc(p.path)}"><span class="project-chevron">${active?"⌄":"›"}</span><span class="project-folder">◆</span><span>${esc(p.name)}</span><span class="project-meta">${p.episodes?.length || 0} 集</span></button>${active?`<div class="episode-list">${episodes || '<div class="library-empty">暂无集数</div>'}</div>`:""}</div>`;
+  }).join("");
+  root.querySelectorAll("[data-project]").forEach(el => el.onclick=()=>selectProject(el.dataset.project));
+  root.querySelectorAll("[data-episode]").forEach(el => { el.onclick=e=>{e.stopPropagation();selectEpisode(el.dataset.episode);}; });
 }
 
-async function loadDirector() {
-  try {
-    S.director = await API.get("/api/director?path=" + encodeURIComponent(S.projectPath));
-    S.progress = S.director.progress || null;
-    window._finalVideo = "";
-    const on = S.director.comfy && S.director.comfy.online;
-    $("#rail-comfy").innerHTML = `<span class="dot ${on ? "on" : "off"}"></span>Comfy${on ? " ✓" : " ✗"}`;
-    buildNav();
-    // auto-detect an existing final episode to show in monitor
-    await probeFinalVideo();
-    if (MON_TAB !== "tasks") refreshMonitor();
-  } catch (e) { console.error(e); }
+function renderCanvas() {
+  const projectName=$("#canvas-project-name"), episodeName=$("#canvas-episode-name"), stage=$("#canvas-stage");
+  projectName.textContent=projectTitle(); episodeName.textContent=episodeTitle(S.activeEpisode);
+  if (!S.episodeDoc || !S.activeEpisode) { stage.innerHTML='<div class="canvas-empty">选择左侧项目中的一集</div>'; return; }
+  const d=S.episodeDoc, chars=d.characters || [], scenes=d.scenes || [], shots=d.shots || [];
+  const assets=chars.map(c => `<div class="asset-tile">${c.image_path?`<img src="${MEDIA(assetPath(c.image_path))}" alt="${esc(c.name)}">`:'<div class="asset-missing">缺少参考图</div>'}<span>${esc(c.name)}</span></div>`).join("");
+  const sceneAssets=scenes.map(s => `<div class="asset-tile">${s.image_path?`<img src="${MEDIA(assetPath(s.image_path))}" alt="${esc(s.name)}">`:'<div class="asset-missing">缺少场景图</div>'}<span>${esc(s.name)}</span></div>`).join("");
+  const cards=shots.map(s => `<article class="shot-card ${S.selectedShot===s.shot_id?"selected":""}" data-shot="${esc(s.shot_id)}"><div class="shot-top"><span class="shot-id">${esc(s.shot_id)}</span><span class="shot-mode">${esc(s.mode || "H3")}</span><span class="shot-time">${s.duration_s || 0}s</span></div><p class="shot-desc">${esc(s.shot_description || "等待填写镜头描述")}</p><div class="shot-foot"><span>钩子：${esc(s.hook_type || "未设定")}</span><span>剪辑点：${s.edit_target_s || 0}s</span></div></article>`).join("");
+  stage.innerHTML=`<div class="canvas-grid"><article class="story-card"><div class="card-kicker"><span class="doc-symbol">▤</span><span>项目简案 · ${esc(S.activeEpisode.folder.split("/").pop())}</span></div><h1>${esc(d.title || episodeTitle(S.activeEpisode))}</h1><p class="story-summary">${esc(d.what_if || "还没有填写故事概念。")}</p><div class="story-facts"><span class="fact"><b>目标情绪</b>${esc(d.target_feeling || "待填写")}</span><span class="fact"><b>时长</b>${d.duration_s || 0}s</span><span class="fact"><b>画幅</b>${esc(d.aspect || "9:16")}</span><span class="fact"><b>对白</b>${esc(d.dialogue_mode || "未指定")}</span></div></article><section class="asset-board"><div class="section-head"><h3>资产参考</h3><span>${chars.length+scenes.length} 项</span></div><div class="asset-grid">${assets}${sceneAssets || (!assets?'<div class="library-empty">暂无资产</div>':"")}</div></section><section class="shot-board"><div class="section-head"><h3>分镜表</h3><span>${shots.length} 个镜头</span></div>${cards || '<div class="library-empty">暂无分镜</div>'}</section></div>`;
+  stage.querySelectorAll("[data-shot]").forEach(el=>el.onclick=()=>{S.selectedShot=el.dataset.shot; renderCanvas();});
 }
 
-// Probe for an already-built episode: common names under gen/<proj>/
-async function probeFinalVideo() {
-  const dir = S.director?.output_dir;
-  if (!dir) return;
-  const files = (await API.get("/api/files?path=" + encodeURIComponent(dir)).catch(() => ({files:[]}))).files || [];
-  for (const f of files.filter(x => x.kind === "vid" && /episode|final|desk/i.test(x.name))) {
-    try {
-      const r = await fetch(MEDIA(f.path), { method: "HEAD" });
-      if (r.ok) { window._finalVideo = MEDIA(f.path); return; }
-    } catch (e) {}
-  }
+function getOutputFiles() { return S.director?.output_dir ? (S.director.output_dir + " files") : ""; }
+function planDone(id) {
+  const d=S.episodeDoc, p=S.director?.progress?.stages || {};
+  if (!d) return false;
+  if (id === "brief") return Boolean(d.what_if && d.target_feeling);
+  if (id === "assets") return Boolean((d.characters?.length || 0) + (d.scenes?.length || 0));
+  if (id === "storyboard") return Boolean(d.shots?.length) && (p.check === "done" || !S.director);
+  if (id === "generate") return p.gen === "done";
+  if (id === "final") return p.final === "done";
+  return false;
 }
+function currentPlanIndex() { for (let i=0;i<PLAN.length;i++) if (!planDone(PLAN[i].id)) return i; return PLAN.length-1; }
+function renderPlan() {
+  const done=PLAN.filter(p=>planDone(p.id)).length, idx=currentPlanIndex(), current=PLAN[idx];
+  $("#plan-count").textContent=`${done}/5`; $("#plan-current").textContent=current ? `· ${current.label}` : "· 已完成"; $("#plan-state").textContent=done===5?"已完成":"进行中";
+  $("#plan-list").innerHTML=PLAN.map((p,i)=>`<button class="plan-item ${i===idx?"current":""} ${planDone(p.id)?"done":""}" data-plan="${p.id}"><span class="plan-check">${planDone(p.id)?"✓":""}</span><span class="plan-label">${p.label}</span><span class="plan-meta">${planDone(p.id)?"已完成":p.detail}</span><span class="plan-open">›</span></button>`).join("");
+  $("#plan-list").querySelectorAll("[data-plan]").forEach(el=>el.onclick=()=>openStage(el.dataset.plan));
+}
+function renderConversation() {
+  const root=$("#conversation-content");
+  if (!S.episodeDoc) { root.innerHTML='<div class="chat-placeholder">选择一个项目集数，开始查看制作内容。</div>'; return; }
+  const d=S.episodeDoc, shot=S.selectedShot ? d.shots?.find(s=>s.shot_id===S.selectedShot) : d.shots?.[0];
+  root.innerHTML=`<div class="chat-intro"><strong>请确认当前集数的制作内容。</strong><br><span class="muted">项目切换后，简案、资产、分镜和生成目录都会跟随当前集数变化。</span></div><div class="chat-block"><b>${esc(d.title || "当前集数")}</b><br>${esc(d.target_feeling || "尚未设置目标情绪")} · ${d.shots?.length || 0} 个镜头</div>${shot?`<div class="chat-block"><b>当前镜头 ${esc(shot.shot_id)}</b><br>${esc(shot.shot_description || "等待镜头描述")}</div>`:""}`;
+}
+function renderAll() { renderProjectLibrary(); renderCanvas(); renderPlan(); renderConversation(); $("#right-project-title").textContent=projectTitle(); $("#right-episode-title").textContent=episodeTitle(S.activeEpisode); }
 
-function openDrawer(open) {
-  $("#config-drawer").classList.toggle("open", open);
-  $("#drawer-mask").classList.toggle("open", open);
-  if (open) {
-    $("#cfg-comfy").value = S.config.comfy;
-    API.get("/api/config/llm").then(c => {
-      $("#cfg-llm-provider").value = c.provider || "";
-      $("#cfg-llm-name").value = c.name || "";
-      $("#cfg-llm-base").value = c.base_url || "";
-      $("#cfg-llm-model").value = c.model || "";
-      $("#cfg-llm-display").value = c.display_name || "";
-    }).catch(() => {});
-  }
+function openStage(id) {
+  if (!S.episodeDoc) { toast("请先选择一集", "bad"); return; }
+  const plan=PLAN.find(p=>p.id===id) || PLAN[0]; $("#modal-kicker").textContent=plan.label; $("#modal-title").textContent=episodeTitle(S.activeEpisode);
+  const d=S.episodeDoc, body=$("#modal-body");
+  if (id === "brief") body.innerHTML=`<div class="chat-block"><b>故事概念</b><br>${esc(d.what_if || "待填写")}</div><div class="chat-block"><b>目标情绪</b><br>${esc(d.target_feeling || "待填写")}</div><div class="chat-block"><b>视觉风格</b><br>${esc(d.visual_style || "待填写")}</div>`;
+  else if (id === "assets") { const items=[...(d.characters||[]).map(c=>({name:c.name,path:c.image_path})),...(d.scenes||[]).map(s=>({name:s.name,path:s.image_path}))]; body.innerHTML=items.length?`<div class="modal-assets">${items.map(x=>x.path?`<div><img src="${MEDIA(assetPath(x.path))}" alt="${esc(x.name)}"><p class="form-note">${esc(x.name)}</p></div>`:`<div class="asset-missing">无参考图<div>${esc(x.name)}</div></div>`).join("")}</div>`:'<div class="library-empty">当前集数还没有角色或场景资产。</div>'; }
+  else if (id === "storyboard") body.innerHTML=`<div class="modal-shot-list">${(d.shots||[]).map(s=>`<div class="modal-shot"><b>${esc(s.shot_id)}</b> · ${s.duration_s||0}s · ${esc(s.mode||"H3")}<br>${esc(s.shot_description||"暂无描述")}<br><span class="form-note">提示词文件位于 ${esc(activeFolder())}/prompts</span></div>`).join("")}</div><div class="modal-action"><button class="primary-button" id="run-prompts">重新编译本集提示词</button><span id="stage-message" class="form-note"></span></div>`;
+  else if (id === "generate") body.innerHTML=`<div class="chat-block">当前 ComfyUI：<b>${esc(S.comfy)}</b><br>点击镜头后提交生成，任务会在后台运行。</div><div class="modal-shot-list">${(d.shots||[]).map(s=>`<div class="modal-shot"><b>${esc(s.shot_id)}</b> · ${esc((s.shot_description||"").slice(0,150))}<button class="primary-button" style="float:right;padding:6px 10px;font-size:11px" data-generate="${esc(s.shot_id)}">生成</button></div>`).join("")}</div>`;
+  else body.innerHTML=`<div class="chat-block">后期合成会读取当前集数的独立 outputs 目录。完成所有镜头后，可以在这里继续装配和查看成片。</div><button class="primary-button" id="refresh-state">刷新生成状态</button><div class="form-note" id="stage-message">${esc(getOutputFiles())}</div>`;
+  $("#stage-mask").classList.add("open");
+  const promptBtn=$("#run-prompts"); if(promptBtn) promptBtn.onclick=async()=>{promptBtn.disabled=true;try{await API.get(`/api/stage/prompts?path=${encodeURIComponent(S.activeEpisode.path)}`);$("#stage-message").textContent="提示词已写入当前集 prompts 目录";toast("提示词编译完成","ok");}catch(e){$("#stage-message").textContent=e.message;}finally{promptBtn.disabled=false;}};
+  body.querySelectorAll("[data-generate]").forEach(btn=>btn.onclick=()=>generateShot(btn.dataset.generate,btn));
+  const refresh=$("#refresh-state"); if(refresh) refresh.onclick=()=>loadEpisode(S.activeEpisode.path);
 }
+async function generateShot(shotId, btn) { btn.disabled=true; btn.textContent="已提交"; try { const r=await API.post("/api/stage/generate",{path:S.activeEpisode.path,shot_id:shotId,comfy:S.comfy}); toast(`已提交 ${shotId} 到 ComfyUI`,"ok"); pollTask(r.task); } catch(e) {btn.disabled=false;btn.textContent="生成";toast("提交失败: "+e.message,"bad");} }
+async function pollTask(id) { try { const t=await API.get(`/api/task/${id}`); if(t.status === "done"){toast("镜头生成完成","ok");loadEpisode(S.activeEpisode.path);return;} if(t.status === "error"){toast("生成失败: "+(t.error||"未知错误"),"bad");return;} setTimeout(()=>pollTask(id),2500); } catch(e){setTimeout(()=>pollTask(id),4000);} }
+async function sendChat() { const input=$("#chat-input"), feedback=input.value.trim(); if(!feedback||!S.activeEpisode||S.busy){if(!S.activeEpisode) toast("请先选择一集","bad");return;} S.busy=true;$("#btn-chat-send").disabled=true; try { const r=await API.post("/api/chat/iter",{path:S.activeEpisode.path,mode:"iterate",feedback}); if(r.error) throw new Error(r.error); input.value=""; toast("AI 已更新当前集数","ok"); await loadEpisode(S.activeEpisode.path); } catch(e){toast("对话更新失败: "+e.message,"bad");} finally {S.busy=false;$("#btn-chat-send").disabled=false;} }
 
-/* ---------------- new project modal ---------------- */
-function activeNpMethod() {
-  const a = $(".np-method.active");
-  return a ? a.dataset.m : "blank";
+function bindUi() {
+  $("#btn-new-project").onclick=()=>$("#new-mask").classList.add("open"); $("#new-close").onclick=()=>$("#new-mask").classList.remove("open");
+  $("#btn-refresh-projects").onclick=()=>loadWorkspace(); $("#btn-project-library").onclick=()=>$("#project-library").scrollTo({top:0,behavior:"smooth"});
+  $("#btn-skill").onclick=()=>{openUtility("Skill", "Skill 入口保留在工作台侧栏。后续可在这里挂载剧本检查、资产锁定和批处理能力。")}; $("#btn-comfy-flow").onclick=()=>openUtility("ComfyUI 工作流", `当前连接地址：${S.comfy}\n\n导演台运行在 5800H，ComfyUI/H3 可以运行在局域网 GPU 主机。`);
+  $("#btn-config").onclick=()=>$("#config-mask").classList.add("open"); $("#config-close").onclick=()=>$("#config-mask").classList.remove("open"); $("#config-save").onclick=()=>{S.comfy=$("#cfg-comfy").value.trim()||S.comfy;localStorage.setItem("director-comfy",S.comfy);$("#config-mask").classList.remove("open");toast("连接配置已保存","ok");};
+  $("#modal-close").onclick=()=>$("#stage-mask").classList.remove("open"); ["#stage-mask","#new-mask","#config-mask"].forEach(s=>$(s).addEventListener("click",e=>{if(e.target===$(s))$(s).classList.remove("open");})); $("#new-create").onclick=createProject; $("#btn-chat-send").onclick=sendChat; $("#chat-input").addEventListener("keydown",e=>{if((e.ctrlKey||e.metaKey)&&e.key==="Enter")sendChat();});
+  S.comfy=localStorage.getItem("director-comfy")||S.comfy;$("#cfg-comfy").value=S.comfy;
 }
-function openNewProject() {
-  $(".np-method[data-m='blank']").classList.add("active");
-  $(".np-method[data-m='example']").classList.remove("active");
-  $("#np-spsec-wrap").style.display = "";
-  $("#np-e").textContent = "";
-  $("#np-name").focus();
-  $("#np-modal").classList.add("open");
-  $("#np-mask").classList.add("open");
-}
-function closeNewProject() {
-  $("#np-modal").classList.remove("open");
-  $("#np-mask").classList.remove("open");
-}
-async function submitNewProject() {
-  const name = $("#np-name").value.trim();
-  if (!name) { toast("请先填写项目名称", "warn"); return; }
-  const m = activeNpMethod();
-  const btn = $("#np-create"); btn.disabled = true; btn.textContent = "创建中…";
-  const progress = $("#np-progress");
-  const progressLabel = $("#np-progress-label");
-  const progressPct = $("#np-progress-pct");
-  const progressFill = $("#np-progress-fill");
-  if (progress) progress.hidden = true;
-  const setProgress = (label, cur, total) => {
-    if (!progress || m !== "ai") return;
-    const pct = total ? Math.round(cur / total * 100) : 0;
-    progressLabel.textContent = label;
-    progressPct.textContent = pct + "%";
-    progressFill.style.width = pct + "%";
-  };
-  try {
-    const res = await API.post("/api/project/new", {
-      name,
-      template: m === "example" ? "example" : "blank",
-      aspect: $("#np-aspect").value,
-      duration_s: parseInt($("#np-dur").value, 10) || 15,
-      seconds_per_shot: parseInt($("#np-spsec").value, 10) || 5,
-    });
-    if (res.error) throw new Error(res.error);
-    S.projectPath = res.path;
-    await refreshProjectSelect();
-    await loadDirector();
-    closeNewProject();
-    toast("项目已创建，请输入提示词", "ok");
-    openChatIter("create");
-  } catch (e) { toast("创建项目出错: " + e.message, "bad"); }
-  if (progress) progress.hidden = true;
-  btn.disabled = false; btn.textContent = "创建项目";
-}
-async function refreshProjectSelect() {
-  try {
-    const ps = (await API.get("/api/projects")).projects || [];
-    const sel = $("#project-select");
-    sel.innerHTML = ps.map(p => `<option value="${p}">${p}</option>`).join("");
-    sel.value = S.projectPath;
-  } catch (e) {}
-}
-
-/* ---------------- conversational iteration ---------------- */
-let CHAT_WELCOME_SHOWN = false;
-let CHAT_MODE = "iterate";
-function openChatIter(mode = "iterate") {
-  CHAT_MODE = mode;
-  const body = $("#chat-body");
-  body.innerHTML = "";
-  if (!CHAT_WELCOME_SHOWN) {
-    addChatMsg("ai", `怎么用（每一轮都在这个框里说话）：\n` +
-      `新项目第一步：把故事想法 / 语料 / 背景 / 风格粘进下面输入框点发送，AI 会基于它生成一集短剧的完整分镜骨架。\n` +
-      `之后每一轮：直接在框里告诉我哪里有问题（例如"第3镜太慢，把反派改阴郁些""加一镜打脸"），AI 会自动改好并保存，导演台各环节实时刷新，你不用填任何字段。`);
-    CHAT_WELCOME_SHOWN = true;
-  }
-  $("#chat-modal").classList.add("open");
-  $("#chat-mask").classList.add("open");
-  $("#chat-feedback").value = "";
-  $("#chat-feedback").placeholder = mode === "create" ? "请输入这个新项目的提示词：故事、人物、场景、动作、台词、风格……" : "告诉 AI 要怎么修改当前项目……";
-  setTimeout(() => $("#chat-feedback").focus(), 80);
-}
-function closeChatIter() {
-  $("#chat-modal").classList.remove("open");
-  $("#chat-mask").classList.remove("open");
-}
-function addChatMsg(kind, text) {
-  const body = $("#chat-body");
-  const el = document.createElement("div");
-  el.className = "chat-msg " + kind;
-  if (kind === "ai") el.innerHTML = `<div class="who">🎬 AI 导演</div>` + esc(text);
-  else el.textContent = text;
-  body.appendChild(el);
-  body.scrollTop = body.scrollHeight;
-  return el;
-}
-async function sendChatIter() {
-  const fb = $("#chat-feedback").value.trim();
-  if (!fb) return;
-  if (!S.projectPath) { addChatMsg("err", "还没有项目。先点「＋ 新建项目」创建项目，再回来对话迭代。"); return; }
-  addChatMsg("user", fb);
-  $("#chat-feedback").value = "";
-  const btn = $("#chat-send"); btn.disabled = true;
-  const typing = addChatMsg("ai", "");
-  typing.innerHTML = `<div class="who">🎬 AI 导演</div><span class="chat-typing chat-dots">AI 在改写分镜</span>`;
-  try {
-    const r = await API.post("/api/chat/iter", {
-      path: S.projectPath,
-      mode: CHAT_MODE,
-      feedback: fb,
-    });
-    typing.remove();
-    if (r.error) {
-      addChatMsg("err", r.error + (r.error.includes("LLM key") ? "" : ""));
-      if (/LLM key|key/.test(r.error)) {
-        addChatMsg("ai", "要启动对话式迭代，请在后端配置 LLM key（OPENAI_API_KEY 或 DEEPSEEK_API_KEY），然后重启后端。配置好我就按轮次自动改分镜。");
-      }
-    } else {
-      const s = r.summary || {};
-      addChatMsg("done", `✅ 第 ${s.round || "?"} 轮已保存\n` +
-        `剧名：${esc(r.project.title)}\n镜头数：${s.n_shots} · 角色：${s.cha} · 场景：${s.scenes}`);
-      // refresh all stage data so the board/monitor reflect the new JSON
-      await loadDirector();
-      if (STAGE_RENDER[S.activeStage]) go(S.activeStage);
-    }
-  } catch (e) {
-    typing.remove();
-    addChatMsg("err", "调用出错: " + e.message);
-  }
-  btn.disabled = false;
-  $("#chat-feedback").focus();
-}
-
-document.addEventListener("DOMContentLoaded", boot);
+function openUtility(title,text){$("#modal-kicker").textContent="工作台工具";$("#modal-title").textContent=title;$("#modal-body").innerHTML=`<div class="chat-block" style="white-space:pre-line">${esc(text)}</div>`;$("#stage-mask").classList.add("open");}
+async function createProject(){const name=$("#new-name").value.trim();if(!name){toast("请填写项目名称","bad");return;}const btn=$("#new-create");btn.disabled=true;try{const r=await API.post("/api/project/new",{name,template:$("#new-template").value});$("#new-mask").classList.remove("open");await loadWorkspace();const p=S.projects.find(x=>x.folder===r.dir);if(p)await selectProject(p.path);toast("项目已创建","ok");}catch(e){toast("创建失败: "+e.message,"bad");}finally{btn.disabled=false;}}
+async function checkComfy(){try{const h=await API.get("/api/hardware");const online=h.online;$("#comfy-dot").className=`status-dot ${online?"on":"off"}`;$("#comfy-label").textContent=online?"ComfyUI 在线":"ComfyUI 离线";}catch(e){$("#comfy-label").textContent="ComfyUI 未知";}}
+bindUi(); renderAll(); loadWorkspace(); checkComfy();

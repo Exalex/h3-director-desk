@@ -1,154 +1,64 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>导演台 · H3 短剧 Director Desk</title>
+<title>导演台 · 项目工作台</title>
 <link rel="stylesheet" href="/assets/style.css">
 </head>
 <body>
-<div class="app">
-  <!-- ===================== LEFT: production pipeline nav ===================== -->
-  <aside class="rail" id="rail">
-    <div class="rail-head">
-      <div class="logo">🎬</div>
-      <div class="rail-title">导演台</div>
-      <div class="rail-sub" id="rail-comfy"><span class="dot off"></span>Comfy</div>
-    </div>
-    <nav class="stages" id="stages"></nav>
-    <div class="advice" id="advice-bar" style="margin:6px 8px 0;padding:9px 10px;border:1px solid var(--line);border-radius:9px;background:var(--panel)">
-      <div class="advice-label">▶ 下一步建议</div>
-      <div class="advice-body" id="advice-body"></div>
-    </div>
-    <div class="rail-foot">
-      <div class="proj-label">项目切换</div>
-      <div class="project-switch-hint">先选项目，或新建一个项目</div>
-      <button class="btn newproj-btn ghost-style" id="btn-new-project">＋ 新建项目</button>
-      <button class="btn newproj-btn" id="btn-chat-iter">✎ 输入提示词 / 修改项目</button>
-      <select id="project-select" title="选择项目"></select>
-      <button class="tiny" id="btn-config">⚙ 配置</button>
-    </div>
-  </aside>
-
-  <!-- ===================== CENTER: director workspace ===================== -->
-  <main class="work" id="work">
-    <header class="work-head">
-      <div class="stage-badge" id="stage-badge">—</div>
-      <h1 class="stage-title" id="stage-title">—</h1>
-      <div class="work-actions" id="work-actions"></div>
-    </header>
-    <section class="stage-body" id="stage-body"><div class="empty">载入导演台…</div></section>
-  </main>
-
-  <!-- ===================== RIGHT: director monitor ===================== -->
-  <aside class="monitor" id="monitor">
-    <div class="mon-head">
-      <span class="mon-title">导演监视器</span>
-      <button class="tiny" id="btn-collapse" title="收起">»</button>
-    </div>
-    <div class="mon-body">
-      <div class="mon-player">
-        <video id="mon-video" controls playsinline></video>
-        <div class="empty-player" id="empty-player">成片预览</div>
+<div class="app-shell">
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">◆</span><span>导演台</span></div>
+    <nav class="top-menu"><span>文件</span><span>窗口</span><span>帮助</span></nav>
+    <div class="top-status"><span id="comfy-dot" class="status-dot off"></span><span id="comfy-label">ComfyUI 检查中</span></div>
+    <button class="icon-button" id="btn-config" title="打开连接配置">⚙</button>
+  </header>
+  <div class="app-body">
+    <aside class="sidebar">
+      <div class="side-tools">
+        <button class="side-action primary" id="btn-new-project"><span class="action-icon">＋</span><span>开始创作</span></button>
+        <button class="side-action active" id="btn-project-library"><span class="action-icon">▱</span><span>项目库</span></button>
+        <button class="side-action" id="btn-skill"><span class="action-icon">⌘</span><span>Skill</span></button>
+        <button class="side-action" id="btn-comfy-flow"><span class="action-icon">⌘</span><span>ComfyUI 工作流 <em>Beta</em></span></button>
       </div>
-      <div class="mon-tabbar">
-        <button class="mon-tab active" data-tab="chars">角色</button>
-        <button class="mon-tab" data-tab="scenes">场景</button>
-        <button class="mon-tab" data-tab="shots">分镜</button>
-        <button class="mon-tab" data-tab="tasks">任务</button>
+      <div class="library-divider"></div>
+      <div class="library-head"><span>项目</span><button class="small-icon" id="btn-refresh-projects" title="刷新项目">↻</button></div>
+      <div class="project-library" id="project-library"><div class="library-loading">正在载入项目…</div></div>
+      <div class="account"><div class="avatar">E</div><div><strong>EXALEX yang</strong><span>本地导演台</span></div><button class="small-icon" title="账户菜单">⋯</button></div>
+    </aside>
+
+    <main class="canvas-area">
+      <div class="canvas-toolbar">
+        <div class="breadcrumbs"><span id="canvas-project-name">项目</span><span class="crumb-arrow">›</span><strong id="canvas-episode-name">选择一集开始</strong></div>
+        <div class="canvas-tools"><button class="small-icon" title="缩小">−</button><span>100%</span><button class="small-icon" title="放大">＋</button><button class="small-icon" title="显示缩略图">▦</button><button class="map-button">⌘ 小地图</button></div>
       </div>
-      <div class="mon-panes" id="mon-panes"></div>
-    </div>
-  </aside>
+      <section class="canvas-stage" id="canvas-stage"><div class="canvas-empty">选择左侧项目中的一集</div></section>
+      <div class="canvas-dock"><button class="dock-add" title="添加内容">＋</button><button title="选择工具">➤</button><button title="收起工具">⌃</button><button title="打开素材文件夹">□</button><button title="帮助">?</button></div>
+      <div class="watermark">导演台 · H3 short drama workspace</div>
+    </main>
+
+    <aside class="work-panel">
+      <div class="panel-titlebar"><div class="panel-title-wrap"><span class="doc-icon">▤</span><div><strong id="right-project-title">未选择项目</strong><span id="right-episode-title">请选择集数</span></div></div><button class="small-icon" title="更多操作">⋯</button></div>
+      <div class="plan-head"><div><span>制作计划</span><b id="plan-count">0/5</b><small id="plan-current">等待开始</small></div><span class="plan-state" id="plan-state">—</span></div>
+      <div class="plan-list" id="plan-list"></div>
+      <div class="conversation" id="conversation">
+        <div class="conversation-toolbar"><span>对话</span><button class="small-icon" id="btn-clear-chat" title="清空对话">⌫</button></div>
+        <div class="conversation-content" id="conversation-content"><div class="chat-placeholder">选择一个项目集数，开始查看制作内容。</div></div>
+      </div>
+      <div class="composer">
+        <div class="composer-promo"><span class="promo-star">✦</span><strong>H3 视频工作台</strong><button class="small-icon" title="关闭提示">×</button></div>
+        <textarea id="chat-input" rows="3" placeholder="描述你要修改的内容，或继续完善当前集数…"></textarea>
+        <div class="composer-foot"><button class="round-add" title="添加文件">＋</button><span class="composer-divider"></span><button class="composer-tool">◇ 模型</button><span class="composer-divider"></span><button class="composer-tool">⌘ Skill</button><button class="send-button" id="btn-chat-send" title="发送">↑</button></div>
+      </div>
+    </aside>
+  </div>
 </div>
+
+<div class="modal-mask" id="stage-mask"><section class="stage-modal" id="stage-modal"><div class="modal-head"><div><span id="modal-kicker">工作台</span><h2 id="modal-title">—</h2></div><button class="small-icon" id="modal-close" title="关闭">×</button></div><div class="modal-body" id="modal-body"></div></section></div>
+<div class="modal-mask" id="new-mask"><section class="stage-modal compact-modal"><div class="modal-head"><div><span>开始创作</span><h2>新建项目</h2></div><button class="small-icon" id="new-close" title="关闭">×</button></div><div class="modal-body"><label class="form-label">项目名称<input id="new-name" placeholder="例如：我的短剧项目"></label><label class="form-label">项目模板<select id="new-template"><option value="blank">空白项目</option><option value="example">奥德赛示例</option></select></label><button class="primary-button full-button" id="new-create">创建项目</button></div></section></div>
+<div class="modal-mask" id="config-mask"><section class="stage-modal compact-modal"><div class="modal-head"><div><span>连接</span><h2>运行配置</h2></div><button class="small-icon" id="config-close" title="关闭">×</button></div><div class="modal-body"><label class="form-label">ComfyUI 地址<input id="cfg-comfy" value="http://127.0.0.1:8188"></label><p class="form-note">5800H 只运行导演台；生成请求通过此地址连接局域网中的 ComfyUI。</p><button class="primary-button full-button" id="config-save">保存</button><div id="config-result" class="form-note"></div></div></section></div>
 <div id="toast-wrap"></div>
-
-<!-- new-project modal -->
-<div class="modal-mask" id="np-mask"></div>
-<div class="modal" id="np-modal">
-  <div class="modal-head">
-    <span>🎬 新建项目</span>
-    <button class="tiny" id="np-close">✕</button>
-  </div>
-  <div class="modal-body">
-    <div class="np-methods">
-      <button class="np-method active" data-m="blank">① 新建空白项目</button>
-      <button class="np-method" data-m="example">② 从示例开始</button>
-    </div>
-
-    <!-- common fields -->
-    <div class="np-fields">
-      <div class="param"><label>项目名称</label><input id="np-name" placeholder="例如：我的都市逆袭剧"></div>
-      <div class="param"><label>一集总时长 (秒)</label><input id="np-dur" type="number" value="15"></div>
-      <div class="param" id="np-spsec-wrap"><label>单镜时长 (秒)</label><input id="np-spsec" type="number" value="5"></div>
-      <div class="param"><label>画幅</label><select id="np-aspect"><option>9:16</option><option>16:9</option><option>1:1</option><option>4:3</option></select></div>
-    </div>
-
-    <div class="prompt-next-step"><b>下一步：</b>创建后会自动打开提示词输入框。你只需要用大白话描述想拍什么，不需要填写 JSON。</div>
-
-    <div class="np-actions">
-      <span class="hint" id="np-e"></span>
-      <button class="btn" id="np-create">创建项目</button>
-    </div>
-    <div class="task-inline" id="np-progress" hidden>
-      <div class="task-inline-head"><span id="np-progress-label">准备中…</span><span id="np-progress-pct">0%</span></div>
-      <div class="task-inline-bar"><i id="np-progress-fill"></i></div>
-      <div class="hint">可以关闭窗口，任务会继续在右侧「任务」中运行。</div>
-    </div>
-  </div>
-</div>
-
-<!-- config drawer -->
-<div class="drawer-mask" id="drawer-mask"></div>
-<div class="drawer" id="config-drawer">
-  <div class="drawer-head">
-    <span>⚙ 导演台配置</span>
-    <button class="tiny" id="btn-drawer-close">✕</button>
-  </div>
-  <div class="drawer-body">
-    <div class="config-section"><b>LLM Provider</b><span class="muted">用于 AI 建项目和对话式改稿</span></div>
-    <label>Provider<input id="cfg-llm-provider" type="text" value="spark"></label>
-    <label>名称<input id="cfg-llm-name" type="text" value="DGX Spark Qwen"></label>
-    <label>地址<input id="cfg-llm-base" type="text" value="http://192.168.3.75:8888/v1"></label>
-    <label>模型<input id="cfg-llm-model" type="text" value="qwen3.8-27b-sglang"></label>
-    <label>显示名<input id="cfg-llm-display" type="text" value="Qwen3.8-27B DFlash2"></label>
-    <label>API Key（可选）<input id="cfg-llm-key" type="password" placeholder="本地服务通常留空"></label>
-    <button class="btn" id="btn-save-llm">保存 LLM 配置</button>
-    <div class="cfg-status" id="llm-status"></div>
-    <hr style="border-color:var(--line);width:100%">
-    <label>ComfyUI base URL
-      <input id="cfg-comfy" type="text" value="http://127.0.0.1:8188">
-    </label>
-    <button class="btn" id="btn-save-config">保存配置</button>
-    <div class="cfg-status" id="cfg-status"></div>
-  </div>
-</div>
-
-<!-- shot editor modal -->
-<div class="modal-mask" id="se-mask"></div>
-<div class="modal" id="se-modal">
-  <div class="modal-head">
-    <span>✎ 镜头编辑 <span id="se-id" class="muted" style="font-family:var(--mono)"></span></span>
-    <div class="flex"><button class="btn-sm danger" id="se-del">删除本镜</button><button class="tiny" id="se-close">✕</button></div>
-  </div>
-  <div class="modal-body" id="se-body" style="width:100%"></div>
-</div>
-
-<!-- chat iteration modal -->
-<div class="modal-mask" id="chat-mask"></div>
-<div class="modal chat-modal" id="chat-modal">
-  <div class="modal-head">
-    <span>💬 对话式迭代 <span class="muted" style="font-weight:400;font-size:11px">喂语料→AI出初版 → 你提意见 → AI自动改 每一轮</span></span>
-    <button class="tiny" id="chat-close">✕</button>
-  </div>
-  <div class="chat-body" id="chat-body"></div>
-  <div class="chat-input">
-    <textarea id="chat-feedback" rows="3" placeholder="第一轮：粘贴语料/背景/风格，AI 生成一版&#10;之后每轮：说明哪里有问题（如：第3镜太慢，把反派改阴郁些）"></textarea>
-    <button class="btn" id="chat-send">发送 ⏎</button>
-  </div>
-</div>
-
 <script src="/assets/app.js"></script>
-<script src="/assets/panels.js"></script>
 </body>
 </html>

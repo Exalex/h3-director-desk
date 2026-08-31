@@ -11,7 +11,7 @@
     {
       "name": "Telemachus",
       "identity_note": "male 19, lean wiry build, short messy dark-brown hair, sharp jaw, intense dark eyes; rough undyed wool tunic with frayed hem, bare arms, thin bronze armband on left wrist; do-not-change: face, short dark-brown hair, undyed wool tunic",
-      "image_path": "gen\\odyssey_ep01\\card_Telemachus.png",
+      "image_path": "projects/odyssey/episodes/ep01/references/card_Telemachus.png",
       "do_not_change": [
         "face",
         "short dark-brown hair",
@@ -21,7 +21,7 @@
     {
       "name": "Penelope",
       "identity_note": "female 34, oval face, long dark hair in a loose low braid, tall stoic figure; simple undyed pale greyish-white wool chiton, plain bronze torc; do-not-change: face, loose low braid, pale chiton",
-      "image_path": "gen\\odyssey_ep01\\card_Penelope.png",
+      "image_path": "projects/odyssey/episodes/ep01/references/card_Penelope.png",
       "do_not_change": [
         "face",
         "loose low braid",
@@ -31,7 +31,7 @@
     {
       "name": "Antinous",
       "identity_note": "male 32, rugged stocky build, thick oiled dark beard, slicked-back black hair; heavy bronze-age jewelry: thick bronze torc and big ring; garish dyed-red tunic over fur; do-not-change: face, oiled beard, red tunic + bronze torc",
-      "image_path": "gen\\odyssey_ep01\\card_Antinous.png",
+      "image_path": "projects/odyssey/episodes/ep01/references/card_Antinous.png",
       "do_not_change": [
         "face",
         "oiled beard",
@@ -50,7 +50,7 @@
         "animal-skins: floor"
       ],
       "light_baseline": "key: central hearth fire (warm orange), no fill, volumetric smoke, deep shadows",
-      "image_path": "projects/odyssey/assets/megaron.png"
+      "image_path": "projects/odyssey/episodes/ep01/assets/megaron.png"
     }
   ],
   "shots": [
@@ -390,3 +390,4 @@
     }
   ]
 }
+

@@ -252,9 +252,8 @@ STAGE_RENDER["prompts"] = async (body) => {
   };
   $("#btn-prompts-out").onclick = async () => {
     try {
-      await API.get("/api/stage/prompts?path=" + encodeURIComponent(S.projectPath) +
-                    "&out=projects/odyssey/_prompts_ep01");
-      toast("已写入 projects/odyssey/_prompts_ep01/", "ok");
+      await API.get("/api/stage/prompts?path=" + encodeURIComponent(S.projectPath));
+      toast("已写入当前项目 prompts/", "ok");
     } catch (e) { toast("失败: " + e.message, "bad"); }
   };
 };
@@ -339,7 +338,7 @@ STAGE_RENDER["gen"] = async (body) => {
   const d = S.director;
   setActions(`<button class="btn" id="btn-gen-all">▶ 生成整集</button>
               <button class="btn ghost" id="btn-gen-refresh">↻ 状态</button>`);
-  const outDir = "auto（项目名-年月日-小时）";
+  const outDir = "";
   const accelOn = d && d.comfy && d.comfy.accel && d.comfy.accel.online;
   body.innerHTML = `
    <div class="desc">逐镜生成 H3 片段（长任务）。可选择生成后端：<b>ComfyUI</b>（原版，支持图生图/角色卡首帧）或
@@ -355,7 +354,7 @@ STAGE_RENDER["gen"] = async (body) => {
         <div class="param"><label>宽</label><input id="gen-w" type="number" value="768"></div>
         <div class="param"><label>高</label><input id="gen-h" type="number" value="1344"></div>
         <div class="param"><label>steps</label><input id="gen-steps" type="number" value="12"></div>
-        <div class="param"><label>输出目录</label><input id="gen-out" value="${outDir}"></div>
+        <div class="param"><label>输出目录</label><input id="gen-out" value="${outDir}" placeholder="默认保存到当前项目 outputs/"></div>
      </div>
      ${accelOn ? "" : `<div class="hint">⚠ 加速服务当前离线（http://192.168.100.11:8123），已默认用 ComfyUI。加速服务连通后刷新本页自动可选。</div>`}
      </div>

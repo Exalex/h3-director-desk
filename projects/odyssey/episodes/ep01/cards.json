@@ -1,0 +1,5 @@
+[
+  {"char":"Telemachus","seed":70001,"length":124,"image_path":"projects/odyssey/episodes/ep01/references/card_Telemachus.png","prompt":"Static three-quarter portrait of Telemachus; lean wiry build, short messy dark-brown hair, sharp jaw, intense dark eyes, rough undyed wool tunic and thin bronze armband. Warm hearth light from the right, deep shadow on the left, smoky Mycenaean stone hall behind."},
+  {"char":"Penelope","seed":70002,"length":124,"image_path":"projects/odyssey/episodes/ep01/references/card_Penelope.png","prompt":"Static three-quarter portrait of Penelope; oval face, long dark hair in a loose low braid, pale undyed wool chiton and bronze torc. Cold moonlight from above, low warm ember glow, dark stone wall behind."},
+  {"char":"Antinous","seed":70003,"length":124,"image_path":"projects/odyssey/episodes/ep01/references/card_Antinous.png","prompt":"Static three-quarter portrait of Antinous; rugged stocky build, thick oiled beard, slicked-back hair, bronze torc, big ring and dyed-red tunic over fur. Warm hearth light, bronze goblet, wine and smoky stone hall."}
+]

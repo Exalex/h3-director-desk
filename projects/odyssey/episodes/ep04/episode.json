@@ -11,7 +11,7 @@
     {
       "name": "Odysseus",
       "identity_note": "male c.45, gaunt battle-scarred face, thick ragged dark-brown beard, deep-set exhausted dark eyes, sun-weathered bronze-tanned skin, bare scarred chest, coarse undyed linen rags; do-not-change: face, thick ragged beard, battle scars",
-      "image_path": "gen/odyssey_ep04/card_Odysseus.png",
+      "image_path": "projects/odyssey/episodes/ep04/references/card_Odysseus.png",
       "do_not_change": [
         "face",
         "thick ragged beard",
@@ -21,7 +21,7 @@
     {
       "name": "Calypso",
       "identity_note": "female, ageless immortal nymph, long flowing golden hair, luminous serene alluring eyes, delicate features; shimmering sheer golden-gold silk robe; do-not-change: face, golden hair, sheer golden robe",
-      "image_path": "gen/odyssey_ep04/card_Calypso.png",
+      "image_path": "projects/odyssey/episodes/ep04/references/card_Calypso.png",
       "do_not_change": [
         "face",
         "golden hair",
@@ -31,7 +31,7 @@
     {
       "name": "Hermes",
       "identity_note": "male c.25, athletic divine messenger god, short golden curls under a small silver winged helmet, crisp blue-white robe with gold trim, winged sandals, silver caduceus staff with two entwined serpents; do-not-change: face, winged helmet, winged sandals, caduceus",
-      "image_path": "gen/odyssey_ep04/card_Hermes.png",
+      "image_path": "projects/odyssey/episodes/ep04/references/card_Hermes.png",
       "do_not_change": [
         "face",
         "winged helmet",
@@ -50,7 +50,7 @@
         "beach: foreground"
       ],
       "light_baseline": "cold storm light vs warm golden magical grotto glow; high contrast cinematic",
-      "image_path": "projects/odyssey/assets/calypso_island.png"
+      "image_path": ""
     }
   ],
   "shots": [
@@ -599,3 +599,4 @@
     }
   ]
 }
+

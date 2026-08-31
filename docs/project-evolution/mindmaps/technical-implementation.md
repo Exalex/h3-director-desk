@@ -7,6 +7,9 @@ mindmap
       director/serve.py main
       h3_short_drama pipeline.main
     关键模块与符号
+      _find_projects/_project_entry
+      selectProject/selectEpisode
+      renderCanvas/renderPlan
       data.Project/Shot
       shot_table.check_project
       prompt.compile_all
@@ -21,6 +24,8 @@ mindmap
       视频输出
     接口与数据结构
       Director HTTP API
+      project.json manifest
+      episode.json storyboard
       Project/Shot schema
       ComfyUI workflow
       task id
@@ -47,6 +52,8 @@ mindmap
 | 路径 | 符号/入口 | 职责 | 调用关系 | 验证 |
 |---|---|---|---|---|
 | `director/serve.py` | `main`、`Handler`、`run_*` | Web 服务和长任务编排 | Handler → 管线函数 → 文件/外部服务 | 已执行 API 与装配验证 |
+| `director/assets/app.js` | `selectProject`、`selectEpisode`、`renderAll` | 项目库、集数状态和三栏工作台渲染 | `/api/projects`、`/api/project` → 当前工作台 | 浏览器 DOM 与截图验证 |
+| `director/index.html` / `style.css` | 工作台壳与响应式样式 | 项目入口、画布、制作计划、对话框 | `app.js` | 浏览器首页 HTTP 200 |
 | `output/scripts/h3_short_drama/data.py` | `Project`、`Shot`、`Reference`、`PerSecond` | 结构化领域模型 | JSON ↔ dataclass | 示例项目可加载 |
 | `shot_table.py` | `check_project` 及规则函数 | 分镜硬门禁 | Project → errors | Odyssey check 通过 |
 | `prompt.py` | `compile`、`compile_all` | Base/Ref2VA 提示词编译 | Shot + Project → text | ep01 prompt 编译通过 |
@@ -57,7 +64,7 @@ mindmap
 
 | 名称 | 类型 | 输入 | 输出 | 兼容性/错误 |
 |---|---|---|---|---|
-| `/api/director`、`/api/projects`、`/api/project` | GET | 总览与项目读取 | JSON；路径受限于仓库根目录 | 不存在项目返回错误 |
+| `/api/director`、`/api/projects`、`/api/project` | GET | 项目库、当前集总览与集数读取 | JSON；路径受限于仓库根目录 | 不存在项目返回错误 |
 | `/api/stage/check`、`prompts`、`plan`、`qc` | GET | 检查、编译、规划、QC | JSON 或文件列表 | 纯读取/计算 |
 | `/api/stage/generate`、`series`、`assemble` | POST | 启动长任务 | task id | 后台执行，失败写 task error |
 | `/api/stage/save_project`、`patch` | POST | 整体或局部保存 | JSON | 直接落盘项目文件 |
@@ -66,6 +73,7 @@ mindmap
 ## 运行机制
 
 - 状态与生命周期：生成/串联/装配由后台线程执行，task id 作为前后端关联键。
+- 工作台状态：浏览器保存当前项目/集数路径；切换时清空旧集状态并重新请求 `episode.json` 与 `/api/director`。
 - 并发、队列或缓存：使用进程内任务注册表，无持久化队列；聊天会话也主要在内存中。
 - 错误、重试与降级：ComfyUI 对瞬时网络错误有限重试；加速服务的 I2V 自动回退 ComfyUI。
 - 配置与环境变量：ComfyUI 地址、加速地址、LLM 地址/模型和密钥均来自环境或命令行；文档不记录密钥值。

@@ -9,6 +9,11 @@
 
 `director/serve.py` 只负责导演台 Web 服务，不会自动安装、下载模型或启动 ComfyUI。当前部署目录包含可切换的 Odyssey 项目 JSON、风格文件和场景素材，但不包含 ComfyUI 本体、H3 模型权重或生成视频。
 
+项目库先按 `projects/<项目目录>/project.json` 切换项目，再按
+`episodes/<集数目录>/episode.json` 切换集数。每一集独立保存
+`assets/`、`references/`、`prompts/` 和 `outputs/`，切换后工作台不会读取其他
+集数的配置和素材。
+
 ## 当前机器检查结果
 
 - Windows 本机 `8188` 没有监听进程；

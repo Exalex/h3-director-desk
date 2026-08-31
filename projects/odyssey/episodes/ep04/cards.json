@@ -1,0 +1,5 @@
+[
+  {"char":"Odysseus","seed":70004,"length":124,"image_path":"projects/odyssey/episodes/ep04/references/card_Odysseus.png","prompt":"Static three-quarter photorealistic portrait of a battle-scarred ancient Greek hero with ragged beard, exhausted eyes, linen rags and a tear track; cold storm light, dark basalt cliff behind."},
+  {"char":"Calypso","seed":70005,"length":124,"image_path":"projects/odyssey/episodes/ep04/references/card_Calypso.png","prompt":"Static three-quarter photorealistic portrait of an ageless nymph with long golden hair, luminous eyes and a golden silk robe; warm magical light, dark grotto flora behind."},
+  {"char":"Hermes","seed":70006,"length":124,"image_path":"projects/odyssey/episodes/ep04/references/card_Hermes.png","prompt":"Static three-quarter photorealistic portrait of a divine messenger with golden curls, winged helmet, blue-white robe and caduceus; golden aura, dark storm clouds behind."}
+]

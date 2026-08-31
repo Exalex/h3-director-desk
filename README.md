@@ -106,9 +106,25 @@ Invoke-WebRequest -UseBasicParsing http://127.0.0.1:8088/
 Invoke-WebRequest -UseBasicParsing http://127.0.0.1:8088/api/projects
 ```
 
-The project selector reads JSON files under `projects/`. The bundled Odyssey
-files provide an initial project list; new projects created from the desk are
-written back to the same directory.
+The project library reads one `project.json` manifest from each directory under
+`projects/`. A project is the top-level workspace; each episode has its own
+JSON, references, prompts, and generated output directory:
+
+```text
+projects/<project>/
+  project.json       project manifest and episode list
+  assets/            shared project materials
+  episodes/<episode>/
+    episode.json     this episode's storyboard and metadata
+    assets/          scene references for this episode
+    references/      character/reference images
+    prompts/         compiled H3 prompts for this episode
+    outputs/         generated clips and assembled video (ignored)
+```
+
+The bundled Odyssey project exposes three episodes in the left project
+library. Switching either project or episode reloads the complete workspace;
+new projects created from the desk use the same isolated directory layout.
 
 ## Troubleshooting ComfyUI port 8188
 

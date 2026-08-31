@@ -1,0 +1,5 @@
+[
+  {"char":"Telemachus","seed":70001,"length":124,"image_path":"projects/odyssey/episodes/ep01_v2/references/card_Telemachus.png","prompt":"Static three-quarter portrait in realistic graphic-novel style: Telemachus, lean young Greek prince, short dark hair, rough undyed tunic and bronze armband; heavy ink shadows, crosshatching, warm firelight across the right half of his face."},
+  {"char":"Penelope","seed":70002,"length":124,"image_path":"projects/odyssey/episodes/ep01_v2/references/card_Penelope.png","prompt":"Static three-quarter portrait in realistic graphic-novel style: Penelope, ancient Greek queen with long dark hair, pale wool veil and chiton, bronze torc; cold moonlight, deep ink shadows and faint ember glow."},
+  {"char":"Antinous","seed":70003,"length":124,"image_path":"projects/odyssey/episodes/ep01_v2/references/card_Antinous.png","prompt":"Static three-quarter portrait in realistic graphic-novel style: muscular ancient Greek suitor with thick oiled beard, cruel grin, bronze torc, big ring and dyed-red tunic; harsh firelight and deep black ink shadows."}
+]

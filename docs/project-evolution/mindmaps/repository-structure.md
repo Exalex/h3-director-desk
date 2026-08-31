@@ -7,13 +7,13 @@ mindmap
   root((h3-director-desk))
     Git 基线
       分支 main
-      提交 825f8d6
-      未提交条目 7
+      提交 27b0c6a
+      未提交条目 64
     顶层模块
       output
         文件数 45
       projects
-        文件数 25
+        文件数 43
       director
         文件数 6
       root
@@ -21,14 +21,14 @@ mindmap
       docs
         文件数 4
     主要文件类型
-      .md 30
+      .md 35
       .txt 19
       .py 17
-      .json 8
+      .png 11
+      .json 9
+      no extension 4
       .bat 2
       .js 2
-      .png 2
-      no extension 1
       .html 1
       .css 1
     清单与构建

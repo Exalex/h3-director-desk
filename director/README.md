@@ -14,10 +14,11 @@ python director/serve.py --port 8088                 # 默认 ComfyUI: 192.168.3
 
 Windows 双击 `start_director.bat` 亦可。
 
-## 界面结构（编导视角的三栏布局）
+## 界面结构（项目入口 + 集数工作台）
 
-- **左栏 · 制作流程导航**：10 个环节瀑布，自上而下推进；每环节带就绪状态灯（✓ 完成 / ! 待办）
-  ，底部有 **"下一步建议"（状态驱动的单主 CTA）**：根据当前产物自动推荐下一个动作并一键跳转，让编导不迷路；顶部实时显示 ComfyUI 在线状态。底部「＋ 新建项目」可创建全新项目。
+- **左栏 · 项目库**：项目是最主要入口；展开项目后显示它自己的集数列表。项目或集数切换后，中央画布、右侧计划、资产引用和生成目录全部绑定到新的工作空间。
+- **中栏 · 项目画布**：展示当前集的简案、资产参考和分镜卡片，点击分镜可选中镜头。
+- **右栏 · 制作计划**：按「制作简案 → 资产 → 分镜图 → 视频生成 → 后期合成」推进，状态来自当前集的真实 JSON、素材和产物扫描。
 
 ## 新建项目（三种方式）
 
@@ -53,7 +54,8 @@ Windows 双击 `start_director.bat` 亦可。
 
 - **① 设定 Bible**：直接在面板填剧名/画幅/时长/对白/概念/感受/视觉风格，点「💾 保存设定」。
 - **② 分镜表**：每镜点「✎ 编辑」打开表单——改画面描述/时长/剪辑秒/mode/钩子/seed/首帧/跨镜衔接/对白/SFX，并逐秒增删改 5 要素（动作/机位/空间/声音/衔接）；「＋ 新增镜头」「删除本镜」。
-- 所有编辑即时落盘到 `projects/<name>/ep01.json`，刷新后各环节数据同步更新。
+- 所有编辑即时落盘到 `projects/<name>/episodes/<episode>/episode.json`；每一集自己的 `assets/`、
+  `references/`、`prompts/` 和 `outputs/` 与其他集数、项目隔离。
 - 后端增量接口：`POST /api/stage/patch`（field=shots|characters|scenes|meta 局部替换）、`POST /api/stage/save_project`（整项目保存）。
 - **中栏 · 导演工作区**：当前环节的控制面板（执行按钮 + 参数 + 实时结果）。
 - **右栏 · 导演监视器**：常驻的成品预览 + 角色卡 / 场景卡 / 分镜 / 后台任务 四个监视页签。
@@ -88,7 +90,7 @@ Windows 双击 `start_director.bat` 亦可。
 | `POST /api/stage/generate` | 提交单镜生成（长任务；`backend=comfy|accel` 选生成后端，accel 下 I2V 镜头自动回退 Comfy） |
 | `POST /api/stage/series` | 提交整集尾帧链生成（长任务） |
 | `POST /api/stage/assemble` | 装配成片（hardcut 硬切 / xfade 转场 + BGM） |
-| `POST /api/project/new` | 新建项目（template=blank/example，建目录+写 ep01.json） |
+| `POST /api/project/new` | 新建项目（template=blank/example，建独立目录+写 project.json） |
 | `POST /api/project/ai_storyboard` | 用 LLM 从点子生成整集分镜（需 key） |
 | `POST /api/chat/iter` | 对话式逐轮迭代（反馈 → AI 改 → 落盘；需 LLM key） |
 | `POST /api/stage/save_project` | 保存/覆盖项目 JSON |
@@ -105,9 +107,9 @@ director/
   serve.py            # 后端：纯 stdlib HTTP + 管线封装
   index.html          # 前端壳
   assets/
-    style.css         # 电影感深色主题
-    app.js            # 核心框架：API/路由/监视器/任务轮询
-    panels.js         # 10 个环节的控制面板
+    style.css         # 浅色项目画布与三栏工作台
+    app.js            # 项目/集数状态、工作台渲染、任务轮询
+    panels.js         # 旧版流程面板（保留作兼容参考）
 docs/h3_pipeline_api_contract.md   # 管线 API 契约（subagent 产出）
 start_director.bat    # 一键启动
 ```

@@ -1,0 +1,6 @@
+{
+  "type": "project",
+  "title": "奥德赛",
+  "description": "H3 短剧项目空间：按集管理分镜、角色、场景、生成任务和成片。",
+  "episodes": ["ep01", "ep01_v2", "ep04"]
+}

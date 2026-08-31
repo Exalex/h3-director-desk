@@ -119,23 +119,46 @@ def _abs(rel):
 
 
 def _find_projects():
-    """Locate project JSON files, excluding generated/private subtrees."""
+    """Locate top-level project manifests; episodes are nested below them."""
     out = []
-    for p in sorted(_glob.glob(os.path.join(REPO, "projects", "**", "*.json"), recursive=True)):
-        rel = os.path.relpath(p, os.path.join(REPO, "projects")).replace("\\", "/")
-        if any(part.startswith("_") or part.startswith(".") for part in rel.split("/")):
-            continue
+    for p in sorted(_glob.glob(os.path.join(REPO, "projects", "*", "project.json"))):
+        rel = os.path.relpath(p, REPO).replace("\\", "/")
         try:
             with open(p, encoding="utf-8") as f:
                 doc = json.load(f)
-            # Character cards and other auxiliary JSON files live beside
-            # episode projects; only episode-shaped documents belong here.
-            if not isinstance(doc, dict) or not isinstance(doc.get("shots"), list):
+            if not isinstance(doc, dict) or doc.get("type", "project") != "project":
                 continue
         except (OSError, ValueError, TypeError):
             continue
-        out.append(os.path.join("projects", rel).replace("\\", "/"))
+        out.append(rel)
     return out
+
+
+def _project_dir(rel):
+    """Return the isolated project folder for a manifest path."""
+    p = _abs(rel)
+    return os.path.dirname(p) if p else None
+
+
+def _project_entry(rel):
+    d, err = _load_project_doc(rel)
+    folder = os.path.dirname(rel).replace("\\", "/")
+    if err or not d:
+        return {"path": rel, "folder": folder, "name": os.path.basename(folder)}
+    episodes = []
+    root = _project_dir(rel)
+    for p in sorted(_glob.glob(os.path.join(root or "", "episodes", "**", "episode.json"), recursive=True)):
+        ep_rel = os.path.relpath(p, REPO).replace("\\", "/")
+        ep_doc, ep_err = _load_project_doc(ep_rel)
+        if not ep_err and isinstance(ep_doc, dict) and isinstance(ep_doc.get("shots"), list):
+            ep_folder = os.path.dirname(ep_rel).replace("\\", "/")
+            episodes.append({"path": ep_rel, "folder": ep_folder,
+                             "name": ep_doc.get("title") or os.path.basename(ep_folder),
+                             "duration_s": ep_doc.get("duration_s", 0),
+                             "shots": len(ep_doc.get("shots", []))})
+    return {"path": rel, "folder": folder, "name": d.get("title") or os.path.basename(folder),
+            "description": d.get("description", ""), "episodes": episodes,
+            "assets": folder + "/assets"}
 
 
 def _load_project_doc(rel):
@@ -154,6 +177,9 @@ def _project_output_dirs(rel):
     if err or not d:
         return []
     title = re.sub(r"[\\/:*?\"<>|]+", "_", (d.get("title") or "project").strip()) or "project"
+    local = os.path.join(_project_dir(rel) or "", "outputs")
+    if os.path.isdir(local):
+        return [os.path.relpath(local, REPO).replace("\\", "/")]
     pattern = os.path.join(REPO, "gen", f"{title}-*")
     dirs = [p for p in _glob.glob(pattern) if os.path.isdir(p)]
     return [os.path.relpath(p, REPO).replace("\\", "/")
@@ -190,13 +216,12 @@ def run_prompts(rel, out_dir=""):
         return {"error": err}
     proj = _as_project(d)
     comp = prompt.compile_all(proj)
-    if out_dir:
-        od = _abs(out_dir)
-        if od:
-            os.makedirs(od, exist_ok=True)
-            for sid, p in comp.items():
-                with open(os.path.join(od, f"{sid}.txt"), "w", encoding="utf-8") as f:
-                    f.write(p)
+    od = _abs(out_dir) if out_dir else os.path.join(_project_dir(rel) or REPO, "prompts")
+    if od:
+        os.makedirs(od, exist_ok=True)
+        for sid, p in comp.items():
+            with open(os.path.join(od, f"{sid}.txt"), "w", encoding="utf-8") as f:
+                f.write(p)
     return {"project": rel, "n": len(comp),
             "prompts": {sid: {"chars": len(p), "preview": p[:1600]}
                         for sid, p in comp.items()},
@@ -277,7 +302,9 @@ def run_comfy_generate(rel, shot_id, tid, params):
             task_append(tid, f"uploading first_frame {first}")
             first = comfyui_gen.upload_image(base, first)
         seed = shot.seed or (42 + 0 * 7919) % (2 ** 31)
-        od = _abs(out_dir) or os.path.join(REPO, "gen", "odyssey_ep01")
+        if out_dir and out_dir.startswith("auto"):
+            out_dir = ""
+        od = _abs(out_dir) or os.path.join(_project_dir(rel) or REPO, "outputs")
         os.makedirs(od, exist_ok=True)
         clip = os.path.join(od, f"{shot.shot_id}.mp4")
         length = max(5, int(round(shot.duration_s * 24)))
@@ -357,7 +384,7 @@ def run_series(rel, tid, out_dir):
         stamp = time.strftime("%Y%m%d-%H")
         safe_title = re.sub(r"[\\/:*?\"<>|]+", "_", title) or "project"
         od = _abs(out_dir) if out_dir and out_dir != "auto" else None
-        od = od or os.path.join(REPO, "gen", f"{safe_title}-{stamp}")
+        od = od or os.path.join(_project_dir(rel) or REPO, "outputs", stamp)
         os.makedirs(od, exist_ok=True)
         with open(os.path.join(od, f"{safe_title}.json"), "w", encoding="utf-8") as f:
             json.dump(d, f, ensure_ascii=False, indent=2)
@@ -536,7 +563,7 @@ def compute_progress(rel):
             stages["scene"] = "done"
         else:
             stages["scene"] = "pending"
-        pdir = os.path.join(REPO, "projects", "odyssey", "_prompts_ep01")
+        pdir = os.path.join(_project_dir(rel) or REPO, "prompts")
         if os.path.isdir(pdir) and len(_glob.glob(os.path.join(pdir, "S*.txt"))) >= len(d.get("shots", [])):
             stages["prompts"] = "done"
     stages["deploy"] = "done" if CFG.get("_comfy_ok") else "warn"
@@ -639,7 +666,7 @@ def blank_project(name, duration_s=15, seconds_per_shot=5, aspect="9:16",
 
 def example_project():
     """A ready-to-edit example (odyssey ep01's 4-shot structure) for importing."""
-    rel = "projects/odyssey/ep01.json"
+    rel = "projects/odyssey/episodes/ep01/episode.json"
     p = _abs(rel)
     if p and os.path.exists(p):
         d = json.load(open(p, encoding="utf-8"))
@@ -679,8 +706,15 @@ def create_project(data):
     while os.path.exists(proj_dir):
         proj_dir = f"{base}_{i}"; i += 1
     os.makedirs(proj_dir, exist_ok=True)
-    rel = os.path.join("projects", os.path.basename(proj_dir), "ep01.json").replace("\\", "/")
-    with open(os.path.join(proj_dir, "ep01.json"), "w", encoding="utf-8") as f:
+    episode_dir = os.path.join(proj_dir, "episodes", "ep01")
+    for folder in ("assets", "references", "prompts", "outputs"):
+        os.makedirs(os.path.join(episode_dir, folder), exist_ok=True)
+    project_manifest = {"type": "project", "title": name or "未命名项目",
+                        "description": "导演台项目空间", "episodes": ["ep01"]}
+    with open(os.path.join(proj_dir, "project.json"), "w", encoding="utf-8") as f:
+        json.dump(project_manifest, f, ensure_ascii=False, indent=2)
+    rel = os.path.join("projects", os.path.basename(proj_dir), "episodes", "ep01", "episode.json").replace("\\", "/")
+    with open(os.path.join(episode_dir, "episode.json"), "w", encoding="utf-8") as f:
         json.dump(doc, f, ensure_ascii=False, indent=2)
     return {"path": rel, "project": doc, "dir": "projects/" + os.path.basename(proj_dir)}
 
@@ -974,7 +1008,7 @@ class Handler(BaseHTTPRequestHandler):
         if path == "/api/director":
             return self._director(qs)
         if path == "/api/projects":
-            return self._send(200, {"projects": _find_projects()})
+            return self._send(200, {"projects": [_project_entry(p) for p in _find_projects()]})
         if path == "/api/project":
             rel = qs.get("path", [""])[0]
             d, err = _load_project_doc(rel)
@@ -1027,12 +1061,10 @@ class Handler(BaseHTTPRequestHandler):
 
     def _director(self, qs):
         """Overall director-desk state: pipeline readiness + project summary."""
-        rel = qs.get("path", [""])[0] or ("projects/odyssey/ep01.json"
-                                          if os.path.exists(os.path.join(REPO, "projects", "odyssey", "ep01.json"))
-                                          else (_find_projects()[0] if _find_projects() else ""))
+        rel = qs.get("path", [""])[0] or (_find_projects()[0] if _find_projects() else "")
         state = {
             "comfy": run_hardware(),
-            "projects": _find_projects(),
+            "projects": [_project_entry(p) for p in _find_projects()],
             "project": rel,
             "output_dir": (_project_output_dirs(rel) or [""])[0],
         }

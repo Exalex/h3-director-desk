@@ -2,8 +2,8 @@
 
 > 这里记录项目当前结构、技术实现、决策依据和不可丢失的迭代历史。
 
-- 文档更新时间：`2026-08-31T17:43:34+08:00`
-- 当前迭代：`I-0008 · 修正项目切换列表筛选 / completed`
+- 文档更新时间：`2026-08-31T20:03:02+08:00`
+- 当前迭代：`I-0009 · 重做项目级工作台与集数导航 / completed`
 
 ## 建议阅读顺序
 
@@ -16,6 +16,7 @@
 
 ## 最近迭代
 
+- [I-0009 · 重做项目级工作台与集数导航](iterations/I-0009-重做项目级工作台与集数导航.md) — 2026-08-31 / `completed`
 - [I-0008 · 修正项目切换列表筛选](iterations/I-0008-修正项目切换列表筛选.md) — 2026-08-31 / `completed`
 - [I-0007 · 接入本机项目切换数据](iterations/I-0007-接入本机项目切换数据.md) — 2026-08-31 / `completed`
 - [I-0006 · 部署 5800H 导演台控制 spark1 ComfyUI](iterations/I-0006-部署-5800h-导演台控制-spark1-comfyui.md) — 2026-08-31 / `in-progress`
@@ -23,10 +24,10 @@
 - [I-0004 · 验证 spark1 导演台到 spark2 ComfyUI/H3 链路](iterations/I-0004-验证-spark1-导演台到-spark2-comfyui-h3-链路.md) — 2026-08-31 / `completed`
 - [I-0003 · 明确控制机与 H3 推理机分离架构](iterations/I-0003-明确控制机与-h3-推理机分离架构.md) — 2026-08-31 / `completed`
 - [I-0002 · 克隆并完成 Windows 本地部署](iterations/I-0002-克隆并完成-windows-本地部署.md) — 2026-08-31 / `completed`
-- [I-0001 · 项目架构文档与 GitHub 基线](iterations/I-0001-项目架构文档与-github-基线.md) — 2026-08-28 / `completed`
 
 ## 最近决策
 
+- [ADR-0004 · 以项目为入口并按集隔离工作空间](decisions/ADR-0004-以项目为入口并按集隔离工作空间.md) — `accepted`
 - [ADR-0003 · split control and inference hosts](decisions/ADR-0003-split-control-and-inference-hosts.md) — `unknown`
 - [ADR-0001 · private complete github baseline](decisions/ADR-0001-private-complete-github-baseline.md) — `unknown`
 

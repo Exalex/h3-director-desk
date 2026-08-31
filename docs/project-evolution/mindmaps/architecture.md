@@ -11,7 +11,9 @@ mindmap
       交互层
         index.html
         app.js
-        panels.js
+        项目库与集数导航
+        中央项目画布
+        右侧五步制作计划
       编排层
         serve.py
         后台任务注册表
@@ -31,7 +33,9 @@ mindmap
       可选LLM
       ffmpeg
     主执行流
-      项目JSON
+      项目manifest
+      集episode JSON
+      集内素材与outputs
       六规则检查
       Prompt编译
       单镜或串联生成
@@ -51,14 +55,15 @@ mindmap
 | Director Desk | 组织 10 个阶段，提供项目编辑、任务和媒体预览 | 浏览器 | `serve.py` API | [`director/assets/app.js`](../../director/assets/app.js)、[`director/assets/panels.js`](../../director/assets/panels.js) |
 | HTTP 编排层 | 静态文件、JSON API、后台长任务 | 前端/CLI | 领域管线与文件系统 | [`director/serve.py`](../../director/serve.py) 的 `Handler`、`new_task` |
 | H3 领域管线 | 校验分镜、编译提示词、生成和装配 | 项目 JSON | ComfyUI、ffmpeg、输出目录 | [`output/scripts/h3_short_drama/`](../../output/scripts/h3_short_drama/) |
-| 项目资产 | 保存 Bible、角色卡、场景卡、镜头和媒体 | 用户/管线 | JSON、图片、视频 | [`projects/`](../../projects/)、[`gen/`](../../gen/) |
+| 项目资产 | 按项目/集保存 Bible、角色卡、场景卡、镜头和媒体 | 用户/管线 | JSON、图片、视频 | [`projects/`](../../projects/)、[`gen/`](../../gen/) |
 
 ## 主流程
 
-1. 浏览器访问 `director/serve.py`，或 CLI 直接读取项目 JSON。
-2. 项目进入 `check`、`prompts`、`plan` 等纯计算阶段。
-3. 生成、串联和装配作为后台任务执行，返回 task id。
-4. 结果落盘到项目输出目录，再由 QC 和媒体接口读取。
+1. 浏览器访问 `director/serve.py`，从 `projects/*/project.json` 构建项目库。
+2. 选择项目中的 `episodes/*/episode.json`，工作台只加载当前集的 JSON 与素材。
+3. 当前集进入 `check`、`prompts`、`plan` 等纯计算阶段。
+4. 生成、串联和装配作为后台任务执行，返回 task id。
+5. 结果落盘到当前集的 `outputs/`，再由 QC 和媒体接口读取。
 
 ## 架构约束
 
