@@ -144,11 +144,20 @@ function openStage(id) {
   else if (id === "assets") { const items=[...(d.characters||[]).map(c=>({name:c.name,path:c.image_path})),...(d.scenes||[]).map(s=>({name:s.name,path:s.image_path}))]; body.innerHTML=items.length?`<div class="modal-assets">${items.map(x=>x.path?`<div><img src="${MEDIA(assetPath(x.path))}" alt="${esc(x.name)}"><p class="form-note">${esc(x.name)}</p></div>`:`<div class="asset-missing">无参考图<div>${esc(x.name)}</div></div>`).join("")}</div>`:'<div class="library-empty">当前集数还没有角色或场景资产。</div>'; }
   else if (id === "storyboard") body.innerHTML=`<div class="modal-shot-list">${(d.shots||[]).map(s=>`<div class="modal-shot"><b>${esc(s.shot_id)}</b> · ${s.duration_s||0}s · ${esc(s.mode||"H3")}<br>${esc(s.shot_description||"暂无描述")}<br><span class="form-note">提示词文件位于 ${esc(activeFolder())}/prompts</span></div>`).join("")}</div><div class="modal-action"><button class="primary-button" id="run-prompts">重新编译本集提示词</button><span id="stage-message" class="form-note"></span></div>`;
   else if (id === "generate") body.innerHTML=`<div class="chat-block">当前 ComfyUI：<b>${esc(S.comfy)}</b><br>点击镜头后提交生成，任务会在后台运行。</div><div class="modal-shot-list">${(d.shots||[]).map(s=>`<div class="modal-shot"><b>${esc(s.shot_id)}</b> · ${esc((s.shot_description||"").slice(0,150))}<button class="primary-button" style="float:right;padding:6px 10px;font-size:11px" data-generate="${esc(s.shot_id)}">生成</button></div>`).join("")}</div>`;
-  else body.innerHTML=`<div class="chat-block">后期合成会读取当前集数的独立 outputs 目录。完成所有镜头后，可以在这里继续装配和查看成片。</div><button class="primary-button" id="refresh-state">刷新生成状态</button><div class="form-note" id="stage-message">${esc(getOutputFiles())}</div>`;
+  else body.innerHTML=`<div class="chat-block">后期合成会读取当前集数的独立 outputs 目录。完成所有镜头后，可以在这里继续装配和查看成片。</div><button class="primary-button" id="refresh-state">刷新生成状态</button><div class="form-note" id="stage-message">${esc(getOutputFiles())}</div><div id="output-preview" class="modal-shot-list" style="margin-top:14px"><div class="form-note">正在读取当前集视频…</div></div>`;
   $("#stage-mask").classList.add("open");
   const promptBtn=$("#run-prompts"); if(promptBtn) promptBtn.onclick=async()=>{promptBtn.disabled=true;try{await API.get(`/api/stage/prompts?path=${encodeURIComponent(S.activeEpisode.path)}`);$("#stage-message").textContent="提示词已写入当前集 prompts 目录";toast("提示词编译完成","ok");}catch(e){$("#stage-message").textContent=e.message;}finally{promptBtn.disabled=false;}};
   body.querySelectorAll("[data-generate]").forEach(btn=>btn.onclick=()=>generateShot(btn.dataset.generate,btn));
   const refresh=$("#refresh-state"); if(refresh) refresh.onclick=()=>loadEpisode(S.activeEpisode.path);
+  if (id === "final") loadOutputPreview();
+}
+async function loadOutputPreview() {
+  const root=$("#output-preview"); if (!root) return;
+  try {
+    const r=await API.get(`/api/files?path=${encodeURIComponent(activeFolder()+"/outputs")}`);
+    const videos=(r.files||[]).filter(f=>f.kind === "vid");
+    root.innerHTML=videos.length ? videos.map(f=>`<div class="modal-shot"><b>${esc(f.name)}</b><br><video controls playsinline preload="metadata" style="width:min(260px,100%);margin-top:9px;border-radius:8px;background:#111" src="${MEDIA(f.path)}"></video></div>`).join("") : '<div class="form-note">当前集还没有可播放的视频。</div>';
+  } catch(e) { root.innerHTML=`<div class="form-note">视频读取失败：${esc(e.message)}</div>`; }
 }
 async function generateShot(shotId, btn) { btn.disabled=true; btn.textContent="已提交"; try { const r=await API.post("/api/stage/generate",{path:S.activeEpisode.path,shot_id:shotId,comfy:S.comfy}); toast(`已提交 ${shotId} 到 ComfyUI`,"ok"); pollTask(r.task); } catch(e) {btn.disabled=false;btn.textContent="生成";toast("提交失败: "+e.message,"bad");} }
 async function pollTask(id) { try { const t=await API.get(`/api/task/${id}`); if(t.status === "done"){toast("镜头生成完成","ok");loadEpisode(S.activeEpisode.path);return;} if(t.status === "error"){toast("生成失败: "+(t.error||"未知错误"),"bad");return;} setTimeout(()=>pollTask(id),2500); } catch(e){setTimeout(()=>pollTask(id),4000);} }
