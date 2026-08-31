@@ -1042,7 +1042,7 @@ class Handler(BaseHTTPRequestHandler):
             with TASKS_LOCK:
                 return self._send(200, {"tasks": sorted(
                     [{"id": t["id"], "kind": t["kind"], "title": t["title"], "status": t["status"],
-                      "cur": t["cur"], "total": t["total"], "error": t["error"]}
+                      "started": t["started"], "cur": t["cur"], "total": t["total"], "error": t["error"]}
                      for t in TASKS.values()], key=lambda x: x["started"], reverse=True)[:30]})
         if path == "/api/media":
             return self._serve_media(qs)
