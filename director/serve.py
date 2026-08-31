@@ -18,6 +18,7 @@ import re
 import sys
 import threading
 import time
+import urllib.request
 import uuid
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import urlparse, parse_qs, unquote
@@ -62,6 +63,7 @@ CFG = {
 TASKS = {}
 TASKS_LOCK = threading.Lock()
 SERIES_LOCK = threading.Lock()
+GENERATION_LOCK = threading.Lock()
 
 # conversational iteration: session key -> {history:[{role,content}], path}
 CHAT_SESSIONS = {}
@@ -75,6 +77,55 @@ def new_task(kind, title, total=None):
                       "started": time.time(), "done": None, "total": total, "cur": 0,
                       "log": [], "result": None, "error": None}
     return tid
+
+
+def active_generation(rel, shot_id):
+    """Return an existing running task for one episode/shot, if any."""
+    key = f"{rel}::{shot_id}"
+    with TASKS_LOCK:
+        for task in TASKS.values():
+            legacy_shot = task.get("shot_id") or task.get("title", "").removeprefix("generate ")
+            is_legacy = not task.get("path") and not task.get("generation_key")
+            if ((task.get("generation_key") == key) or (is_legacy and legacy_shot == shot_id)) and task.get("status") == "running":
+                return task
+    return None
+
+
+def remote_generations(base):
+    """Return queued ComfyUI jobs keyed by their SaveVideo filename prefix."""
+    if not base:
+        return []
+    try:
+        with urllib.request.urlopen(base.rstrip("/") + "/queue", timeout=2) as response:
+            queue = json.loads(response.read().decode("utf-8"))
+    except Exception:
+        return []
+    found = []
+    seen = set()
+    for group in ("queue_running", "queue_pending"):
+        for item in queue.get(group, []):
+            if not isinstance(item, list) or len(item) < 3:
+                continue
+            prompt_id, workflow = item[1], item[2]
+            if not isinstance(workflow, dict):
+                continue
+            for node in workflow.values():
+                inputs = node.get("inputs", {}) if isinstance(node, dict) else {}
+                shot_id = str(inputs.get("filename_prefix", ""))
+                if (isinstance(node, dict) and node.get("class_type") == "SaveVideo"
+                        and shot_id and prompt_id not in seen):
+                    found.append({"id": f"comfy:{prompt_id}", "kind": "generate",
+                                  "title": f"generate {shot_id}", "status": "running",
+                                  "started": None, "path": "", "shot_id": shot_id,
+                                  "cur": 1 if group == "queue_running" else 0, "total": 3,
+                                  "error": None, "remote": True})
+                    seen.add(prompt_id)
+    return found
+
+
+def remote_generation(base, shot_id):
+    """Find one queued ComfyUI job by its SaveVideo filename prefix."""
+    return next((task for task in remote_generations(base) if task["shot_id"] == shot_id), None)
 
 
 def task_append(tid, line):
@@ -1040,10 +1091,18 @@ class Handler(BaseHTTPRequestHandler):
                 return self._send(200, TASKS.get(tid, {"error": "no such task"}))
         if path == "/api/tasks":
             with TASKS_LOCK:
+                tasks = [{"id": t["id"], "kind": t["kind"], "title": t["title"], "status": t["status"],
+                      "started": t["started"], "path": t.get("path", ""),
+                      "shot_id": t.get("shot_id") or t.get("title", "").removeprefix("generate "), "cur": t["cur"],
+                      "total": t["total"], "error": t["error"]}
+                     for t in TASKS.values()]
+                known_shots = {t.get("shot_id") for t in tasks if t.get("status") == "running"}
+                for remote in remote_generations(CFG["comfy_base"]):
+                    if remote["shot_id"] not in known_shots:
+                        tasks.append(remote)
+                        known_shots.add(remote["shot_id"])
                 return self._send(200, {"tasks": sorted(
-                    [{"id": t["id"], "kind": t["kind"], "title": t["title"], "status": t["status"],
-                      "started": t["started"], "cur": t["cur"], "total": t["total"], "error": t["error"]}
-                     for t in TASKS.values()], key=lambda x: x["started"], reverse=True)[:30]})
+                    tasks, key=lambda x: x["started"] or 0, reverse=True)[:30]})
         if path == "/api/media":
             return self._serve_media(qs)
         return self._send(404, {"error": "unknown api: " + path})
@@ -1145,7 +1204,23 @@ class Handler(BaseHTTPRequestHandler):
                 "timeout": int(data.get("timeout", 3000) or 3000),
                 "backend": data.get("backend", "comfy"),
             }
-            tid = new_task("generate", f"generate {shot_id or 'auto'}")
+            # A browser can reopen the modal or double-submit while ComfyUI is
+            # still working. Reuse the existing task instead of queueing a
+            # second GPU job for the same episode and shot.
+            with GENERATION_LOCK:
+                existing = active_generation(rel, shot_id)
+                if existing:
+                    return self._send(202, {"task": existing["id"], "status": "existing",
+                                            "message": f"{shot_id} 已在生成中"})
+                remote = remote_generation(params["comfy_base"], shot_id)
+                if remote:
+                    return self._send(202, {"task": None, "status": "existing", "remote": True,
+                                            "message": f"{shot_id} 已在 ComfyUI 队列中"})
+                tid = new_task("generate", f"generate {shot_id or 'auto'}")
+                with TASKS_LOCK:
+                    TASKS[tid]["generation_key"] = f"{rel}::{shot_id}"
+                    TASKS[tid]["path"] = rel
+                    TASKS[tid]["shot_id"] = shot_id
             t = threading.Thread(target=run_comfy_generate,
                                  args=(rel, shot_id, tid, params), daemon=True)
             t.start()

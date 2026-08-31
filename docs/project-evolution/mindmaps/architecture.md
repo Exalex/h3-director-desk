@@ -29,6 +29,7 @@ mindmap
         libraries
     外部集成
       ComfyUI
+      ComfyUI /queue 任务观测
       可选加速服务
       可选LLM
       ffmpeg
@@ -39,6 +40,7 @@ mindmap
       六规则检查
       Prompt编译
       单镜或串联生成
+      任务去重与状态轮询
       QC与装配
     部署与运行边界
       本地Windows Web服务
@@ -53,7 +55,7 @@ mindmap
 | 组件 | 职责 | 上游 | 下游 | 代码证据 |
 |---|---|---|---|---|
 | Director Desk | 组织 10 个阶段，提供项目编辑、任务和媒体预览 | 浏览器 | `serve.py` API | [`director/assets/app.js`](../../director/assets/app.js)、[`director/assets/panels.js`](../../director/assets/panels.js) |
-| HTTP 编排层 | 静态文件、JSON API、后台长任务 | 前端/CLI | 领域管线与文件系统 | [`director/serve.py`](../../director/serve.py) 的 `Handler`、`new_task` |
+| HTTP 编排层 | 静态文件、JSON API、后台长任务、生成任务去重 | 前端/CLI | 领域管线、文件系统、ComfyUI 队列 | [`director/serve.py`](../../director/serve.py) 的 `Handler`、`new_task`、`remote_generations` |
 | H3 领域管线 | 校验分镜、编译提示词、生成和装配 | 项目 JSON | ComfyUI、ffmpeg、输出目录 | [`output/scripts/h3_short_drama/`](../../output/scripts/h3_short_drama/) |
 | 项目资产 | 按项目/集保存 Bible、角色卡、场景卡、镜头和媒体 | 用户/管线 | JSON、图片、视频 | [`projects/`](../../projects/)、[`gen/`](../../gen/) |
 
@@ -63,10 +65,11 @@ mindmap
 2. 选择项目中的 `episodes/*/episode.json`，工作台只加载当前集的 JSON 与素材。
 3. 当前集进入 `check`、`prompts`、`plan` 等纯计算阶段。
 4. 生成、串联和装配作为后台任务执行，返回 task id。
-5. 结果落盘到当前集的 `outputs/`，再由 QC 和媒体接口读取。
+5. 生成提交前同时核对导演台任务表和 ComfyUI `/queue`；前端轮询任务并定时刷新远端队列。
+6. 结果落盘到当前集的 `outputs/`，再由 QC 和媒体接口读取。
 
 ## 架构约束
 
-- JSON 是项目事实源；运行中的任务状态保存在内存任务表中。
+- JSON 是项目事实源；导演台任务状态保存在内存任务表中，远端 ComfyUI 队列作为生成去重和重启恢复的补充事实源。
 - 有首帧/I2V 的镜头优先使用 ComfyUI；可选加速服务主要承担纯 T2V。
 - 生成服务、模型权重、ffmpeg 和外部 LLM 不属于仓库内部部署内容。
