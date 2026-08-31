@@ -125,6 +125,15 @@ def _find_projects():
         rel = os.path.relpath(p, os.path.join(REPO, "projects")).replace("\\", "/")
         if any(part.startswith("_") or part.startswith(".") for part in rel.split("/")):
             continue
+        try:
+            with open(p, encoding="utf-8") as f:
+                doc = json.load(f)
+            # Character cards and other auxiliary JSON files live beside
+            # episode projects; only episode-shaped documents belong here.
+            if not isinstance(doc, dict) or not isinstance(doc.get("shots"), list):
+                continue
+        except (OSError, ValueError, TypeError):
+            continue
         out.append(os.path.join("projects", rel).replace("\\", "/"))
     return out
 
