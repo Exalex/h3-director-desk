@@ -2,12 +2,12 @@
 
 > 本文件由脚本生成。它只陈述可扫描事实，不代表完整架构分析。
 
-- 扫描时间：`2026-09-01T00:46:38+08:00`
+- 扫描时间：`2026-09-01T00:52:36+08:00`
 - 项目：`h3-director-desk`
 - 根目录：`D:\workspace\deepseekSpace\h3-director-desk`
 - Git 分支：`main`
-- Git 提交：`e26bffd`
-- Git 变更条目：`8`
+- Git 提交：`d25156b`
+- Git 变更条目：`7`
 - 扫描文件数：`102`
 - 是否截断：`否`
 
@@ -53,11 +53,10 @@
 
 ## 当前 Git 状态
 
-- ` M docs/LOCAL_DEPLOYMENT.md`
+- ` M director/assets/app.js`
 - ` M docs/project-evolution/.project-evolution.json`
 - ` M docs/project-evolution/README.md`
 - ` M docs/project-evolution/evidence/repository-snapshot.md`
 - ` M docs/project-evolution/mindmaps/iterations.md`
 - ` M docs/project-evolution/mindmaps/repository-structure.md`
-- ` M start_local.bat`
-- `?? "docs/project-evolution/iterations/I-0010-\346\201\242\345\244\215\346\226\260\347\211\210\345\267\245\344\275\234\345\217\260\345\220\257\345\212\250\345\205\245\345\217\243.md"`
+- `?? "docs/project-evolution/iterations/I-0011-\344\277\256\345\244\215\346\265\217\350\247\210\345\231\250\346\227\247-comfyui-\345\234\260\345\235\200\350\246\206\347\233\226.md"`

@@ -70,7 +70,19 @@ async function loadEpisode(path) {
     S.episodeDoc = await API.get(`/api/project?path=${encodeURIComponent(path)}`);
     renderAll();
     // The hardware probe can be slow while ComfyUI is starting, so it never blocks the workspace shell.
-    API.get(`/api/director?path=${encodeURIComponent(path)}`).then(d => { if (S.activeEpisode?.path === path) { S.director=d; renderAll(); } }).catch(e => console.warn(e));
+    API.get(`/api/director?path=${encodeURIComponent(path)}`).then(d => {
+      if (S.activeEpisode?.path === path) {
+        S.director=d;
+        // The backend is the source of truth. This also repairs stale browser
+        // settings left over from the old local 127.0.0.1:8188 setup.
+        if (d.comfy?.base) {
+          S.comfy=d.comfy.base;
+          localStorage.setItem("director-comfy", S.comfy);
+          const input=$("#cfg-comfy"); if (input) input.value=S.comfy;
+        }
+        renderAll();
+      }
+    }).catch(e => console.warn(e));
   } catch (e) { toast("集数读取失败: " + e.message, "bad"); }
 }
 
@@ -152,5 +164,5 @@ function bindUi() {
 }
 function openUtility(title,text){$("#modal-kicker").textContent="工作台工具";$("#modal-title").textContent=title;$("#modal-body").innerHTML=`<div class="chat-block" style="white-space:pre-line">${esc(text)}</div>`;$("#stage-mask").classList.add("open");}
 async function createProject(){const name=$("#new-name").value.trim();if(!name){toast("请填写项目名称","bad");return;}const btn=$("#new-create");btn.disabled=true;try{const r=await API.post("/api/project/new",{name,template:$("#new-template").value});$("#new-mask").classList.remove("open");await loadWorkspace();const p=S.projects.find(x=>x.folder===r.dir);if(p)await selectProject(p.path);toast("项目已创建","ok");}catch(e){toast("创建失败: "+e.message,"bad");}finally{btn.disabled=false;}}
-async function checkComfy(){try{const h=await API.get("/api/hardware");const online=h.online;$("#comfy-dot").className=`status-dot ${online?"on":"off"}`;$("#comfy-label").textContent=online?"ComfyUI 在线":"ComfyUI 离线";}catch(e){$("#comfy-label").textContent="ComfyUI 未知";}}
+async function checkComfy(){try{const h=await API.get("/api/hardware");if(h.base){S.comfy=h.base;localStorage.setItem("director-comfy",S.comfy);const input=$("#cfg-comfy");if(input)input.value=S.comfy;}const online=h.online;$("#comfy-dot").className=`status-dot ${online?"on":"off"}`;$("#comfy-label").textContent=online?"ComfyUI 在线":"ComfyUI 离线";}catch(e){$("#comfy-label").textContent="ComfyUI 未知";}}
 bindUi(); renderAll(); loadWorkspace(); checkComfy();
