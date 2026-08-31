@@ -1,0 +1,20 @@
+For the target video, at 0.00 seconds into the target video, <Picture 1> (from [Shot 1]) is fully referenced.
+
+integrated_multimodal_description:
+Style: Cinematic photorealistic live-action film still: hyperrealistic skin texture, visible scar detail, volumetric storm light and sea spray, natural motion blur, muted desaturated teal-and-amber cinematic palette, subtle film grain; ancient Mediterranean island c.1200 BC: basalt cliffs, primitive grotto, bronze-age tools; absolutely no illustration, no comic ink lines, no crosshatching, no panel borders; 8k highly detailed
+[Shot 1] Live-action cinematic film still: photorealistic, no comic style, no ink lines, no panel borders. High angle wide shot, slow push-in from the vast stormy ocean toward a high basalt cliff. A rugged battle-scarred hero with a thick ragged beard (Odysseus), gaunt and bare-chested in rags, sits alone on the rocky ledge, head in his hands, weeping silently toward the vast stormy sea. Muted desaturated teal-amber palette, volumetric sea spray, subtle film grain.
+Per-second directives:
+  0-2s: the camera opens high over the endless storm-torn ocean, whitecaps and grey spray; a mournful cello note fades in; camera: high angle wide, slow push-in begins; spatial: ocean fills the frame, the basalt cliff edge at the bottom; audio: howling sea wind + mournful cello; handoff: the bleakness is established
+  2-4s: the cliff ledge resolves into view: Odysseus hunched on the rocks, head buried in his scarred hands; rain-mist drifts past; camera: push-in continues down to the ledge; spatial: Odysseus center on the rock ledge, stormy ocean background; audio: wind + cello sustained; handoff: the weeping hero is framed
+  4-6s: his shoulders shake with silent sobs; hands press over his face; his first words leak out, muffled by his hands; camera: slow push-in on his hunched back; spatial: his back center, the sea beyond; audio: his desperate whisper begins: '十年战争，十年漂泊……'; handoff: the weeping voice starts
+  6-8s: his hands slide off his face, revealing the gaunt scarred features, eyes red, staring into the storm; camera: hold on his upper body, high angle; spatial: his face center, stormy ocean background; audio: '伊萨卡，难道只存在于我的梦里吗？' + wind; handoff: the doubt lands
+  8-10s: he stays frozen, head falling forward; a wave slams the rocks below, spray soaks him; he does not move; camera: slow settle, high angle held; spatial: his silhouette center, spray at frame bottom; audio: wave impact + wind recedes to a moan, cello fades; handoff: hold his stillness for the hard cut into the grotto
+Fixed landmarks: stormy-ocean: background; basalt-cliff: midground; rock-ledge: foreground
+Character positions: Odysseus=center, seated on the rocky ledge, head in hands
+Lighting baseline: cold storm light from above, grey-teal palette, deep shadows under the brow
+Continuity handoff: Open the episode: the cold storm sea pulls toward the cliff; Odysseus alone on the rock, weeping silently; his despair sets up the paradise contrast in the next shot.
+Dialogue: <Picture 1> (S1) says, <d>[Chinese] 十年战争，十年漂泊……伊萨卡，难道只存在于我的梦里吗？</d>
+
+overall_soundscape: howling-wind; mournful-cello; wave-slam; sea-spray; hook: suspense
+
+non_diegetic_music: diegetic ambient only; no score unless the shot calls for it

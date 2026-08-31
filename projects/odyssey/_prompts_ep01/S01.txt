@@ -1,0 +1,17 @@
+integrated_multimodal_description:
+Style: Mycenaean Greece 1200 BC: cyclopean masonry, rough timber pillars, crude bronze vessels, coarse undyed linen and animal hides; gritty realism, cinematic epic, chiaroscuro cinematic lighting, shot on 35mm lens, volumetric smoke, dark earthy low-saturation palette, film grain; reference: Troy (2004) texture, 300 dark oil-painting mood, The Northman primal rawness; no classical marble, no ornate temple architecture
+[Shot 1] Wide shot, slow push in. The smoky, dimly lit ancient Greek Megaron great hall. Mycenaean architecture with thick wooden pillars and rough stone walls. Dozens of arrogant men are feasting chaotically, sprawling on animal skins. Firelight from the central hearth casts long, dramatic shadows.
+Per-second directives:
+  0-1s: camera opens inside the smoky great hall; haze drifts across the frame; fire flicker ripples on the stone wall; camera: slow push in begins; spatial: hearth center, wooden pillars at left and right, animal skins on the floor; audio: low roar of the fire + distant chaotic chatter; handoff: wide chaos established
+  1-2s: suitors sprawl on skins: one raises a bronze goblet, another tosses a bone, others brawl-laugh over meat; camera: slow push in continues; spatial: figures scattered across the midground, hearth light central; audio: raucous laughter + bronze cup clink + meat sizzling; handoff: greed readable at wide scale
+  2-3s: pillar shadows loom across the smoke; a heavy suitor sprawls center-frame, drunk on wine; camera: push in settles slightly tighter; spatial: foreground pillar edge at frame-left, hearth glow center; audio: laughter swells, fire crackle close; handoff: holds wide chaos for the hard cut to the greedy close-up
+  3-4s: chaos sustains: cups raised, meat torn, smoke thickens; the fire swells once; camera: nearly still, tiny drift; spatial: same wide composition, hearth center; audio: hall roar steady, one deep guffaw; handoff: tail hold (edit trims at 3s)
+  4-5s: chaos sustains; embers rise through the haze; camera: hold; spatial: same wide composition; audio: fire crackle + low roar; handoff: tail hold (edit trims at 3s)
+Fixed landmarks: central-hearth: center; wooden-pillars: left & right edges; stone-wall: background; animal-skins: floor
+Character positions: 求婚者们(群演)=dozens of rough men sprawling on animal skins across the floor, midground
+Lighting baseline: key: central hearth fire warm orange; volumetric smoke; deep black shadows on stone
+Continuity handoff: Open on the smoky great hall wide; the suitors' chaos is the baseline Telemachus will watch in the next shot; hearth + pillars + skins anchor the space for the whole episode.
+
+overall_soundscape: fire-crackle; raucous-laughter; bronze-cup-clink; meat-sizzle; hall-roar; hook: suspense
+
+non_diegetic_music: diegetic ambient only; no score unless the shot calls for it

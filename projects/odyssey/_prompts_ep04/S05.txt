@@ -1,0 +1,20 @@
+For the target video, at 0.00 seconds into the target video, <Picture 1> (from [Shot 1]) is fully referenced.
+
+integrated_multimodal_description:
+Style: Cinematic photorealistic live-action film still: hyperrealistic skin texture, visible scar detail, volumetric storm light and sea spray, natural motion blur, muted desaturated teal-and-amber cinematic palette, subtle film grain; ancient Mediterranean island c.1200 BC: basalt cliffs, primitive grotto, bronze-age tools; absolutely no illustration, no comic ink lines, no crosshatching, no panel borders; 8k highly detailed
+[Shot 1] Live-action cinematic film still: photorealistic, no comic style, no ink lines, no panel borders. Medium shot, slow dolly. Young winged messenger god Hermes with a small winged helmet stands imperiously before the beautiful nymph Calypso in her sheer golden robe, holding a silver caduceus staff with two entwined serpents, raising it; Calypso looks shocked and furious, hand at her chest. A glowing golden divine aura around Hermes, sharp shadows, stormy sky and dark coast behind. Cinematic motion, subtle film grain.
+Per-second directives:
+  0-2s: the medium frame opens: dust still drifting; Hermes stands tall at center, winged helmet catching the golden aura; Calypso half-turned at frame-left; camera: medium shot, slow dolly right; spatial: Hermes center, Calypso frame-left, stormy sky background; audio: the wind's last moan + a resonant hum; handoff: the confrontation is framed
+  2-4s: Hermes raises the caduceus; the two serpents catch the light; his voice booms, the first command lands; camera: hold, slow dolly continues; spatial: staff raised center, aura flaring; audio: Hermes shouts: '神王宙斯有令，卡吕普索！'; handoff: the decree begins
+  4-6s: Calypso whips around into profile: shock then fury, hand clutched to her chest; her robe ripples in the gust; camera: push slightly toward Calypso's reaction; spatial: her face frame-left, Hermes center-right; audio: '放他走！'; handoff: the nymph is struck
+  6-8s: Hermes steps forward one stride, caduceus extended; the golden aura flares; Calypso's jaw tightens, eyes blazing; camera: hold two-shot; spatial: Hermes center, Calypso left, beach foreground; audio: '命运不允许这个伟大的灵魂死在你的岛上！' + storm gust; handoff: the decree completes
+  8-10s: the aura holds; the two stand frozen in the golden-and-storm light; a wave slaps the dark coast behind them; camera: slow settle on the two-shot; spatial: same composition; audio: wave slap + sustained hum; handoff: hold the standoff for the hard cut to the hero's new fire
+Fixed landmarks: beach: foreground; stormy-sky: background
+Character positions: Hermes=center, standing tall, caduceus raised; Calypso=frame-left, half-turned, sheer golden robe
+Lighting baseline: key: golden divine aura on Hermes; cold storm light on Calypso; high contrast
+Continuity handoff: HARD CUT to medium: Hermes stands before Calypso with the caduceus raised; the divine aura splits the frame; her shock and fury are the reaction beat into the episode's turn.
+Dialogue: <Picture 1> (S3) says, <d>[Chinese] 神王宙斯有令，卡吕普索！放他走！命运不允许这个伟大的灵魂死在你的岛上！</d>
+
+overall_soundscape: divine-hum; storm-gust; wave-slap; caduceus-clink; hook: reveal
+
+non_diegetic_music: diegetic ambient only; no score unless the shot calls for it

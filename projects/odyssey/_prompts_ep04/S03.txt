@@ -1,0 +1,20 @@
+For the target video, at 0.00 seconds into the target video, <Picture 1> (from [Shot 1]) is fully referenced.
+
+integrated_multimodal_description:
+Style: Cinematic photorealistic live-action film still: hyperrealistic skin texture, visible scar detail, volumetric storm light and sea spray, natural motion blur, muted desaturated teal-and-amber cinematic palette, subtle film grain; ancient Mediterranean island c.1200 BC: basalt cliffs, primitive grotto, bronze-age tools; absolutely no illustration, no comic ink lines, no crosshatching, no panel borders; 8k highly detailed
+[Shot 1] Live-action cinematic film still: photorealistic, no comic style, no ink lines, no panel borders. Close up, static. The weathered scarred face of Odysseus: gaunt, thick ragged beard, salt tears glistening on his cheeks; he turns his head away in firm rejection, jaw set, eyes unyielding with a stubborn mortal's devotion to his home. High contrast harsh shadows, intense emotional grit, subtle film grain.
+Per-second directives:
+  0-2s: the close-up opens on his weathered face: scarred brow, thick ragged beard, a tear track catching the warm grotto light; camera: close up, static; spatial: his face center, lush grotto bokeh behind; audio: his ragged breathing + faint island breeze; handoff: the sorrow is on his skin
+  2-4s: his eyes glisten; he swallows; the tear rolls down his cheek; his jaw tightens with resolve; camera: hold, micro push to the eyes; spatial: tear line on the right cheek, scar across the brow; audio: his whisper begins: '没有我的妻子和家园，'; handoff: the resolve forms
+  4-6s: he starts turning his head away; the rejection is physical, his hand brushing the warm light aside; camera: follow his head turn, close up; spatial: his face rotating from camera toward profile; audio: '永生不过是一座精致的牢笼。'; handoff: the rejection begins
+  6-8s: his head is fully turned; only his firm profile remains; the eye stays hard, unbroken; camera: hold on the profile; spatial: his profile center, dark shadow at frame right; audio: '我宁愿作为凡人死去。' + wind; handoff: the mortal choice is spoken
+  8-10s: he holds the turned pose; a tremor runs through his jaw; the warm light dims slightly at the frame edge; camera: slow settle, close up held; spatial: his profile center, grotto bokeh background; audio: breath steadies, a single cello note; handoff: hold his stillness for the hard cut to the golden light splitting the sky
+Fixed landmarks: lush-grotto: background
+Character positions: Odysseus=center close, facing camera, turning away
+Lighting baseline: harsh warm key from the grotto glow at his left, heavy shadow across the right half, high contrast
+Continuity handoff: HARD CUT into Odysseus's face: the tears and the firm head-turn close the temptation; his mortal choice sets up the god's interruption in the next shot.
+Dialogue: <Picture 1> (S1) says, <d>[Chinese] 没有我的妻子和家园，永生不过是一座精致的牢笼。我宁愿作为凡人死去。</d>
+
+overall_soundscape: ragged-breath; grotto-breeze; single-cello-note; hook: expression-beat
+
+non_diegetic_music: diegetic ambient only; no score unless the shot calls for it

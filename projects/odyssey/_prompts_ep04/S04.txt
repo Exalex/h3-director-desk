@@ -1,0 +1,16 @@
+integrated_multimodal_description:
+Style: Cinematic photorealistic live-action film still: hyperrealistic skin texture, visible scar detail, volumetric storm light and sea spray, natural motion blur, muted desaturated teal-and-amber cinematic palette, subtle film grain; ancient Mediterranean island c.1200 BC: basalt cliffs, primitive grotto, bronze-age tools; absolutely no illustration, no comic ink lines, no crosshatching, no panel borders; 8k highly detailed
+[Shot 1] Live-action cinematic film still: photorealistic, no comic style, no ink lines, no panel borders. Dynamic wide action shot. A beam of golden divine light tears through the dark storm clouds; a winged messenger god in winged sandals (Hermes) streaks down like a meteor on a golden trail, crashing onto the white-sand beach, kicking up a huge cone of dust and wind. Dramatic low perspective, motion streaks in the air, cinematic motion blur, subtle film grain.
+Per-second directives:
+  0-2s: the dark storm sky dominates; a crack of golden light splits the clouds; thunder rumbles in; camera: dynamic wide, low angle toward the sky; spatial: beach foreground bottom third, stormy sky background; audio: the first thunder roll + a rising shriek; handoff: the sky is about to break
+  2-4s: the golden beam widens; a small winged figure blazes down it, wings catching the light, a golden trail behind; camera: track the streaking figure, wide; spatial: the figure mid-frame descending, beam vertical; audio: the shriek climbs into a howl; handoff: the figure is in the dive
+  4-6s: the figure strikes the sand: impact — a huge cone of dust and sand explodes outward, the wind flattens the beach grass; camera: impact frame, low angle at the sand; spatial: dust cone foreground center, the beam still glowing in the sky; audio: sonic boom + thunder crack + sand hiss; handoff: the impact lands
+  6-8s: the dust column towers and spins; the silhouette of wings is visible inside; the sky beam flickers; camera: hold on the dust column; spatial: dust cone center, golden sky beam behind; audio: wind howl + a low cello hit; handoff: he is inside the dust
+  8-10s: the dust begins to settle; winged sandals glint in the golden haze; the figure crouches low, staff raised; camera: slow settle on the clearing dust; spatial: the figure at the dust's heart, beach around; audio: wind dies to a moan, distant thunder; handoff: the god lands for the hard cut to the face-to-face with the nymph
+Fixed landmarks: beach: foreground; stormy-sky: background
+Lighting baseline: golden divine lightning beam cutting the dark storm, harsh rim light on the sand
+Continuity handoff: HARD CUT to the wide beach: the golden light tears the storm clouds and the messenger god strikes down; the sky itself breaks the paradise scene; the impact dust is still rolling in the next shot.
+
+overall_soundscape: thunder-bolt; sonic-shriek; impact-boom; sand-hiss; hook: chase
+
+non_diegetic_music: diegetic ambient only; no score unless the shot calls for it

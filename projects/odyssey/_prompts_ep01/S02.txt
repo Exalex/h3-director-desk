@@ -1,0 +1,19 @@
+For the target video, at 0.00 seconds into the target video, <Picture 1> (from [Shot 1]) is fully referenced.
+
+integrated_multimodal_description:
+Style: Mycenaean Greece 1200 BC: cyclopean masonry, rough timber pillars, crude bronze vessels, coarse undyed linen and animal hides; gritty realism, cinematic epic, chiaroscuro cinematic lighting, shot on 35mm lens, volumetric smoke, dark earthy low-saturation palette, film grain; reference: Troy (2004) texture, 300 dark oil-painting mood, The Northman primal rawness; no classical marble, no ornate temple architecture
+[Shot 1] Close up, slow motion. A rugged, bearded ancient Greek suitor wearing bronze-age jewelry laughs maliciously, spilling dark red wine from a crude bronze goblet; greasy roasted meat on the wooden table.
+Per-second directives:
+  0-1s: Antinous leans into frame: oiled beard, thick bronze torc, big ring; he raises the crude bronze goblet, grin wide; camera: close-up, slow motion; spatial: his face center, dark stone wall behind, fire glow front-left; audio: his malicious laugh + wine sloshing in the cup; handoff: goblet raised, wine at the rim
+  1-2s: he tilts the goblet; dark red wine spills over the bronze lip onto the wooden table; grease glints on the roasted meat; camera: hold tight close, slight push toward the spill; spatial: wine stream center-bottom, rim light on the droplets; audio: wine splash SFX + his laugh + distant hall roar; handoff: end on the spilled wine - greed motif locked
+  2-3s: he laughs again, wiping wine from his beard with his thumb; camera: hold close-up; spatial: same composition; audio: his laugh + distant roar; handoff: tail hold (edit trims at 2s)
+  3-4s: he tips the cup once more, more wine spills; the meat glints in firelight; camera: hold; spatial: same composition; audio: wine spill + low roar; handoff: tail hold
+  4-5s: he grins at camera, wine on his beard; camera: hold close-up; spatial: same composition; audio: his low chuckle; handoff: tail hold
+Fixed landmarks: stone-wall: background; hearth-glow: warm off-frame
+Character positions: Antinous=center close, facing camera, smirking
+Lighting baseline: key: hearth fire warm orange from front-left; rim light on the spilled wine; deep shadow behind
+Continuity handoff: HARD CUT from the wide hall to Antinous's greedy face; same firelight world (stone wall + hearth glow); his spilled wine is the greed motif that Telemachus watches in the next shot.
+
+overall_soundscape: wine-spill-splash; malicious-laugh; hall-roar-distant; meat-sizzle; hook: expression-beat
+
+non_diegetic_music: diegetic ambient only; no score unless the shot calls for it

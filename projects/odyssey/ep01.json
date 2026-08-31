@@ -1,0 +1,392 @@
+{
+  "title": "奥德赛 · 第01集：求婚者的狂宴",
+  "what_if": "奥德修斯失踪20年，宫殿沦为求婚者的酒池肉林；19岁的忒勒玛科斯在怒火与无力之间，第一次看清自己将继承的是什么。",
+  "target_feeling": "史诗压迫感 + 隐忍的愤怒 + 命运的冷光",
+  "aspect": "9:16",
+  "duration_s": 10,
+  "dialogue_mode": "无对白",
+  "dialogue_language": "未指定",
+  "visual_style": "Mycenaean Greece 1200 BC: cyclopean masonry, rough timber pillars, crude bronze vessels, coarse undyed linen and animal hides; gritty realism, cinematic epic, chiaroscuro cinematic lighting, shot on 35mm lens, volumetric smoke, dark earthy low-saturation palette, film grain; reference: Troy (2004) texture, 300 dark oil-painting mood, The Northman primal rawness; no classical marble, no ornate temple architecture",
+  "characters": [
+    {
+      "name": "Telemachus",
+      "identity_note": "male 19, lean wiry build, short messy dark-brown hair, sharp jaw, intense dark eyes; rough undyed wool tunic with frayed hem, bare arms, thin bronze armband on left wrist; do-not-change: face, short dark-brown hair, undyed wool tunic",
+      "image_path": "gen\\odyssey_ep01\\card_Telemachus.png",
+      "do_not_change": [
+        "face",
+        "short dark-brown hair",
+        "undyed wool tunic"
+      ]
+    },
+    {
+      "name": "Penelope",
+      "identity_note": "female 34, oval face, long dark hair in a loose low braid, tall stoic figure; simple undyed pale greyish-white wool chiton, plain bronze torc; do-not-change: face, loose low braid, pale chiton",
+      "image_path": "gen\\odyssey_ep01\\card_Penelope.png",
+      "do_not_change": [
+        "face",
+        "loose low braid",
+        "pale chiton"
+      ]
+    },
+    {
+      "name": "Antinous",
+      "identity_note": "male 32, rugged stocky build, thick oiled dark beard, slicked-back black hair; heavy bronze-age jewelry: thick bronze torc and big ring; garish dyed-red tunic over fur; do-not-change: face, oiled beard, red tunic + bronze torc",
+      "image_path": "gen\\odyssey_ep01\\card_Antinous.png",
+      "do_not_change": [
+        "face",
+        "oiled beard",
+        "red tunic + bronze torc"
+      ]
+    }
+  ],
+  "scenes": [
+    {
+      "name": "Mycenaean Megaron (great hall)",
+      "description": "massive interior palace hall: cyclopean stone walls, thick rough-hewn wooden pillars, central hearth pit, animal-skin floor, drifting smoke haze, night",
+      "landmarks": [
+        "central-hearth: center",
+        "wooden-pillars: left & right edges",
+        "stone-wall: background",
+        "animal-skins: floor"
+      ],
+      "light_baseline": "key: central hearth fire (warm orange), no fill, volumetric smoke, deep shadows",
+      "image_path": "projects/odyssey/assets/megaron.png"
+    }
+  ],
+  "shots": [
+    {
+      "shot_id": "S01",
+      "duration_s": 5,
+      "edit_target_s": 3,
+      "continuity_handoff": "Open on the smoky great hall wide; the suitors' chaos is the baseline Telemachus will watch in the next shot; hearth + pillars + skins anchor the space for the whole episode.",
+      "fixed_landmarks": [
+        "central-hearth: center",
+        "wooden-pillars: left & right edges",
+        "stone-wall: background",
+        "animal-skins: floor"
+      ],
+      "char_positions": {
+        "求婚者们(群演)": "dozens of rough men sprawling on animal skins across the floor, midground"
+      },
+      "exited_chars": [],
+      "lighting_baseline": "key: central hearth fire warm orange; volumetric smoke; deep black shadows on stone",
+      "hook_type": "suspense",
+      "shot_description": "Wide shot, slow push in. The smoky, dimly lit ancient Greek Megaron great hall. Mycenaean architecture with thick wooden pillars and rough stone walls. Dozens of arrogant men are feasting chaotically, sprawling on animal skins. Firelight from the central hearth casts long, dramatic shadows.",
+      "per_second": [
+        {
+          "rng": "0-1s",
+          "action": "camera opens inside the smoky great hall; haze drifts across the frame; fire flicker ripples on the stone wall",
+          "camera": "slow push in begins",
+          "spatial": "hearth center, wooden pillars at left and right, animal skins on the floor",
+          "audio": "low roar of the fire + distant chaotic chatter",
+          "handoff": "wide chaos established"
+        },
+        {
+          "rng": "1-2s",
+          "action": "suitors sprawl on skins: one raises a bronze goblet, another tosses a bone, others brawl-laugh over meat",
+          "camera": "slow push in continues",
+          "spatial": "figures scattered across the midground, hearth light central",
+          "audio": "raucous laughter + bronze cup clink + meat sizzling",
+          "handoff": "greed readable at wide scale"
+        },
+        {
+          "rng": "2-3s",
+          "action": "pillar shadows loom across the smoke; a heavy suitor sprawls center-frame, drunk on wine",
+          "camera": "push in settles slightly tighter",
+          "spatial": "foreground pillar edge at frame-left, hearth glow center",
+          "audio": "laughter swells, fire crackle close",
+          "handoff": "holds wide chaos for the hard cut to the greedy close-up"
+        },
+        {
+          "rng": "3-4s",
+          "action": "chaos sustains: cups raised, meat torn, smoke thickens; the fire swells once",
+          "camera": "nearly still, tiny drift",
+          "spatial": "same wide composition, hearth center",
+          "audio": "hall roar steady, one deep guffaw",
+          "handoff": "tail hold (edit trims at 3s)"
+        },
+        {
+          "rng": "4-5s",
+          "action": "chaos sustains; embers rise through the haze",
+          "camera": "hold",
+          "spatial": "same wide composition",
+          "audio": "fire crackle + low roar",
+          "handoff": "tail hold (edit trims at 3s)"
+        }
+      ],
+      "dialogue": [],
+      "sfx": [
+        "fire-crackle",
+        "raucous-laughter",
+        "bronze-cup-clink",
+        "meat-sizzle",
+        "hall-roar"
+      ],
+      "mode": "T2VA",
+      "video_model": "H3",
+      "resolution_tier": "768P",
+      "aspect": "9:16",
+      "references": [],
+      "first_frame": "",
+      "last_frame": "",
+      "continuity_type": "hard_cut"
+    },
+    {
+      "shot_id": "S02",
+      "duration_s": 5,
+      "edit_target_s": 2,
+      "continuity_handoff": "HARD CUT from the wide hall to Antinous's greedy face; same firelight world (stone wall + hearth glow); his spilled wine is the greed motif that Telemachus watches in the next shot.",
+      "fixed_landmarks": [
+        "stone-wall: background",
+        "hearth-glow: warm off-frame"
+      ],
+      "char_positions": {
+        "Antinous": "center close, facing camera, smirking"
+      },
+      "exited_chars": [],
+      "lighting_baseline": "key: hearth fire warm orange from front-left; rim light on the spilled wine; deep shadow behind",
+      "hook_type": "expression-beat",
+      "shot_description": "Close up, slow motion. A rugged, bearded ancient Greek suitor wearing bronze-age jewelry laughs maliciously, spilling dark red wine from a crude bronze goblet; greasy roasted meat on the wooden table.",
+      "per_second": [
+        {
+          "rng": "0-1s",
+          "action": "Antinous leans into frame: oiled beard, thick bronze torc, big ring; he raises the crude bronze goblet, grin wide",
+          "camera": "close-up, slow motion",
+          "spatial": "his face center, dark stone wall behind, fire glow front-left",
+          "audio": "his malicious laugh + wine sloshing in the cup",
+          "handoff": "goblet raised, wine at the rim"
+        },
+        {
+          "rng": "1-2s",
+          "action": "he tilts the goblet; dark red wine spills over the bronze lip onto the wooden table; grease glints on the roasted meat",
+          "camera": "hold tight close, slight push toward the spill",
+          "spatial": "wine stream center-bottom, rim light on the droplets",
+          "audio": "wine splash SFX + his laugh + distant hall roar",
+          "handoff": "end on the spilled wine - greed motif locked"
+        },
+        {
+          "rng": "2-3s",
+          "action": "he laughs again, wiping wine from his beard with his thumb",
+          "camera": "hold close-up",
+          "spatial": "same composition",
+          "audio": "his laugh + distant roar",
+          "handoff": "tail hold (edit trims at 2s)"
+        },
+        {
+          "rng": "3-4s",
+          "action": "he tips the cup once more, more wine spills; the meat glints in firelight",
+          "camera": "hold",
+          "spatial": "same composition",
+          "audio": "wine spill + low roar",
+          "handoff": "tail hold"
+        },
+        {
+          "rng": "4-5s",
+          "action": "he grins at camera, wine on his beard",
+          "camera": "hold close-up",
+          "spatial": "same composition",
+          "audio": "his low chuckle",
+          "handoff": "tail hold"
+        }
+      ],
+      "dialogue": [],
+      "sfx": [
+        "wine-spill-splash",
+        "malicious-laugh",
+        "hall-roar-distant",
+        "meat-sizzle"
+      ],
+      "mode": "I2VA",
+      "video_model": "H3",
+      "resolution_tier": "768P",
+      "aspect": "9:16",
+      "seed": 70003,
+      "references": [
+        {
+          "label": "<Picture 1>",
+          "kind": "person",
+          "char": "Antinous",
+          "retention": "fully_preserved",
+          "retention_note": "retain face, oiled beard, red tunic + bronze torc of Antinous across the whole shot",
+          "path": "gen/odyssey_ep01/card_Antinous.png",
+          "description": "the rugged bearded suitor in the dyed-red tunic with thick bronze torc",
+          "used_as": "frame_anchor"
+        }
+      ],
+      "first_frame": "gen/odyssey_ep01/card_Antinous.png",
+      "last_frame": "",
+      "continuity_type": "hard_cut"
+    },
+    {
+      "shot_id": "S03",
+      "duration_s": 5,
+      "edit_target_s": 3,
+      "continuity_handoff": "HARD CUT to Telemachus in the pillar shadow; same hall (stone wall + hearth glow visible), his eye-line lands on the suitors; his clenched fists set up his mother's grief in the final shot.",
+      "fixed_landmarks": [
+        "stone-wall: background",
+        "central-hearth: warm off-frame right"
+      ],
+      "char_positions": {
+        "Telemachus": "left third, midground, standing in the pillar shadow, facing frame-right"
+      },
+      "exited_chars": [],
+      "lighting_baseline": "key: hearth fire raking from the right, half his face lit (chiaroscuro); left half in deep shadow",
+      "hook_type": "expression-beat",
+      "shot_description": "Medium shot, slow tracking camera. Young Telemachus stands in the shadows of a massive stone pillar, watching the chaotic suitors; he wears a rough woven ancient tunic; his eyes are filled with suppressed anger and tears, fists clenched; dramatic side lighting illuminates half his face.",
+      "per_second": [
+        {
+          "rng": "0-1s",
+          "action": "Telemachus stands still in the pillar's shadow, jaw tight; hearth glow rakes the right half of his face",
+          "camera": "slow tracking camera drifts left",
+          "spatial": "pillar shadow at frame-left, Telemachus left third, fire glow from the right",
+          "audio": "his controlled breathing + faint distant laughter",
+          "handoff": "stillness against the chaos"
+        },
+        {
+          "rng": "1-2s",
+          "action": "his fists clench at his sides; his eyes track a suitor off-frame, teeth grit",
+          "camera": "slow tracking continues, slight push toward his eyes",
+          "spatial": "fists lower third, eye-line toward frame-right",
+          "audio": "breath-held tension, the hall roar pushed far away",
+          "handoff": "anger suppressed, not released"
+        },
+        {
+          "rng": "2-3s",
+          "action": "he swallows hard; one fist tightens; smoke drifts past his silhouette",
+          "camera": "hold on his half-lit face",
+          "spatial": "his face center-left, shadowed stone wall behind",
+          "audio": "hall roar fades to a distant murmur",
+          "handoff": "holds his gaze for the hard cut up to Penelope"
+        },
+        {
+          "rng": "3-4s",
+          "action": "he watches the off-frame suitors; a single ember falls across the frame",
+          "camera": "hold, micro-drift",
+          "spatial": "same composition",
+          "audio": "distant murmur + faint ember hiss",
+          "handoff": "tail hold (edit trims at 3s)"
+        },
+        {
+          "rng": "4-5s",
+          "action": "his jaw works; the fire swells, his half-lit face flares",
+          "camera": "hold",
+          "spatial": "same composition",
+          "audio": "fire swell + low murmur",
+          "handoff": "tail hold"
+        }
+      ],
+      "dialogue": [],
+      "sfx": [
+        "suppressed-breath",
+        "distant-hall-murmur",
+        "ember-hiss",
+        "fire-swelling"
+      ],
+      "mode": "I2VA",
+      "video_model": "H3",
+      "resolution_tier": "768P",
+      "aspect": "9:16",
+      "seed": 70001,
+      "references": [
+        {
+          "label": "<Picture 1>",
+          "kind": "person",
+          "char": "Telemachus",
+          "retention": "fully_preserved",
+          "retention_note": "retain face, short dark-brown hair, undyed wool tunic of Telemachus across the whole shot",
+          "path": "gen/odyssey_ep01/card_Telemachus.png",
+          "description": "the young prince in the rough undyed tunic with thin bronze armband",
+          "used_as": "frame_anchor"
+        }
+      ],
+      "first_frame": "gen/odyssey_ep01/card_Telemachus.png",
+      "last_frame": "",
+      "continuity_type": "hard_cut"
+    },
+    {
+      "shot_id": "S04",
+      "duration_s": 5,
+      "edit_target_s": 2,
+      "continuity_handoff": "HARD CUT up to the wooden balcony: cold moonlight world against the warm firelight below; Penelope's silhouetted grief is the closing image of the episode.",
+      "fixed_landmarks": [
+        "wooden-balcony: top",
+        "stone-wall: background"
+      ],
+      "char_positions": {
+        "Penelope": "top center, standing at the rail, silhouetted against the moonlight"
+      },
+      "exited_chars": [],
+      "lighting_baseline": "key: pale cold moonlight from above; warm violent firelight glow from below; soft ethereal contrast",
+      "hook_type": "suspense",
+      "shot_description": "Low angle shot looking up at a rough wooden balcony. Queen Penelope stands silhouetted against pale moonlight, looking down at the fiery chaos below with an expression of profound grief and resilience.",
+      "per_second": [
+        {
+          "rng": "0-1s",
+          "action": "camera looks up the rough stone wall to the wooden balcony; Penelope stands at the rail, pale moonlight halos behind her",
+          "camera": "low angle, slow tilt up",
+          "spatial": "stone wall bottom, wooden balcony top third, moonlight behind her",
+          "audio": "night wind + very distant fire below",
+          "handoff": "her silhouette resolves in the moonlight"
+        },
+        {
+          "rng": "1-2s",
+          "action": "she looks down over the rail; warm firelight from the hall tints the bottom of the frame; she is still against the chaos",
+          "camera": "hold low angle on her silhouette",
+          "spatial": "her silhouette top center, fire glow at frame bottom",
+          "audio": "heavy ambient bed in: low wind + distant cracking fire + a lone low drone",
+          "handoff": "end on her silent grief - episode closes"
+        },
+        {
+          "rng": "2-3s",
+          "action": "the fire below swells, her silhouette edges flare warm; she does not move",
+          "camera": "hold low angle",
+          "spatial": "same composition",
+          "audio": "low drone + distant roar",
+          "handoff": "tail hold (edit trims at 2s)"
+        },
+        {
+          "rng": "3-4s",
+          "action": "her braid stirs in the wind; the moonlight steadies",
+          "camera": "hold, micro-drift",
+          "spatial": "same composition",
+          "audio": "wind + low drone",
+          "handoff": "tail hold"
+        },
+        {
+          "rng": "4-5s",
+          "action": "she holds her stillness; the frame breathes with smoke and light",
+          "camera": "hold low angle",
+          "spatial": "same composition",
+          "audio": "heavy ambient sustains",
+          "handoff": "tail hold"
+        }
+      ],
+      "dialogue": [],
+      "sfx": [
+        "night-wind",
+        "distant-fire-crackle",
+        "low-heavy-ambient-drone"
+      ],
+      "mode": "I2VA",
+      "video_model": "H3",
+      "resolution_tier": "768P",
+      "aspect": "9:16",
+      "seed": 70002,
+      "references": [
+        {
+          "label": "<Picture 1>",
+          "kind": "person",
+          "char": "Penelope",
+          "retention": "fully_preserved",
+          "retention_note": "retain face, loose low braid, pale chiton of Penelope across the whole shot",
+          "path": "gen/odyssey_ep01/card_Penelope.png",
+          "description": "the queen in the pale undyed chiton with bronze torc",
+          "used_as": "frame_anchor"
+        }
+      ],
+      "first_frame": "gen/odyssey_ep01/card_Penelope.png",
+      "last_frame": "",
+      "continuity_type": "hard_cut"
+    }
+  ]
+}

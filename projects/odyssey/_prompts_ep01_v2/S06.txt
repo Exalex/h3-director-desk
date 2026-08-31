@@ -1,0 +1,20 @@
+For the target video, at 0.00 seconds into the target video, <Picture 1> (from [Shot 1]) is fully referenced.
+
+integrated_multimodal_description:
+Style: Realistic graphic novel style, dark fantasy comic: heavy ink shadows, crosshatching, detailed line work, deep black shadows, high contrast cinematic lighting, chiaroscuro, gritty comic book art, muted dark palette; Mycenaean Greece 1200 BC setting: cyclopean masonry, rough timber pillars, crude bronze vessels, coarse undyed linen and animal hides; 8k highly detailed
+[Shot 1] Low angle shot. Realistic graphic novel style. Queen Penelope wearing a veil, standing on a dark wooden balcony. A single tear rolls down her beautiful, sorrowful face as she looks down. Pale moonlight contrasting with warm firelight from below. Deep melancholic atmosphere, cinematic comic book framing.
+Per-second directives:
+  0-2s: camera looks up the rough stone wall to the dark wooden balcony; Penelope's veiled silhouette against the pale moon; camera: low angle, slow tilt up; spatial: stone wall bottom, wooden balcony top third, moonlight behind her; audio: night wind + the distant hall roar fading to a murmur; handoff: her silhouette resolves in the moonlight
+  2-4s: she stands at the rail, veil half-shadowing her face, looking down over the chaos; warm firelight tints the frame bottom; camera: hold low angle on her silhouette; spatial: her silhouette top center, fire glow at frame bottom; audio: the roar recedes, a sad cello score begins to fade in; handoff: the mood turns to grief
+  4-6s: a single tear rolls down her cheek, catching the moonlight; her lips tremble; her line begins, soft and breaking; camera: slow push to her veiled face; spatial: tear line center on the cheek; audio: her soft whisper: '奥德修斯……你到底在哪里？' + cello swelling; handoff: the tear and the whisper land
+  6-8s: she presses one hand to the rail; the tear trail glints; the cello rises under her voice; camera: hold on her face, low angle; spatial: hand on rail lower third, tear trail glowing; audio: '我们快撑不住了……' + cello sustained; handoff: the grief is spoken
+  8-10s: she holds her stillness; cold moon above, warm fire below; heavy ink shadows close around her; camera: slow pull back to the full low-angle framing; spatial: silhouette top center, fire glow bottom edge; audio: cello sustains, night wind, the far-off fire; handoff: end on her silent grief - episode closes
+Fixed landmarks: wooden-balcony: top; stone-wall: background
+Character positions: Penelope=top center, veiled, standing at the rail, silhouetted against the moonlight
+Lighting baseline: key: pale cold moonlight from above; warm violent firelight glow from below; deep melancholic comic contrast
+Continuity handoff: HARD CUT up to the wooden balcony: cold moonlight world against the warm firelight below; Penelope's veiled silhouette and her single tear are the closing image of the episode.
+Dialogue: <Picture 1> (S5) says, <d>[Chinese] 奥德修斯……你到底在哪里？我们快撑不住了……</d>
+
+overall_soundscape: night-wind; distant-roar-fading; sad-cello-score; hook: suspense
+
+non_diegetic_music: diegetic ambient only; no score unless the shot calls for it

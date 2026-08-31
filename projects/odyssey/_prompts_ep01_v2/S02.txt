@@ -1,0 +1,20 @@
+For the target video, at 0.00 seconds into the target video, <Picture 1> (from [Shot 1]) is fully referenced.
+
+integrated_multimodal_description:
+Style: Realistic graphic novel style, dark fantasy comic: heavy ink shadows, crosshatching, detailed line work, deep black shadows, high contrast cinematic lighting, chiaroscuro, gritty comic book art, muted dark palette; Mycenaean Greece 1200 BC setting: cyclopean masonry, rough timber pillars, crude bronze vessels, coarse undyed linen and animal hides; 8k highly detailed
+[Shot 1] Close up, slow motion. Realistic graphic novel style. A muscular, arrogant ancient Greek suitor with a thick beard and a cruel smile. He is raising a crude bronze goblet, dark red wine dripping down his beard like blood. Detailed line work, deep black shadows, chiaroscuro lighting, dark comic aesthetic.
+Per-second directives:
+  0-2s: Antinous leans into frame: heavy flesh face, thick oiled beard, cruel grin; the hall roar blurs behind him; camera: close up, slow motion begins; spatial: his face center, dark stone wall behind, fire glow front-left; audio: his low chuckle + distant hall roar; handoff: the cruel face is established
+  2-4s: he raises the crude bronze goblet to his lips, wine sloshing at the rim; camera: slow push-in to his face; spatial: goblet lower third, wine at the rim; audio: wine sloshing + his laugh grows; handoff: goblet at his lips
+  4-6s: he drinks; dark red wine runs down his thick beard like blood, catching the firelight; camera: hold tight close on the dripping beard; spatial: wine stream down the beard center; audio: his line begins: '那个叫奥德修斯的老家伙早就死在海上了！'; handoff: the blood-like wine drips
+  6-8s: he lowers the goblet, stares at camera, wine on his lips and beard; detailed ink line work on his cruel smile; camera: hold, micro push; spatial: his face center, goblet lowered to frame-bottom; audio: '这王座，这女人，都是我们的！' + his cruel laugh; handoff: the claim lands on his smile
+  8-10s: he laughs, wiping wine from his chin with his thumb, pointing off-frame; camera: hold close-up; spatial: same composition; audio: his laugh + distant hall roar; handoff: end on the cruel smile for the hard cut to the shadow
+Fixed landmarks: stone-wall: background; hearth-glow: warm off-frame
+Character positions: Antinous=center close, facing camera, cruel grin
+Lighting baseline: key: hearth fire warm orange from front-left; deep black ink shadows; rim light on the dripping wine
+Continuity handoff: HARD CUT from the wide hall to Antinous's cruel face; same firelight world (stone wall + hearth glow); his blood-like dripping wine is the greed motif Telemachus watches next.
+Dialogue: <Picture 1> (S2) says, <d>[Chinese] 那个叫奥德修斯的老家伙早就死在海上了！这王座，这女人，都是我们的！</d>
+
+overall_soundscape: wine-drip; malicious-laugh; goblet-set; hall-roar-distant; hook: expression-beat
+
+non_diegetic_music: diegetic ambient only; no score unless the shot calls for it

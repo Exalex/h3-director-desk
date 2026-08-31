@@ -7,7 +7,7 @@
 | `http://127.0.0.1:8088/` | H3 Director Desk 控制台 | 本机可启动 |
 | `http://127.0.0.1:8188/` | ComfyUI/H3 生成服务 | 需要单独安装并启动 |
 
-`director/serve.py` 只负责导演台 Web 服务，不会自动安装、下载模型或启动 ComfyUI。仓库也不包含 ComfyUI 本体、H3 模型权重和完整项目素材。
+`director/serve.py` 只负责导演台 Web 服务，不会自动安装、下载模型或启动 ComfyUI。当前部署目录包含可切换的 Odyssey 项目 JSON、风格文件和场景素材，但不包含 ComfyUI 本体、H3 模型权重或生成视频。
 
 ## 当前机器检查结果
 

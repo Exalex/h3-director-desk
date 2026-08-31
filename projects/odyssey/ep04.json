@@ -1,0 +1,601 @@
+{
+  "title": "奥德赛 · 第04集：被困女仙岛的奥德修斯（60s 实拍版）",
+  "what_if": "十年漂泊，英雄被仙女困在绝美孤岛：永生与家园的拉扯，直到神使砸穿云层——回家的战争重新开始。",
+  "target_feeling": "悲怆 → 诱惑 → 决绝 → 神迹 → 怒火重燃",
+  "aspect": "9:16",
+  "duration_s": 60,
+  "dialogue_mode": "有对白",
+  "dialogue_language": "中文",
+  "visual_style": "Cinematic photorealistic live-action film still: hyperrealistic skin texture, visible scar detail, volumetric storm light and sea spray, natural motion blur, muted desaturated teal-and-amber cinematic palette, subtle film grain; ancient Mediterranean island c.1200 BC: basalt cliffs, primitive grotto, bronze-age tools; absolutely no illustration, no comic ink lines, no crosshatching, no panel borders; 8k highly detailed",
+  "characters": [
+    {
+      "name": "Odysseus",
+      "identity_note": "male c.45, gaunt battle-scarred face, thick ragged dark-brown beard, deep-set exhausted dark eyes, sun-weathered bronze-tanned skin, bare scarred chest, coarse undyed linen rags; do-not-change: face, thick ragged beard, battle scars",
+      "image_path": "gen/odyssey_ep04/card_Odysseus.png",
+      "do_not_change": [
+        "face",
+        "thick ragged beard",
+        "battle scars"
+      ]
+    },
+    {
+      "name": "Calypso",
+      "identity_note": "female, ageless immortal nymph, long flowing golden hair, luminous serene alluring eyes, delicate features; shimmering sheer golden-gold silk robe; do-not-change: face, golden hair, sheer golden robe",
+      "image_path": "gen/odyssey_ep04/card_Calypso.png",
+      "do_not_change": [
+        "face",
+        "golden hair",
+        "sheer golden robe"
+      ]
+    },
+    {
+      "name": "Hermes",
+      "identity_note": "male c.25, athletic divine messenger god, short golden curls under a small silver winged helmet, crisp blue-white robe with gold trim, winged sandals, silver caduceus staff with two entwined serpents; do-not-change: face, winged helmet, winged sandals, caduceus",
+      "image_path": "gen/odyssey_ep04/card_Hermes.png",
+      "do_not_change": [
+        "face",
+        "winged helmet",
+        "winged sandals",
+        "caduceus"
+      ]
+    }
+  ],
+  "scenes": [
+    {
+      "name": "Calypso's storm island",
+      "description": "storm-battered ancient Mediterranean island: high basalt cliffs over a wild grey-teal sea, lush grotto with naturally glowing flora, white-sand cove, storm-to-dusk sky",
+      "landmarks": [
+        "stormy-ocean: background",
+        "basalt-cliff: midground",
+        "beach: foreground"
+      ],
+      "light_baseline": "cold storm light vs warm golden magical grotto glow; high contrast cinematic",
+      "image_path": "projects/odyssey/assets/calypso_island.png"
+    }
+  ],
+  "shots": [
+    {
+      "shot_id": "S01",
+      "duration_s": 10,
+      "edit_target_s": 10,
+      "continuity_handoff": "Open the episode: the cold storm sea pulls toward the cliff; Odysseus alone on the rock, weeping silently; his despair sets up the paradise contrast in the next shot.",
+      "fixed_landmarks": [
+        "stormy-ocean: background",
+        "basalt-cliff: midground",
+        "rock-ledge: foreground"
+      ],
+      "char_positions": {
+        "Odysseus": "center, seated on the rocky ledge, head in hands"
+      },
+      "exited_chars": [],
+      "lighting_baseline": "cold storm light from above, grey-teal palette, deep shadows under the brow",
+      "hook_type": "suspense",
+      "shot_description": "Live-action cinematic film still: photorealistic, no comic style, no ink lines, no panel borders. High angle wide shot, slow push-in from the vast stormy ocean toward a high basalt cliff. A rugged battle-scarred hero with a thick ragged beard (Odysseus), gaunt and bare-chested in rags, sits alone on the rocky ledge, head in his hands, weeping silently toward the vast stormy sea. Muted desaturated teal-amber palette, volumetric sea spray, subtle film grain.",
+      "per_second": [
+        {
+          "rng": "0-2s",
+          "action": "the camera opens high over the endless storm-torn ocean, whitecaps and grey spray; a mournful cello note fades in",
+          "camera": "high angle wide, slow push-in begins",
+          "spatial": "ocean fills the frame, the basalt cliff edge at the bottom",
+          "audio": "howling sea wind + mournful cello",
+          "handoff": "the bleakness is established"
+        },
+        {
+          "rng": "2-4s",
+          "action": "the cliff ledge resolves into view: Odysseus hunched on the rocks, head buried in his scarred hands; rain-mist drifts past",
+          "camera": "push-in continues down to the ledge",
+          "spatial": "Odysseus center on the rock ledge, stormy ocean background",
+          "audio": "wind + cello sustained",
+          "handoff": "the weeping hero is framed"
+        },
+        {
+          "rng": "4-6s",
+          "action": "his shoulders shake with silent sobs; hands press over his face; his first words leak out, muffled by his hands",
+          "camera": "slow push-in on his hunched back",
+          "spatial": "his back center, the sea beyond",
+          "audio": "his desperate whisper begins: '十年战争，十年漂泊……'",
+          "handoff": "the weeping voice starts"
+        },
+        {
+          "rng": "6-8s",
+          "action": "his hands slide off his face, revealing the gaunt scarred features, eyes red, staring into the storm",
+          "camera": "hold on his upper body, high angle",
+          "spatial": "his face center, stormy ocean background",
+          "audio": "'伊萨卡，难道只存在于我的梦里吗？' + wind",
+          "handoff": "the doubt lands"
+        },
+        {
+          "rng": "8-10s",
+          "action": "he stays frozen, head falling forward; a wave slams the rocks below, spray soaks him; he does not move",
+          "camera": "slow settle, high angle held",
+          "spatial": "his silhouette center, spray at frame bottom",
+          "audio": "wave impact + wind recedes to a moan, cello fades",
+          "handoff": "hold his stillness for the hard cut into the grotto"
+        }
+      ],
+      "dialogue": [
+        {
+          "text": "十年战争，十年漂泊……伊萨卡，难道只存在于我的梦里吗？",
+          "speaker_id": "Odysseus",
+          "tone": "desperate whisper, broken, muffled at the start",
+          "time_range": "4-9s",
+          "is_diegetic": true
+        }
+      ],
+      "sfx": [
+        "howling-wind",
+        "mournful-cello",
+        "wave-slam",
+        "sea-spray"
+      ],
+      "mode": "I2VA",
+      "video_model": "H3",
+      "resolution_tier": "768P",
+      "aspect": "9:16",
+      "seed": 70004,
+      "references": [
+        {
+          "label": "<Picture 1>",
+          "kind": "person",
+          "char": "Odysseus",
+          "retention": "fully_preserved",
+          "retention_note": "retain face, thick ragged beard, battle scars, gaunt build of Odysseus across the whole shot",
+          "path": "gen/odyssey_ep04/card_Odysseus.png",
+          "description": "the gaunt battle-scarred hero in rags",
+          "used_as": "frame_anchor"
+        }
+      ],
+      "first_frame": "gen/odyssey_ep04/card_Odysseus.png",
+      "last_frame": "",
+      "continuity_type": "hard_cut"
+    },
+    {
+      "shot_id": "S02",
+      "duration_s": 10,
+      "edit_target_s": 10,
+      "continuity_handoff": "HARD CUT from the storm cliff to the intimate grotto: Calypso's lush paradise against Odysseus's gaunt despair; her arms close around him, his refusal is teased for the next shot.",
+      "fixed_landmarks": [
+        "lush-grotto: background",
+        "basalt-rock: foreground"
+      ],
+      "char_positions": {
+        "Calypso": "behind Odysseus, center, sheer golden robe glowing",
+        "Odysseus": "seated, back to camera, bare scarred shoulders"
+      },
+      "exited_chars": [],
+      "lighting_baseline": "key: warm magical golden glow from the grotto flora; deep cinematic shadows; Odysseus's back in colder relative shadow",
+      "hook_type": "expression-beat",
+      "shot_description": "Live-action cinematic film still: photorealistic, no comic style, no ink lines, no panel borders. Medium shot, subtle slow push. Beautiful immortal nymph Calypso in a shimmering sheer golden silk robe stands behind the seated gaunt hero, gently wrapping her arms around his bare, battle-scarred shoulders; lush mythical island grotto with glowing flora behind. Warm golden magical key light against deep cinematic shadows; the paradise and his desolate body in one frame. Subtle film grain.",
+      "per_second": [
+        {
+          "rng": "0-2s",
+          "action": "the lush grotto resolves: glowing flora, warm golden haze; Calypso glides into frame behind Odysseus",
+          "camera": "medium shot, subtle slow push",
+          "spatial": "Odysseus's scarred shoulders center, Calypso's arms entering from behind, grotto background",
+          "audio": "soft island breeze + a gentle warm cello pad",
+          "handoff": "the paradise is established"
+        },
+        {
+          "rng": "2-4s",
+          "action": "she places her arms around his bare scarred shoulders; her golden robe shimmers; he stiffens slightly",
+          "camera": "hold medium, slow push toward her face over his shoulder",
+          "spatial": "her face upper-right, his back center",
+          "audio": "her voice begins, honeyed: '忘掉那块贫瘠的石头吧，奥德修斯。'",
+          "handoff": "the embrace lands"
+        },
+        {
+          "rng": "4-6s",
+          "action": "her hand strokes his scarred shoulder; he does not turn; her patient smile holds",
+          "camera": "hold, micro push to her eyes",
+          "spatial": "same composition, her eyes catching the golden light",
+          "audio": "'留下来陪我，'",
+          "handoff": "the offer is made"
+        },
+        {
+          "rng": "6-8s",
+          "action": "he slowly turns his head a few degrees, not toward her; her expression flickers; the golden light holds",
+          "camera": "hold medium",
+          "spatial": "his averted profile center, her arms still around him",
+          "audio": "'你可以获得神明般永恒的不朽。' + breeze",
+          "handoff": "the seduction completes, his refusal hangs"
+        },
+        {
+          "rng": "8-10s",
+          "action": "she keeps her embrace, chin near his hair; he breathes hard, jaw set; a dark shadow deepens at the grotto edge",
+          "camera": "slow settle on the two",
+          "spatial": "the pair center, glowing flora background",
+          "audio": "cello pad sustains, wind whispers",
+          "handoff": "hold the tension for the hard cut to his face close-up"
+        }
+      ],
+      "dialogue": [
+        {
+          "text": "忘掉那块贫瘠的石头吧，奥德修斯。留下来陪我，你可以获得神明般永恒的不朽。",
+          "speaker_id": "Calypso",
+          "tone": "seductive, honeyed, unhurried",
+          "time_range": "2-10s",
+          "is_diegetic": true
+        }
+      ],
+      "sfx": [
+        "soft-breeze",
+        "warm-cello-pad",
+        "robe-shimmer"
+      ],
+      "mode": "I2VA",
+      "video_model": "H3",
+      "resolution_tier": "768P",
+      "aspect": "9:16",
+      "seed": 70005,
+      "references": [
+        {
+          "label": "<Picture 1>",
+          "kind": "person",
+          "char": "Calypso",
+          "retention": "fully_preserved",
+          "retention_note": "retain face, golden hair, sheer golden robe of Calypso across the whole shot",
+          "path": "gen/odyssey_ep04/card_Calypso.png",
+          "description": "the golden-haired nymph in the sheer golden robe",
+          "used_as": "frame_anchor"
+        }
+      ],
+      "first_frame": "gen/odyssey_ep04/card_Calypso.png",
+      "last_frame": "",
+      "continuity_type": "hard_cut"
+    },
+    {
+      "shot_id": "S03",
+      "duration_s": 10,
+      "edit_target_s": 10,
+      "continuity_handoff": "HARD CUT into Odysseus's face: the tears and the firm head-turn close the temptation; his mortal choice sets up the god's interruption in the next shot.",
+      "fixed_landmarks": [
+        "lush-grotto: background"
+      ],
+      "char_positions": {
+        "Odysseus": "center close, facing camera, turning away"
+      },
+      "exited_chars": [],
+      "lighting_baseline": "harsh warm key from the grotto glow at his left, heavy shadow across the right half, high contrast",
+      "hook_type": "expression-beat",
+      "shot_description": "Live-action cinematic film still: photorealistic, no comic style, no ink lines, no panel borders. Close up, static. The weathered scarred face of Odysseus: gaunt, thick ragged beard, salt tears glistening on his cheeks; he turns his head away in firm rejection, jaw set, eyes unyielding with a stubborn mortal's devotion to his home. High contrast harsh shadows, intense emotional grit, subtle film grain.",
+      "per_second": [
+        {
+          "rng": "0-2s",
+          "action": "the close-up opens on his weathered face: scarred brow, thick ragged beard, a tear track catching the warm grotto light",
+          "camera": "close up, static",
+          "spatial": "his face center, lush grotto bokeh behind",
+          "audio": "his ragged breathing + faint island breeze",
+          "handoff": "the sorrow is on his skin"
+        },
+        {
+          "rng": "2-4s",
+          "action": "his eyes glisten; he swallows; the tear rolls down his cheek; his jaw tightens with resolve",
+          "camera": "hold, micro push to the eyes",
+          "spatial": "tear line on the right cheek, scar across the brow",
+          "audio": "his whisper begins: '没有我的妻子和家园，'",
+          "handoff": "the resolve forms"
+        },
+        {
+          "rng": "4-6s",
+          "action": "he starts turning his head away; the rejection is physical, his hand brushing the warm light aside",
+          "camera": "follow his head turn, close up",
+          "spatial": "his face rotating from camera toward profile",
+          "audio": "'永生不过是一座精致的牢笼。'",
+          "handoff": "the rejection begins"
+        },
+        {
+          "rng": "6-8s",
+          "action": "his head is fully turned; only his firm profile remains; the eye stays hard, unbroken",
+          "camera": "hold on the profile",
+          "spatial": "his profile center, dark shadow at frame right",
+          "audio": "'我宁愿作为凡人死去。' + wind",
+          "handoff": "the mortal choice is spoken"
+        },
+        {
+          "rng": "8-10s",
+          "action": "he holds the turned pose; a tremor runs through his jaw; the warm light dims slightly at the frame edge",
+          "camera": "slow settle, close up held",
+          "spatial": "his profile center, grotto bokeh background",
+          "audio": "breath steadies, a single cello note",
+          "handoff": "hold his stillness for the hard cut to the golden light splitting the sky"
+        }
+      ],
+      "dialogue": [
+        {
+          "text": "没有我的妻子和家园，永生不过是一座精致的牢笼。我宁愿作为凡人死去。",
+          "speaker_id": "Odysseus",
+          "tone": "tough, defiant, quiet fire",
+          "time_range": "3-9s",
+          "is_diegetic": true
+        }
+      ],
+      "sfx": [
+        "ragged-breath",
+        "grotto-breeze",
+        "single-cello-note"
+      ],
+      "mode": "I2VA",
+      "video_model": "H3",
+      "resolution_tier": "768P",
+      "aspect": "9:16",
+      "seed": 70004,
+      "references": [
+        {
+          "label": "<Picture 1>",
+          "kind": "person",
+          "char": "Odysseus",
+          "retention": "fully_preserved",
+          "retention_note": "retain face, thick ragged beard, battle scars of Odysseus across the whole shot",
+          "path": "gen/odyssey_ep04/card_Odysseus.png",
+          "description": "the gaunt battle-scarred hero",
+          "used_as": "frame_anchor"
+        }
+      ],
+      "first_frame": "gen/odyssey_ep04/card_Odysseus.png",
+      "last_frame": "",
+      "continuity_type": "hard_cut"
+    },
+    {
+      "shot_id": "S04",
+      "duration_s": 10,
+      "edit_target_s": 10,
+      "continuity_handoff": "HARD CUT to the wide beach: the golden light tears the storm clouds and the messenger god strikes down; the sky itself breaks the paradise scene; the impact dust is still rolling in the next shot.",
+      "fixed_landmarks": [
+        "beach: foreground",
+        "stormy-sky: background"
+      ],
+      "char_positions": {},
+      "exited_chars": [],
+      "lighting_baseline": "golden divine lightning beam cutting the dark storm, harsh rim light on the sand",
+      "hook_type": "chase",
+      "shot_description": "Live-action cinematic film still: photorealistic, no comic style, no ink lines, no panel borders. Dynamic wide action shot. A beam of golden divine light tears through the dark storm clouds; a winged messenger god in winged sandals (Hermes) streaks down like a meteor on a golden trail, crashing onto the white-sand beach, kicking up a huge cone of dust and wind. Dramatic low perspective, motion streaks in the air, cinematic motion blur, subtle film grain.",
+      "per_second": [
+        {
+          "rng": "0-2s",
+          "action": "the dark storm sky dominates; a crack of golden light splits the clouds; thunder rumbles in",
+          "camera": "dynamic wide, low angle toward the sky",
+          "spatial": "beach foreground bottom third, stormy sky background",
+          "audio": "the first thunder roll + a rising shriek",
+          "handoff": "the sky is about to break"
+        },
+        {
+          "rng": "2-4s",
+          "action": "the golden beam widens; a small winged figure blazes down it, wings catching the light, a golden trail behind",
+          "camera": "track the streaking figure, wide",
+          "spatial": "the figure mid-frame descending, beam vertical",
+          "audio": "the shriek climbs into a howl",
+          "handoff": "the figure is in the dive"
+        },
+        {
+          "rng": "4-6s",
+          "action": "the figure strikes the sand: impact — a huge cone of dust and sand explodes outward, the wind flattens the beach grass",
+          "camera": "impact frame, low angle at the sand",
+          "spatial": "dust cone foreground center, the beam still glowing in the sky",
+          "audio": "sonic boom + thunder crack + sand hiss",
+          "handoff": "the impact lands"
+        },
+        {
+          "rng": "6-8s",
+          "action": "the dust column towers and spins; the silhouette of wings is visible inside; the sky beam flickers",
+          "camera": "hold on the dust column",
+          "spatial": "dust cone center, golden sky beam behind",
+          "audio": "wind howl + a low cello hit",
+          "handoff": "he is inside the dust"
+        },
+        {
+          "rng": "8-10s",
+          "action": "the dust begins to settle; winged sandals glint in the golden haze; the figure crouches low, staff raised",
+          "camera": "slow settle on the clearing dust",
+          "spatial": "the figure at the dust's heart, beach around",
+          "audio": "wind dies to a moan, distant thunder",
+          "handoff": "the god lands for the hard cut to the face-to-face with the nymph"
+        }
+      ],
+      "dialogue": [],
+      "sfx": [
+        "thunder-bolt",
+        "sonic-shriek",
+        "impact-boom",
+        "sand-hiss"
+      ],
+      "mode": "T2VA",
+      "video_model": "H3",
+      "resolution_tier": "768P",
+      "aspect": "9:16",
+      "references": [],
+      "first_frame": "",
+      "last_frame": "",
+      "continuity_type": "hard_cut"
+    },
+    {
+      "shot_id": "S05",
+      "duration_s": 10,
+      "edit_target_s": 10,
+      "continuity_handoff": "HARD CUT to medium: Hermes stands before Calypso with the caduceus raised; the divine aura splits the frame; her shock and fury are the reaction beat into the episode's turn.",
+      "fixed_landmarks": [
+        "beach: foreground",
+        "stormy-sky: background"
+      ],
+      "char_positions": {
+        "Hermes": "center, standing tall, caduceus raised",
+        "Calypso": "frame-left, half-turned, sheer golden robe"
+      },
+      "exited_chars": [],
+      "lighting_baseline": "key: golden divine aura on Hermes; cold storm light on Calypso; high contrast",
+      "hook_type": "reveal",
+      "shot_description": "Live-action cinematic film still: photorealistic, no comic style, no ink lines, no panel borders. Medium shot, slow dolly. Young winged messenger god Hermes with a small winged helmet stands imperiously before the beautiful nymph Calypso in her sheer golden robe, holding a silver caduceus staff with two entwined serpents, raising it; Calypso looks shocked and furious, hand at her chest. A glowing golden divine aura around Hermes, sharp shadows, stormy sky and dark coast behind. Cinematic motion, subtle film grain.",
+      "per_second": [
+        {
+          "rng": "0-2s",
+          "action": "the medium frame opens: dust still drifting; Hermes stands tall at center, winged helmet catching the golden aura; Calypso half-turned at frame-left",
+          "camera": "medium shot, slow dolly right",
+          "spatial": "Hermes center, Calypso frame-left, stormy sky background",
+          "audio": "the wind's last moan + a resonant hum",
+          "handoff": "the confrontation is framed"
+        },
+        {
+          "rng": "2-4s",
+          "action": "Hermes raises the caduceus; the two serpents catch the light; his voice booms, the first command lands",
+          "camera": "hold, slow dolly continues",
+          "spatial": "staff raised center, aura flaring",
+          "audio": "Hermes shouts: '神王宙斯有令，卡吕普索！'",
+          "handoff": "the decree begins"
+        },
+        {
+          "rng": "4-6s",
+          "action": "Calypso whips around into profile: shock then fury, hand clutched to her chest; her robe ripples in the gust",
+          "camera": "push slightly toward Calypso's reaction",
+          "spatial": "her face frame-left, Hermes center-right",
+          "audio": "'放他走！'",
+          "handoff": "the nymph is struck"
+        },
+        {
+          "rng": "6-8s",
+          "action": "Hermes steps forward one stride, caduceus extended; the golden aura flares; Calypso's jaw tightens, eyes blazing",
+          "camera": "hold two-shot",
+          "spatial": "Hermes center, Calypso left, beach foreground",
+          "audio": "'命运不允许这个伟大的灵魂死在你的岛上！' + storm gust",
+          "handoff": "the decree completes"
+        },
+        {
+          "rng": "8-10s",
+          "action": "the aura holds; the two stand frozen in the golden-and-storm light; a wave slaps the dark coast behind them",
+          "camera": "slow settle on the two-shot",
+          "spatial": "same composition",
+          "audio": "wave slap + sustained hum",
+          "handoff": "hold the standoff for the hard cut to the hero's new fire"
+        }
+      ],
+      "dialogue": [
+        {
+          "text": "神王宙斯有令，卡吕普索！放他走！命运不允许这个伟大的灵魂死在你的岛上！",
+          "speaker_id": "Hermes",
+          "tone": "loud, commanding, divine",
+          "time_range": "2-10s",
+          "is_diegetic": true
+        }
+      ],
+      "sfx": [
+        "divine-hum",
+        "storm-gust",
+        "wave-slap",
+        "caduceus-clink"
+      ],
+      "mode": "I2VA",
+      "video_model": "H3",
+      "resolution_tier": "768P",
+      "aspect": "9:16",
+      "seed": 70006,
+      "references": [
+        {
+          "label": "<Picture 1>",
+          "kind": "person",
+          "char": "Hermes",
+          "retention": "fully_preserved",
+          "retention_note": "retain face, winged helmet, winged sandals, caduceus of Hermes across the whole shot",
+          "path": "gen/odyssey_ep04/card_Hermes.png",
+          "description": "the winged messenger god in the winged helmet with caduceus",
+          "used_as": "frame_anchor"
+        }
+      ],
+      "first_frame": "gen/odyssey_ep04/card_Hermes.png",
+      "last_frame": "",
+      "continuity_type": "hard_cut"
+    },
+    {
+      "shot_id": "S06",
+      "duration_s": 10,
+      "edit_target_s": 10,
+      "continuity_handoff": "HARD CUT to the beach at dusk: the same hero transformed — bare-chested, axe in hand, hacking the massive tree trunks for the raft; sweat and wood chips fly; the weeping is gone, replaced by a wolf's war-hunger.",
+      "fixed_landmarks": [
+        "beach: foreground",
+        "sunset-sky: background"
+      ],
+      "char_positions": {
+        "Odysseus": "center, mid-arc of the axe swing, bare-chested"
+      },
+      "exited_chars": [],
+      "lighting_baseline": "key: low sunset amber raking across the sand; long dramatic shadows; sweat glinting",
+      "hook_type": "suspense",
+      "shot_description": "Live-action cinematic film still: photorealistic, no comic style, no ink lines, no panel borders. Full action shot, kinetic camera. Muscular bare-chested Odysseus with thick ragged beard and battle scars swings a heavy bronze axe in a wide arc, chopping a massive tree trunk on the beach; sweat flies, wood chips burst into the sunset light; his eyes burn with fierce wolf-like focus. Low sunset amber key, long dramatic shadows, gritty realistic textures, subtle film grain.",
+      "per_second": [
+        {
+          "rng": "0-2s",
+          "action": "the wide arc of the axe opens the shot: the bronze head blurs through the sunset air; heavy breathing sets the rhythm",
+          "camera": "full action shot, kinetic low angle",
+          "spatial": "Odysseus center, the massive trunk center-low, sunset sky background",
+          "audio": "heavy breathing + the first whoosh of the axe",
+          "handoff": "the rhythm is set"
+        },
+        {
+          "rng": "2-4s",
+          "action": "the axe bites the trunk: wood chips burst into the golden light, his back muscles coil; the impact rings out",
+          "camera": "impact frame, slight push",
+          "spatial": "wood chips center, his back to camera",
+          "audio": "the axe-thunk + chip spray",
+          "handoff": "the strike lands"
+        },
+        {
+          "rng": "4-6s",
+          "action": "he lifts the axe again, roaring with the effort; a shout tears out of him, the first words of the howl",
+          "camera": "follow the lift, low angle",
+          "spatial": "his face in profile center, sunset behind",
+          "audio": "he howls: '大海啊！准备迎接我的怒火吧！'",
+          "handoff": "the howl begins"
+        },
+        {
+          "rng": "6-8s",
+          "action": "the swing comes down: a crack splits the trunk; sweat flies from his beard; the tree groans",
+          "camera": "impact, kinetic",
+          "spatial": "the trunk center, sunset flare background",
+          "audio": "'我要回家了！' + the axe-thunk + wood crack",
+          "handoff": "the howl lands with the strike"
+        },
+        {
+          "rng": "8-10s",
+          "action": "he plants the axe into the trunk and holds it there, chest heaving, eyes burning with the wolf's fire; the sun dips low, shadows swallow the sand",
+          "camera": "slow settle on his burning eyes",
+          "spatial": "his face center, the axe planted in the trunk",
+          "audio": "breathing steadies, distant wave",
+          "handoff": "hold his burning gaze - the episode closes on the fire returned"
+        }
+      ],
+      "dialogue": [
+        {
+          "text": "大海啊！准备迎接我的怒火吧！我要回家了！",
+          "speaker_id": "Odysseus",
+          "tone": "roaring, feral, triumphant",
+          "time_range": "4-9s",
+          "is_diegetic": true
+        }
+      ],
+      "sfx": [
+        "axe-thunk",
+        "wood-crack",
+        "wood-chip-spray",
+        "heavy-breathing",
+        "distant-wave"
+      ],
+      "mode": "I2VA",
+      "video_model": "H3",
+      "resolution_tier": "768P",
+      "aspect": "9:16",
+      "seed": 70004,
+      "references": [
+        {
+          "label": "<Picture 1>",
+          "kind": "person",
+          "char": "Odysseus",
+          "retention": "fully_preserved",
+          "retention_note": "retain face, thick ragged beard, battle scars of Odysseus across the whole shot",
+          "path": "gen/odyssey_ep04/card_Odysseus.png",
+          "description": "the gaunt battle-scarred hero",
+          "used_as": "frame_anchor"
+        }
+      ],
+      "first_frame": "gen/odyssey_ep04/card_Odysseus.png",
+      "last_frame": "",
+      "continuity_type": "hard_cut"
+    }
+  ]
+}

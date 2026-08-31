@@ -1,0 +1,584 @@
+{
+  "title": "奥德赛 · 第01集 v2：求婚者的狂宴（60s 写实漫画版）",
+  "what_if": "奥德修斯失踪20年，宫殿沦为求婚者的酒池肉林；19岁的忒勒玛科斯在怒火与无力之间，第一次看清自己将继承的是什么。",
+  "target_feeling": "史诗压迫感 + 漫画式愤怒 + 命运的冷光",
+  "aspect": "9:16",
+  "duration_s": 60,
+  "dialogue_mode": "有对白",
+  "dialogue_language": "中文",
+  "visual_style": "Realistic graphic novel style, dark fantasy comic: heavy ink shadows, crosshatching, detailed line work, deep black shadows, high contrast cinematic lighting, chiaroscuro, gritty comic book art, muted dark palette; Mycenaean Greece 1200 BC setting: cyclopean masonry, rough timber pillars, crude bronze vessels, coarse undyed linen and animal hides; 8k highly detailed",
+  "characters": [
+    {
+      "name": "Telemachus",
+      "identity_note": "male 19, lean wiry build, short messy dark-brown hair, sharp jaw, intense dark eyes; rough undyed wool tunic with frayed hem, bare arms, thin bronze armband on left wrist; do-not-change: face, short dark-brown hair, undyed wool tunic",
+      "image_path": "gen/odyssey_ep01_v2/card_Telemachus.png",
+      "do_not_change": [
+        "face",
+        "short dark-brown hair",
+        "undyed wool tunic"
+      ]
+    },
+    {
+      "name": "Penelope",
+      "identity_note": "female 34, oval face, long dark hair under a pale undyed wool veil, tall stoic figure; simple pale greyish-white wool chiton, plain bronze torc; do-not-change: face, veil, pale chiton",
+      "image_path": "gen/odyssey_ep01_v2/card_Penelope.png",
+      "do_not_change": [
+        "face",
+        "veil",
+        "pale chiton"
+      ]
+    },
+    {
+      "name": "Antinous",
+      "identity_note": "male 32, muscular build with a heavy flesh face, thick oiled dark beard, slicked-back black hair, cruel smug grin; heavy bronze-age jewelry: thick bronze torc and big ring; garish dyed-red tunic over fur; do-not-change: face, oiled beard, red tunic + bronze torc",
+      "image_path": "gen/odyssey_ep01_v2/card_Antinous.png",
+      "do_not_change": [
+        "face",
+        "oiled beard",
+        "red tunic + bronze torc"
+      ]
+    }
+  ],
+  "scenes": [
+    {
+      "name": "Mycenaean Megaron (great hall)",
+      "description": "massive interior palace hall: cyclopean stone walls, thick rough-hewn wooden pillars, central hearth pit, animal-skin floor with bones and spilled wine, drifting smoke haze, night",
+      "landmarks": [
+        "central-hearth: center",
+        "wooden-pillars: left & right edges",
+        "stone-wall: background",
+        "animal-skins-and-bones: floor"
+      ],
+      "light_baseline": "key: central hearth fire (warm orange) through smoke, heavy ink shadows, high contrast comic lighting",
+      "image_path": "projects/odyssey/assets/megaron_v2.png"
+    }
+  ],
+  "shots": [
+    {
+      "shot_id": "S01",
+      "duration_s": 10,
+      "edit_target_s": 10,
+      "continuity_handoff": "Open on the smoky great hall; the suitors' feast is the baseline world; the toast shout sets up Antinous's cruel claim in the next shot.",
+      "fixed_landmarks": [
+        "central-hearth: center",
+        "wooden-pillars: left & right edges",
+        "stone-wall: background",
+        "animal-skins-and-bones: floor"
+      ],
+      "char_positions": {
+        "求婚者们(群演)": "dozens of bearded men in tunics sprawling on animal skins across the floor, midground"
+      },
+      "exited_chars": [],
+      "lighting_baseline": "key: central hearth fire warm orange through smoke; heavy ink shadows; high contrast comic lighting",
+      "hook_type": "suspense",
+      "shot_description": "Dark comic ink illustration: heavy ink shadows, crosshatched shading, deep black shadows, muted desaturated dark palette, no vibrant colors, no clean digital look. Wide shot, slow pan. Realistic graphic novel style. The smoky, dimly lit great hall of an ancient Greek palace. Dozens of arrogant bearded men in tunics feasting chaotically, spilling wine, and eating roasted meat. Thick wooden pillars, heavy ink shadows, high contrast cinematic lighting, gritty comic book art style, 8k resolution.",
+      "per_second": [
+        {
+          "rng": "0-2s",
+          "action": "camera opens inside the smoky great hall; heavy ink shadows on the stone wall; fire flicker ripples across the haze",
+          "camera": "wide shot, slow pan begins",
+          "spatial": "hearth center, wooden pillars left & right, animal skins and bones on the floor",
+          "audio": "low roar of the fire + distant chaotic chatter",
+          "handoff": "wide chaos baseline established"
+        },
+        {
+          "rng": "2-4s",
+          "action": "bearded suitors tear roasted meat with their hands, wine spills from tipped goblets, bones litter the skins",
+          "camera": "slow pan continues across the hall",
+          "spatial": "figures scattered across the midground, hearth glow central",
+          "audio": "meat tearing + goblet clink + raucous laughter",
+          "handoff": "greed readable at wide scale"
+        },
+        {
+          "rng": "4-6s",
+          "action": "one bearded suitor stands, raises his bronze goblet high above his head, shouts the first word of the toast",
+          "camera": "pan settles on him at mid-right",
+          "spatial": "goblet-raiser mid-right, hearth behind, crowd foreground",
+          "audio": "Suitor A shouts: '干杯！'",
+          "handoff": "the toast begins in the air"
+        },
+        {
+          "rng": "6-8s",
+          "action": "the crowd roars back, arms and goblets thrown up in the haze",
+          "camera": "hold wide",
+          "spatial": "same wide composition, cups raised everywhere",
+          "audio": "Suitor A: '为了伊萨卡的无尽财富！' + crowd echo",
+          "handoff": "the toast builds"
+        },
+        {
+          "rng": "8-10s",
+          "action": "the crowd toasts together, wine arcs through the air; the suitor's line lands and the laughter peaks",
+          "camera": "slow pan drifts back to center",
+          "spatial": "wide hall, fire glow center",
+          "audio": "'为了我们未来的王后！' + peak roar + cup clink",
+          "handoff": "end on the feast peak for the hard cut to Antinous's face"
+        }
+      ],
+      "dialogue": [
+        {
+          "text": "干杯！为了伊萨卡的无尽财富！为了我们未来的王后！",
+          "speaker_id": "求婚者甲",
+          "tone": "shouting, raucous, celebratory",
+          "time_range": "4-9s",
+          "is_diegetic": true
+        }
+      ],
+      "sfx": [
+        "fire-crackle",
+        "raucous-laughter",
+        "bronze-cup-clink",
+        "meat-tearing",
+        "wine-spill",
+        "crowd-roar"
+      ],
+      "mode": "T2VA",
+      "video_model": "H3",
+      "resolution_tier": "768P",
+      "aspect": "9:16",
+      "references": [],
+      "first_frame": "",
+      "last_frame": "",
+      "continuity_type": "hard_cut"
+    },
+    {
+      "shot_id": "S02",
+      "duration_s": 10,
+      "edit_target_s": 10,
+      "continuity_handoff": "HARD CUT from the wide hall to Antinous's cruel face; same firelight world (stone wall + hearth glow); his blood-like dripping wine is the greed motif Telemachus watches next.",
+      "fixed_landmarks": [
+        "stone-wall: background",
+        "hearth-glow: warm off-frame"
+      ],
+      "char_positions": {
+        "Antinous": "center close, facing camera, cruel grin"
+      },
+      "exited_chars": [],
+      "lighting_baseline": "key: hearth fire warm orange from front-left; deep black ink shadows; rim light on the dripping wine",
+      "hook_type": "expression-beat",
+      "shot_description": "Close up, slow motion. Realistic graphic novel style. A muscular, arrogant ancient Greek suitor with a thick beard and a cruel smile. He is raising a crude bronze goblet, dark red wine dripping down his beard like blood. Detailed line work, deep black shadows, chiaroscuro lighting, dark comic aesthetic.",
+      "per_second": [
+        {
+          "rng": "0-2s",
+          "action": "Antinous leans into frame: heavy flesh face, thick oiled beard, cruel grin; the hall roar blurs behind him",
+          "camera": "close up, slow motion begins",
+          "spatial": "his face center, dark stone wall behind, fire glow front-left",
+          "audio": "his low chuckle + distant hall roar",
+          "handoff": "the cruel face is established"
+        },
+        {
+          "rng": "2-4s",
+          "action": "he raises the crude bronze goblet to his lips, wine sloshing at the rim",
+          "camera": "slow push-in to his face",
+          "spatial": "goblet lower third, wine at the rim",
+          "audio": "wine sloshing + his laugh grows",
+          "handoff": "goblet at his lips"
+        },
+        {
+          "rng": "4-6s",
+          "action": "he drinks; dark red wine runs down his thick beard like blood, catching the firelight",
+          "camera": "hold tight close on the dripping beard",
+          "spatial": "wine stream down the beard center",
+          "audio": "his line begins: '那个叫奥德修斯的老家伙早就死在海上了！'",
+          "handoff": "the blood-like wine drips"
+        },
+        {
+          "rng": "6-8s",
+          "action": "he lowers the goblet, stares at camera, wine on his lips and beard; detailed ink line work on his cruel smile",
+          "camera": "hold, micro push",
+          "spatial": "his face center, goblet lowered to frame-bottom",
+          "audio": "'这王座，这女人，都是我们的！' + his cruel laugh",
+          "handoff": "the claim lands on his smile"
+        },
+        {
+          "rng": "8-10s",
+          "action": "he laughs, wiping wine from his chin with his thumb, pointing off-frame",
+          "camera": "hold close-up",
+          "spatial": "same composition",
+          "audio": "his laugh + distant hall roar",
+          "handoff": "end on the cruel smile for the hard cut to the shadow"
+        }
+      ],
+      "dialogue": [
+        {
+          "text": "那个叫奥德修斯的老家伙早就死在海上了！这王座，这女人，都是我们的！",
+          "speaker_id": "Antinous",
+          "tone": "laughing, cruel, dominant",
+          "time_range": "4-9s",
+          "is_diegetic": true
+        }
+      ],
+      "sfx": [
+        "wine-drip",
+        "malicious-laugh",
+        "goblet-set",
+        "hall-roar-distant"
+      ],
+      "mode": "I2VA",
+      "video_model": "H3",
+      "resolution_tier": "768P",
+      "aspect": "9:16",
+      "seed": 70003,
+      "references": [
+        {
+          "label": "<Picture 1>",
+          "kind": "person",
+          "char": "Antinous",
+          "retention": "fully_preserved",
+          "retention_note": "retain face, heavy flesh face, oiled beard, red tunic + bronze torc of Antinous across the whole shot",
+          "path": "gen/odyssey_ep01_v2/card_Antinous.png",
+          "description": "the muscular bearded suitor in the dyed-red tunic with thick bronze torc",
+          "used_as": "frame_anchor"
+        }
+      ],
+      "first_frame": "gen/odyssey_ep01_v2/card_Antinous.png",
+      "last_frame": "",
+      "continuity_type": "hard_cut"
+    },
+    {
+      "shot_id": "S03",
+      "duration_s": 10,
+      "edit_target_s": 10,
+      "continuity_handoff": "HARD CUT to Telemachus in the pillar shadow; same hall (stone wall + hearth glow), his eye-line lands on the suitors; his suppressed whisper sets up the bone throw in the next shot.",
+      "fixed_landmarks": [
+        "stone-wall: background",
+        "central-hearth: warm off-frame right"
+      ],
+      "char_positions": {
+        "Telemachus": "left third, midground, standing in the pillar shadow, facing frame-right"
+      },
+      "exited_chars": [],
+      "lighting_baseline": "key: hearth fire raking from the right, half his face lit; heavy crosshatched shadow on the other half",
+      "hook_type": "expression-beat",
+      "shot_description": "Medium shot. Realistic graphic novel style. Young Greek prince Telemachus standing in the dark shadows of a giant stone pillar. He looks at the suitors with intense anger. Firelight illuminates half of his face. Heavy contrast, crosshatching shading, glowing embers reflecting in his eyes, gritty realism.",
+      "per_second": [
+        {
+          "rng": "0-2s",
+          "action": "Telemachus stands still in the pillar's shadow, jaw tight; firelight rakes the right half of his face; comic crosshatch shading deepens the left",
+          "camera": "medium shot, slow tracking left",
+          "spatial": "pillar shadow at frame-left, Telemachus left third, fire glow right",
+          "audio": "his controlled breathing + faint distant laughter",
+          "handoff": "stillness against the chaos"
+        },
+        {
+          "rng": "2-4s",
+          "action": "his eyes track the off-frame suitors; his jaw hardens; crosshatched shadow lines tighten on his neck",
+          "camera": "slow tracking continues, slight push toward his eyes",
+          "spatial": "fists at his sides lower third, eye-line frame-right",
+          "audio": "breath-held tension, the hall roar pushed far",
+          "handoff": "anger suppressed, not released"
+        },
+        {
+          "rng": "4-6s",
+          "action": "his fists clench; he mutters through gritted teeth, the first words landing soft and muffled",
+          "camera": "hold on his half-lit face",
+          "spatial": "his face center-left, shadowed stone wall behind",
+          "audio": "his muffled whisper: '寄生虫……'",
+          "handoff": "the whisper begins"
+        },
+        {
+          "rng": "6-8s",
+          "action": "his eyes glisten; a glowing ember reflects in his eye; the whisper continues",
+          "camera": "hold, micro push to the eye",
+          "spatial": "same composition",
+          "audio": "'在我的房子里，吃着我父亲的牛羊，却毫无敬畏。'",
+          "handoff": "the whisper lands"
+        },
+        {
+          "rng": "8-10s",
+          "action": "he swallows hard; one fist tightens further; smoke drifts past his silhouette",
+          "camera": "hold on his half-lit face",
+          "spatial": "same composition",
+          "audio": "whisper ends, the hall roar returns faintly",
+          "handoff": "holds his gaze for the hard cut to the bone throw"
+        }
+      ],
+      "dialogue": [
+        {
+          "text": "寄生虫……在我的房子里，吃着我父亲的牛羊，却毫无敬畏。",
+          "speaker_id": "Telemachus",
+          "tone": "muffled mutter, gritted teeth, suppressed",
+          "time_range": "4-8s",
+          "is_diegetic": true
+        }
+      ],
+      "sfx": [
+        "suppressed-breath",
+        "distant-hall-murmur",
+        "ember-hiss"
+      ],
+      "mode": "I2VA",
+      "video_model": "H3",
+      "resolution_tier": "768P",
+      "aspect": "9:16",
+      "seed": 70001,
+      "references": [
+        {
+          "label": "<Picture 1>",
+          "kind": "person",
+          "char": "Telemachus",
+          "retention": "fully_preserved",
+          "retention_note": "retain face, short dark-brown hair, undyed wool tunic of Telemachus across the whole shot",
+          "path": "gen/odyssey_ep01_v2/card_Telemachus.png",
+          "description": "the young prince in the rough undyed tunic with thin bronze armband",
+          "used_as": "frame_anchor"
+        }
+      ],
+      "first_frame": "gen/odyssey_ep01_v2/card_Telemachus.png",
+      "last_frame": "",
+      "continuity_type": "hard_cut"
+    },
+    {
+      "shot_id": "S04",
+      "duration_s": 10,
+      "edit_target_s": 10,
+      "continuity_handoff": "HARD CUT to the dynamic action beat: the bone lands where Telemachus stands; the jeer comes from the blurred background suitors; same hall world (stone floor + stone wall).",
+      "fixed_landmarks": [
+        "stone-floor: foreground",
+        "stone-wall: background"
+      ],
+      "char_positions": {
+        "求婚者们(群演)": "blurred background, pointing and jeering"
+      },
+      "exited_chars": [],
+      "lighting_baseline": "harsh firelight from the left, deep ink shadows, action comic contrast",
+      "hook_type": "chase",
+      "shot_description": "Dynamic action shot. Realistic graphic novel style. A large gnawed animal bone is thrown onto the stone floor in the foreground. In the blurred background, arrogant suitors are pointing and jeering maliciously. Action comic book layout, dramatic perspective, deep shadows, cinematic depth of field.",
+      "per_second": [
+        {
+          "rng": "0-2s",
+          "action": "a large gnawed bone whips through the air with motion streaks, spinning toward the floor",
+          "camera": "dynamic low angle, bone foreground",
+          "spatial": "bone mid-air center, stone floor below, blurred suitors far back",
+          "audio": "the whoosh of the thrown bone",
+          "handoff": "the bone is in flight"
+        },
+        {
+          "rng": "2-4s",
+          "action": "the bone slams onto the stone floor, spins, kicks up a puff of dust",
+          "camera": "impact framing on the stone floor",
+          "spatial": "bone foreground rolling, dust puff",
+          "audio": "sharp clack of bone on stone + a hard thud",
+          "handoff": "the bone settles rolling"
+        },
+        {
+          "rng": "4-6s",
+          "action": "the camera pulls back fast: in the blurred background a suitor points at the shadows and jeers, the first words land",
+          "camera": "quick pull-back, dramatic perspective",
+          "spatial": "bone foreground-left, pointing suitor mid-right blurred",
+          "audio": "Suitor B: '看呐！小王子在那儿偷看呢！'",
+          "handoff": "the jeer begins"
+        },
+        {
+          "rng": "6-8s",
+          "action": "the suitors in the background point and laugh, faces smug in the blur",
+          "camera": "hold pulled-back action framing",
+          "spatial": "bone foreground, laughing crowd background",
+          "audio": "'怎么，你想替你那死鬼老爸出头吗？'",
+          "handoff": "the jeer builds"
+        },
+        {
+          "rng": "8-10s",
+          "action": "the laughter peaks, goblets raised in the blur; the bone comes to rest in the firelight",
+          "camera": "slow settle on the bone",
+          "spatial": "bone foreground center, fire glow catching it",
+          "audio": "'哈哈哈哈！' + peak jeering",
+          "handoff": "end on the jeer peak for the hard cut to the hand"
+        }
+      ],
+      "dialogue": [
+        {
+          "text": "看呐！小王子在那儿偷看呢！怎么，你想替你那死鬼老爸出头吗？哈哈哈哈！",
+          "speaker_id": "求婚者乙",
+          "tone": "jeering, mocking, loud",
+          "time_range": "4-9s",
+          "is_diegetic": true
+        }
+      ],
+      "sfx": [
+        "bone-whoosh",
+        "bone-hit-stone-clack",
+        "dust-puff",
+        "jeering-laugh"
+      ],
+      "mode": "T2VA",
+      "video_model": "H3",
+      "resolution_tier": "768P",
+      "aspect": "9:16",
+      "references": [],
+      "first_frame": "",
+      "last_frame": "",
+      "continuity_type": "hard_cut"
+    },
+    {
+      "shot_id": "S05",
+      "duration_s": 10,
+      "edit_target_s": 10,
+      "continuity_handoff": "HARD CUT to the extreme close-up: Telemachus's hand on the bronze dagger hilt (his identity carried by the frayed tunic sleeve + bronze armband, not the face); the scabbard creak and heartbeat carry his restraint; the loosening hand sets up the cut up to the balcony.",
+      "fixed_landmarks": [
+        "bronze-dagger: center"
+      ],
+      "char_positions": {},
+      "exited_chars": [],
+      "lighting_baseline": "harsh firelight raking the hand, deep ink shadow, high contrast on the bronze texture",
+      "hook_type": "expression-beat",
+      "shot_description": "Extreme close up. Realistic graphic novel style. A young man's hand violently gripping the hilt of an ancient bronze dagger. Veins popping on the hand. Harsh cinematic lighting highlighting the tension and the bronze texture. Intricate ink details, dark and gritty comic art.",
+      "per_second": [
+        {
+          "rng": "0-2s",
+          "action": "a young man's hand slams onto the bronze dagger hilt, knuckles white; a frayed tunic sleeve and thin bronze armband mark the wrist",
+          "camera": "extreme close up, static",
+          "spatial": "hand + hilt center, dark ink shadow background",
+          "audio": "leather scabbard creak + the heartbeat begins low",
+          "handoff": "the grip is locked on"
+        },
+        {
+          "rng": "2-4s",
+          "action": "the grip tightens, veins pop on the back of the hand; the bronze texture glints in the firelight",
+          "camera": "hold extreme close, micro push",
+          "spatial": "veins center, hilt lower",
+          "audio": "heartbeat accelerates",
+          "handoff": "tension peaks on the grip"
+        },
+        {
+          "rng": "4-6s",
+          "action": "the fingers strain; a trembling breath; the inner voice begins, soft and muffled",
+          "camera": "hold on the hand",
+          "spatial": "same composition",
+          "audio": "his inner monologue: '众神啊……如果你们还有眼'",
+          "handoff": "the plea begins"
+        },
+        {
+          "rng": "6-8s",
+          "action": "the fingers start to slowly loosen, one by one; the hilt stays half-gripped",
+          "camera": "hold",
+          "spatial": "same composition",
+          "audio": "'就降下惩罚吧。'",
+          "handoff": "the resolve weakens"
+        },
+        {
+          "rng": "8-10s",
+          "action": "the hand rests half-open on the hilt; an ember swells, the ink shadows soften",
+          "camera": "slow pull back a breath",
+          "spatial": "hand + hilt center, ember glow at the edge",
+          "audio": "'我还太弱小……' + heartbeat fades",
+          "handoff": "end on the loosened hand for the hard cut up to the balcony"
+        }
+      ],
+      "dialogue": [
+        {
+          "text": "众神啊……如果你们还有眼，就降下惩罚吧。我还太弱小……",
+          "speaker_id": "Telemachus",
+          "tone": "inner monologue, suppressed, trembling, voice over",
+          "time_range": "4-9s",
+          "is_diegetic": false
+        }
+      ],
+      "sfx": [
+        "leather-scabbard-creak",
+        "heartbeat-accelerating",
+        "ember-hiss"
+      ],
+      "mode": "T2VA",
+      "video_model": "H3",
+      "resolution_tier": "768P",
+      "aspect": "9:16",
+      "references": [],
+      "first_frame": "",
+      "last_frame": "",
+      "continuity_type": "hard_cut"
+    },
+    {
+      "shot_id": "S06",
+      "duration_s": 10,
+      "edit_target_s": 10,
+      "continuity_handoff": "HARD CUT up to the wooden balcony: cold moonlight world against the warm firelight below; Penelope's veiled silhouette and her single tear are the closing image of the episode.",
+      "fixed_landmarks": [
+        "wooden-balcony: top",
+        "stone-wall: background"
+      ],
+      "char_positions": {
+        "Penelope": "top center, veiled, standing at the rail, silhouetted against the moonlight"
+      },
+      "exited_chars": [],
+      "lighting_baseline": "key: pale cold moonlight from above; warm violent firelight glow from below; deep melancholic comic contrast",
+      "hook_type": "suspense",
+      "shot_description": "Low angle shot. Realistic graphic novel style. Queen Penelope wearing a veil, standing on a dark wooden balcony. A single tear rolls down her beautiful, sorrowful face as she looks down. Pale moonlight contrasting with warm firelight from below. Deep melancholic atmosphere, cinematic comic book framing.",
+      "per_second": [
+        {
+          "rng": "0-2s",
+          "action": "camera looks up the rough stone wall to the dark wooden balcony; Penelope's veiled silhouette against the pale moon",
+          "camera": "low angle, slow tilt up",
+          "spatial": "stone wall bottom, wooden balcony top third, moonlight behind her",
+          "audio": "night wind + the distant hall roar fading to a murmur",
+          "handoff": "her silhouette resolves in the moonlight"
+        },
+        {
+          "rng": "2-4s",
+          "action": "she stands at the rail, veil half-shadowing her face, looking down over the chaos; warm firelight tints the frame bottom",
+          "camera": "hold low angle on her silhouette",
+          "spatial": "her silhouette top center, fire glow at frame bottom",
+          "audio": "the roar recedes, a sad cello score begins to fade in",
+          "handoff": "the mood turns to grief"
+        },
+        {
+          "rng": "4-6s",
+          "action": "a single tear rolls down her cheek, catching the moonlight; her lips tremble; her line begins, soft and breaking",
+          "camera": "slow push to her veiled face",
+          "spatial": "tear line center on the cheek",
+          "audio": "her soft whisper: '奥德修斯……你到底在哪里？' + cello swelling",
+          "handoff": "the tear and the whisper land"
+        },
+        {
+          "rng": "6-8s",
+          "action": "she presses one hand to the rail; the tear trail glints; the cello rises under her voice",
+          "camera": "hold on her face, low angle",
+          "spatial": "hand on rail lower third, tear trail glowing",
+          "audio": "'我们快撑不住了……' + cello sustained",
+          "handoff": "the grief is spoken"
+        },
+        {
+          "rng": "8-10s",
+          "action": "she holds her stillness; cold moon above, warm fire below; heavy ink shadows close around her",
+          "camera": "slow pull back to the full low-angle framing",
+          "spatial": "silhouette top center, fire glow bottom edge",
+          "audio": "cello sustains, night wind, the far-off fire",
+          "handoff": "end on her silent grief - episode closes"
+        }
+      ],
+      "dialogue": [
+        {
+          "text": "奥德修斯……你到底在哪里？我们快撑不住了……",
+          "speaker_id": "Penelope",
+          "tone": "soft, breaking, whispered, grieving",
+          "time_range": "4-8s",
+          "is_diegetic": true
+        }
+      ],
+      "sfx": [
+        "night-wind",
+        "distant-roar-fading",
+        "sad-cello-score"
+      ],
+      "mode": "I2VA",
+      "video_model": "H3",
+      "resolution_tier": "768P",
+      "aspect": "9:16",
+      "seed": 70002,
+      "references": [
+        {
+          "label": "<Picture 1>",
+          "kind": "person",
+          "char": "Penelope",
+          "retention": "fully_preserved",
+          "retention_note": "retain face, veil, pale chiton of Penelope across the whole shot",
+          "path": "gen/odyssey_ep01_v2/card_Penelope.png",
+          "description": "the veiled queen in the pale undyed chiton with bronze torc",
+          "used_as": "frame_anchor"
+        }
+      ],
+      "first_frame": "gen/odyssey_ep01_v2/card_Penelope.png",
+      "last_frame": "",
+      "continuity_type": "hard_cut"
+    }
+  ]
+}

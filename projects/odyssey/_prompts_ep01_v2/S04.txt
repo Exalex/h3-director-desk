@@ -1,0 +1,18 @@
+integrated_multimodal_description:
+Style: Realistic graphic novel style, dark fantasy comic: heavy ink shadows, crosshatching, detailed line work, deep black shadows, high contrast cinematic lighting, chiaroscuro, gritty comic book art, muted dark palette; Mycenaean Greece 1200 BC setting: cyclopean masonry, rough timber pillars, crude bronze vessels, coarse undyed linen and animal hides; 8k highly detailed
+[Shot 1] Dynamic action shot. Realistic graphic novel style. A large gnawed animal bone is thrown onto the stone floor in the foreground. In the blurred background, arrogant suitors are pointing and jeering maliciously. Action comic book layout, dramatic perspective, deep shadows, cinematic depth of field.
+Per-second directives:
+  0-2s: a large gnawed bone whips through the air with motion streaks, spinning toward the floor; camera: dynamic low angle, bone foreground; spatial: bone mid-air center, stone floor below, blurred suitors far back; audio: the whoosh of the thrown bone; handoff: the bone is in flight
+  2-4s: the bone slams onto the stone floor, spins, kicks up a puff of dust; camera: impact framing on the stone floor; spatial: bone foreground rolling, dust puff; audio: sharp clack of bone on stone + a hard thud; handoff: the bone settles rolling
+  4-6s: the camera pulls back fast: in the blurred background a suitor points at the shadows and jeers, the first words land; camera: quick pull-back, dramatic perspective; spatial: bone foreground-left, pointing suitor mid-right blurred; audio: Suitor B: '看呐！小王子在那儿偷看呢！'; handoff: the jeer begins
+  6-8s: the suitors in the background point and laugh, faces smug in the blur; camera: hold pulled-back action framing; spatial: bone foreground, laughing crowd background; audio: '怎么，你想替你那死鬼老爸出头吗？'; handoff: the jeer builds
+  8-10s: the laughter peaks, goblets raised in the blur; the bone comes to rest in the firelight; camera: slow settle on the bone; spatial: bone foreground center, fire glow catching it; audio: '哈哈哈哈！' + peak jeering; handoff: end on the jeer peak for the hard cut to the hand
+Fixed landmarks: stone-floor: foreground; stone-wall: background
+Character positions: 求婚者们(群演)=blurred background, pointing and jeering
+Lighting baseline: harsh firelight from the left, deep ink shadows, action comic contrast
+Continuity handoff: HARD CUT to the dynamic action beat: the bone lands where Telemachus stands; the jeer comes from the blurred background suitors; same hall world (stone floor + stone wall).
+Dialogue: <Subject> (S4) says, <d>[Chinese] 看呐！小王子在那儿偷看呢！怎么，你想替你那死鬼老爸出头吗？哈哈哈哈！</d>
+
+overall_soundscape: bone-whoosh; bone-hit-stone-clack; dust-puff; jeering-laugh; hook: chase
+
+non_diegetic_music: diegetic ambient only; no score unless the shot calls for it

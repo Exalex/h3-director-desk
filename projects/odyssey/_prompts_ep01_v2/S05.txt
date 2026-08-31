@@ -1,0 +1,17 @@
+integrated_multimodal_description:
+Style: Realistic graphic novel style, dark fantasy comic: heavy ink shadows, crosshatching, detailed line work, deep black shadows, high contrast cinematic lighting, chiaroscuro, gritty comic book art, muted dark palette; Mycenaean Greece 1200 BC setting: cyclopean masonry, rough timber pillars, crude bronze vessels, coarse undyed linen and animal hides; 8k highly detailed
+[Shot 1] Extreme close up. Realistic graphic novel style. A young man's hand violently gripping the hilt of an ancient bronze dagger. Veins popping on the hand. Harsh cinematic lighting highlighting the tension and the bronze texture. Intricate ink details, dark and gritty comic art.
+Per-second directives:
+  0-2s: a young man's hand slams onto the bronze dagger hilt, knuckles white; a frayed tunic sleeve and thin bronze armband mark the wrist; camera: extreme close up, static; spatial: hand + hilt center, dark ink shadow background; audio: leather scabbard creak + the heartbeat begins low; handoff: the grip is locked on
+  2-4s: the grip tightens, veins pop on the back of the hand; the bronze texture glints in the firelight; camera: hold extreme close, micro push; spatial: veins center, hilt lower; audio: heartbeat accelerates; handoff: tension peaks on the grip
+  4-6s: the fingers strain; a trembling breath; the inner voice begins, soft and muffled; camera: hold on the hand; spatial: same composition; audio: his inner monologue: '众神啊……如果你们还有眼'; handoff: the plea begins
+  6-8s: the fingers start to slowly loosen, one by one; the hilt stays half-gripped; camera: hold; spatial: same composition; audio: '就降下惩罚吧。'; handoff: the resolve weakens
+  8-10s: the hand rests half-open on the hilt; an ember swells, the ink shadows soften; camera: slow pull back a breath; spatial: hand + hilt center, ember glow at the edge; audio: '我还太弱小……' + heartbeat fades; handoff: end on the loosened hand for the hard cut up to the balcony
+Fixed landmarks: bronze-dagger: center
+Lighting baseline: harsh firelight raking the hand, deep ink shadow, high contrast on the bronze texture
+Continuity handoff: HARD CUT to the extreme close-up: Telemachus's hand on the bronze dagger hilt (his identity carried by the frayed tunic sleeve + bronze armband, not the face); the scabbard creak and heartbeat carry his restraint; the loosening hand sets up the cut up to the balcony.
+Dialogue: narration (<Subject>, voice over, mouth closed): 众神啊……如果你们还有眼，就降下惩罚吧。我还太弱小……
+
+overall_soundscape: leather-scabbard-creak; heartbeat-accelerating; ember-hiss; hook: expression-beat
+
+non_diegetic_music: diegetic ambient only; no score unless the shot calls for it

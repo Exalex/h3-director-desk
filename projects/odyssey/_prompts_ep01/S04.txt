@@ -1,0 +1,19 @@
+For the target video, at 0.00 seconds into the target video, <Picture 1> (from [Shot 1]) is fully referenced.
+
+integrated_multimodal_description:
+Style: Mycenaean Greece 1200 BC: cyclopean masonry, rough timber pillars, crude bronze vessels, coarse undyed linen and animal hides; gritty realism, cinematic epic, chiaroscuro cinematic lighting, shot on 35mm lens, volumetric smoke, dark earthy low-saturation palette, film grain; reference: Troy (2004) texture, 300 dark oil-painting mood, The Northman primal rawness; no classical marble, no ornate temple architecture
+[Shot 1] Low angle shot looking up at a rough wooden balcony. Queen Penelope stands silhouetted against pale moonlight, looking down at the fiery chaos below with an expression of profound grief and resilience.
+Per-second directives:
+  0-1s: camera looks up the rough stone wall to the wooden balcony; Penelope stands at the rail, pale moonlight halos behind her; camera: low angle, slow tilt up; spatial: stone wall bottom, wooden balcony top third, moonlight behind her; audio: night wind + very distant fire below; handoff: her silhouette resolves in the moonlight
+  1-2s: she looks down over the rail; warm firelight from the hall tints the bottom of the frame; she is still against the chaos; camera: hold low angle on her silhouette; spatial: her silhouette top center, fire glow at frame bottom; audio: heavy ambient bed in: low wind + distant cracking fire + a lone low drone; handoff: end on her silent grief - episode closes
+  2-3s: the fire below swells, her silhouette edges flare warm; she does not move; camera: hold low angle; spatial: same composition; audio: low drone + distant roar; handoff: tail hold (edit trims at 2s)
+  3-4s: her braid stirs in the wind; the moonlight steadies; camera: hold, micro-drift; spatial: same composition; audio: wind + low drone; handoff: tail hold
+  4-5s: she holds her stillness; the frame breathes with smoke and light; camera: hold low angle; spatial: same composition; audio: heavy ambient sustains; handoff: tail hold
+Fixed landmarks: wooden-balcony: top; stone-wall: background
+Character positions: Penelope=top center, standing at the rail, silhouetted against the moonlight
+Lighting baseline: key: pale cold moonlight from above; warm violent firelight glow from below; soft ethereal contrast
+Continuity handoff: HARD CUT up to the wooden balcony: cold moonlight world against the warm firelight below; Penelope's silhouetted grief is the closing image of the episode.
+
+overall_soundscape: night-wind; distant-fire-crackle; low-heavy-ambient-drone; hook: suspense
+
+non_diegetic_music: diegetic ambient only; no score unless the shot calls for it

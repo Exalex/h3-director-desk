@@ -24,12 +24,16 @@ mindmap
       I-0006 部署 5800H 导演台控制 spark1 ComfyUI
         状态 in-progress
         日期 2026-08-31
+      I-0007 接入本机项目切换数据
+        状态 completed
+        日期 2026-08-31
 ```
 
 ## 迭代索引
 
 | 迭代 | 日期 | 状态 | 标题 |
 |---|---|---|---|
+| [I-0007](../iterations/I-0007-接入本机项目切换数据.md) | 2026-08-31 | completed | 接入本机项目切换数据 |
 | [I-0006](../iterations/I-0006-部署-5800h-导演台控制-spark1-comfyui.md) | 2026-08-31 | in-progress | 部署 5800H 导演台控制 spark1 ComfyUI |
 | [I-0005](../iterations/I-0005-完成-10-秒-h3-真实生成测试.md) | 2026-08-31 | completed | 完成 10 秒 H3 真实生成测试 |
 | [I-0004](../iterations/I-0004-验证-spark1-导演台到-spark2-comfyui-h3-链路.md) | 2026-08-31 | completed | 验证 spark1 导演台到 spark2 ComfyUI/H3 链路 |

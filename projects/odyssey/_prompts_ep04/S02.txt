@@ -1,0 +1,20 @@
+For the target video, at 0.00 seconds into the target video, <Picture 1> (from [Shot 1]) is fully referenced.
+
+integrated_multimodal_description:
+Style: Cinematic photorealistic live-action film still: hyperrealistic skin texture, visible scar detail, volumetric storm light and sea spray, natural motion blur, muted desaturated teal-and-amber cinematic palette, subtle film grain; ancient Mediterranean island c.1200 BC: basalt cliffs, primitive grotto, bronze-age tools; absolutely no illustration, no comic ink lines, no crosshatching, no panel borders; 8k highly detailed
+[Shot 1] Live-action cinematic film still: photorealistic, no comic style, no ink lines, no panel borders. Medium shot, subtle slow push. Beautiful immortal nymph Calypso in a shimmering sheer golden silk robe stands behind the seated gaunt hero, gently wrapping her arms around his bare, battle-scarred shoulders; lush mythical island grotto with glowing flora behind. Warm golden magical key light against deep cinematic shadows; the paradise and his desolate body in one frame. Subtle film grain.
+Per-second directives:
+  0-2s: the lush grotto resolves: glowing flora, warm golden haze; Calypso glides into frame behind Odysseus; camera: medium shot, subtle slow push; spatial: Odysseus's scarred shoulders center, Calypso's arms entering from behind, grotto background; audio: soft island breeze + a gentle warm cello pad; handoff: the paradise is established
+  2-4s: she places her arms around his bare scarred shoulders; her golden robe shimmers; he stiffens slightly; camera: hold medium, slow push toward her face over his shoulder; spatial: her face upper-right, his back center; audio: her voice begins, honeyed: '忘掉那块贫瘠的石头吧，奥德修斯。'; handoff: the embrace lands
+  4-6s: her hand strokes his scarred shoulder; he does not turn; her patient smile holds; camera: hold, micro push to her eyes; spatial: same composition, her eyes catching the golden light; audio: '留下来陪我，'; handoff: the offer is made
+  6-8s: he slowly turns his head a few degrees, not toward her; her expression flickers; the golden light holds; camera: hold medium; spatial: his averted profile center, her arms still around him; audio: '你可以获得神明般永恒的不朽。' + breeze; handoff: the seduction completes, his refusal hangs
+  8-10s: she keeps her embrace, chin near his hair; he breathes hard, jaw set; a dark shadow deepens at the grotto edge; camera: slow settle on the two; spatial: the pair center, glowing flora background; audio: cello pad sustains, wind whispers; handoff: hold the tension for the hard cut to his face close-up
+Fixed landmarks: lush-grotto: background; basalt-rock: foreground
+Character positions: Calypso=behind Odysseus, center, sheer golden robe glowing; Odysseus=seated, back to camera, bare scarred shoulders
+Lighting baseline: key: warm magical golden glow from the grotto flora; deep cinematic shadows; Odysseus's back in colder relative shadow
+Continuity handoff: HARD CUT from the storm cliff to the intimate grotto: Calypso's lush paradise against Odysseus's gaunt despair; her arms close around him, his refusal is teased for the next shot.
+Dialogue: <Picture 1> (S2) says, <d>[Chinese] 忘掉那块贫瘠的石头吧，奥德修斯。留下来陪我，你可以获得神明般永恒的不朽。</d>
+
+overall_soundscape: soft-breeze; warm-cello-pad; robe-shimmer; hook: expression-beat
+
+non_diegetic_music: diegetic ambient only; no score unless the shot calls for it

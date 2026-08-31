@@ -1,0 +1,20 @@
+For the target video, at 0.00 seconds into the target video, <Picture 1> (from [Shot 1]) is fully referenced.
+
+integrated_multimodal_description:
+Style: Realistic graphic novel style, dark fantasy comic: heavy ink shadows, crosshatching, detailed line work, deep black shadows, high contrast cinematic lighting, chiaroscuro, gritty comic book art, muted dark palette; Mycenaean Greece 1200 BC setting: cyclopean masonry, rough timber pillars, crude bronze vessels, coarse undyed linen and animal hides; 8k highly detailed
+[Shot 1] Medium shot. Realistic graphic novel style. Young Greek prince Telemachus standing in the dark shadows of a giant stone pillar. He looks at the suitors with intense anger. Firelight illuminates half of his face. Heavy contrast, crosshatching shading, glowing embers reflecting in his eyes, gritty realism.
+Per-second directives:
+  0-2s: Telemachus stands still in the pillar's shadow, jaw tight; firelight rakes the right half of his face; comic crosshatch shading deepens the left; camera: medium shot, slow tracking left; spatial: pillar shadow at frame-left, Telemachus left third, fire glow right; audio: his controlled breathing + faint distant laughter; handoff: stillness against the chaos
+  2-4s: his eyes track the off-frame suitors; his jaw hardens; crosshatched shadow lines tighten on his neck; camera: slow tracking continues, slight push toward his eyes; spatial: fists at his sides lower third, eye-line frame-right; audio: breath-held tension, the hall roar pushed far; handoff: anger suppressed, not released
+  4-6s: his fists clench; he mutters through gritted teeth, the first words landing soft and muffled; camera: hold on his half-lit face; spatial: his face center-left, shadowed stone wall behind; audio: his muffled whisper: '寄生虫……'; handoff: the whisper begins
+  6-8s: his eyes glisten; a glowing ember reflects in his eye; the whisper continues; camera: hold, micro push to the eye; spatial: same composition; audio: '在我的房子里，吃着我父亲的牛羊，却毫无敬畏。'; handoff: the whisper lands
+  8-10s: he swallows hard; one fist tightens further; smoke drifts past his silhouette; camera: hold on his half-lit face; spatial: same composition; audio: whisper ends, the hall roar returns faintly; handoff: holds his gaze for the hard cut to the bone throw
+Fixed landmarks: stone-wall: background; central-hearth: warm off-frame right
+Character positions: Telemachus=left third, midground, standing in the pillar shadow, facing frame-right
+Lighting baseline: key: hearth fire raking from the right, half his face lit; heavy crosshatched shadow on the other half
+Continuity handoff: HARD CUT to Telemachus in the pillar shadow; same hall (stone wall + hearth glow), his eye-line lands on the suitors; his suppressed whisper sets up the bone throw in the next shot.
+Dialogue: <Picture 1> (S3) says, <d>[Chinese] 寄生虫……在我的房子里，吃着我父亲的牛羊，却毫无敬畏。</d>
+
+overall_soundscape: suppressed-breath; distant-hall-murmur; ember-hiss; hook: expression-beat
+
+non_diegetic_music: diegetic ambient only; no score unless the shot calls for it

@@ -34,7 +34,8 @@ Stop the service with `Ctrl+C` in the service window.
 The desk itself uses only the Python standard library. `8088` is the desk UI
 port; `8188` is ComfyUI's separate generation port. ComfyUI is optional for
 opening and editing the desk, but it must be running at the configured address
-for GPU generation. This checkout intentionally does not include project JSON,
+for GPU generation. The checkout includes the editable Odyssey project JSON,
+style bible, scene assets, and compiled prompt examples. It does not include
 generated media, model weights, or runtime LLM configuration.
 
 For a small local machine such as a 5800H PC, keep the desk on the local
@@ -105,9 +106,9 @@ Invoke-WebRequest -UseBasicParsing http://127.0.0.1:8088/
 Invoke-WebRequest -UseBasicParsing http://127.0.0.1:8088/api/projects
 ```
 
-With no `projects/` directory or project JSON, `/api/projects` returns an empty
-project list. Create a project from the desk or provide project data from the
-production environment.
+The project selector reads JSON files under `projects/`. The bundled Odyssey
+files provide an initial project list; new projects created from the desk are
+written back to the same directory.
 
 ## Troubleshooting ComfyUI port 8188
 

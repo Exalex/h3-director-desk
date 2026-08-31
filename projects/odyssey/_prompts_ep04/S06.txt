@@ -1,0 +1,20 @@
+For the target video, at 0.00 seconds into the target video, <Picture 1> (from [Shot 1]) is fully referenced.
+
+integrated_multimodal_description:
+Style: Cinematic photorealistic live-action film still: hyperrealistic skin texture, visible scar detail, volumetric storm light and sea spray, natural motion blur, muted desaturated teal-and-amber cinematic palette, subtle film grain; ancient Mediterranean island c.1200 BC: basalt cliffs, primitive grotto, bronze-age tools; absolutely no illustration, no comic ink lines, no crosshatching, no panel borders; 8k highly detailed
+[Shot 1] Live-action cinematic film still: photorealistic, no comic style, no ink lines, no panel borders. Full action shot, kinetic camera. Muscular bare-chested Odysseus with thick ragged beard and battle scars swings a heavy bronze axe in a wide arc, chopping a massive tree trunk on the beach; sweat flies, wood chips burst into the sunset light; his eyes burn with fierce wolf-like focus. Low sunset amber key, long dramatic shadows, gritty realistic textures, subtle film grain.
+Per-second directives:
+  0-2s: the wide arc of the axe opens the shot: the bronze head blurs through the sunset air; heavy breathing sets the rhythm; camera: full action shot, kinetic low angle; spatial: Odysseus center, the massive trunk center-low, sunset sky background; audio: heavy breathing + the first whoosh of the axe; handoff: the rhythm is set
+  2-4s: the axe bites the trunk: wood chips burst into the golden light, his back muscles coil; the impact rings out; camera: impact frame, slight push; spatial: wood chips center, his back to camera; audio: the axe-thunk + chip spray; handoff: the strike lands
+  4-6s: he lifts the axe again, roaring with the effort; a shout tears out of him, the first words of the howl; camera: follow the lift, low angle; spatial: his face in profile center, sunset behind; audio: he howls: '大海啊！准备迎接我的怒火吧！'; handoff: the howl begins
+  6-8s: the swing comes down: a crack splits the trunk; sweat flies from his beard; the tree groans; camera: impact, kinetic; spatial: the trunk center, sunset flare background; audio: '我要回家了！' + the axe-thunk + wood crack; handoff: the howl lands with the strike
+  8-10s: he plants the axe into the trunk and holds it there, chest heaving, eyes burning with the wolf's fire; the sun dips low, shadows swallow the sand; camera: slow settle on his burning eyes; spatial: his face center, the axe planted in the trunk; audio: breathing steadies, distant wave; handoff: hold his burning gaze - the episode closes on the fire returned
+Fixed landmarks: beach: foreground; sunset-sky: background
+Character positions: Odysseus=center, mid-arc of the axe swing, bare-chested
+Lighting baseline: key: low sunset amber raking across the sand; long dramatic shadows; sweat glinting
+Continuity handoff: HARD CUT to the beach at dusk: the same hero transformed — bare-chested, axe in hand, hacking the massive tree trunks for the raft; sweat and wood chips fly; the weeping is gone, replaced by a wolf's war-hunger.
+Dialogue: <Picture 1> (S1) says, <d>[Chinese] 大海啊！准备迎接我的怒火吧！我要回家了！</d>
+
+overall_soundscape: axe-thunk; wood-crack; wood-chip-spray; heavy-breathing; distant-wave; hook: suspense
+
+non_diegetic_music: diegetic ambient only; no score unless the shot calls for it

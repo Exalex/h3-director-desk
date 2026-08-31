@@ -1,0 +1,18 @@
+integrated_multimodal_description:
+Style: Realistic graphic novel style, dark fantasy comic: heavy ink shadows, crosshatching, detailed line work, deep black shadows, high contrast cinematic lighting, chiaroscuro, gritty comic book art, muted dark palette; Mycenaean Greece 1200 BC setting: cyclopean masonry, rough timber pillars, crude bronze vessels, coarse undyed linen and animal hides; 8k highly detailed
+[Shot 1] Wide shot, slow pan. Realistic graphic novel style. The smoky, dimly lit great hall of an ancient Greek palace. Dozens of arrogant bearded men in tunics feasting chaotically, spilling wine, and eating roasted meat. Thick wooden pillars, heavy ink shadows, high contrast cinematic lighting, gritty comic book art style.
+Per-second directives:
+  0-2s: camera opens inside the smoky great hall; heavy ink shadows on the stone wall; fire flicker ripples across the haze; camera: wide shot, slow pan begins; spatial: hearth center, wooden pillars left & right, animal skins and bones on the floor; audio: low roar of the fire + distant chaotic chatter; handoff: wide chaos baseline established
+  2-4s: bearded suitors tear roasted meat with their hands, wine spills from tipped goblets, bones litter the skins; camera: slow pan continues across the hall; spatial: figures scattered across the midground, hearth glow central; audio: meat tearing + goblet clink + raucous laughter; handoff: greed readable at wide scale
+  4-6s: one bearded suitor stands, raises his bronze goblet high above his head, shouts the first word of the toast; camera: pan settles on him at mid-right; spatial: goblet-raiser mid-right, hearth behind, crowd foreground; audio: Suitor A shouts: '干杯！'; handoff: the toast begins in the air
+  6-8s: the crowd roars back, arms and goblets thrown up in the haze; camera: hold wide; spatial: same wide composition, cups raised everywhere; audio: Suitor A: '为了伊萨卡的无尽财富！' + crowd echo; handoff: the toast builds
+  8-10s: the crowd toasts together, wine arcs through the air; the suitor's line lands and the laughter peaks; camera: slow pan drifts back to center; spatial: wide hall, fire glow center; audio: '为了我们未来的王后！' + peak roar + cup clink; handoff: end on the feast peak for the hard cut to Antinous's face
+Fixed landmarks: central-hearth: center; wooden-pillars: left & right edges; stone-wall: background; animal-skins-and-bones: floor
+Character positions: 求婚者们(群演)=dozens of bearded men in tunics sprawling on animal skins across the floor, midground
+Lighting baseline: key: central hearth fire warm orange through smoke; heavy ink shadows; high contrast comic lighting
+Continuity handoff: Open on the smoky great hall; the suitors' feast is the baseline world; the toast shout sets up Antinous's cruel claim in the next shot.
+Dialogue: <Subject> (S1) says, <d>[Chinese] 干杯！为了伊萨卡的无尽财富！为了我们未来的王后！</d>
+
+overall_soundscape: fire-crackle; raucous-laughter; bronze-cup-clink; meat-tearing; wine-spill; crowd-roar; hook: suspense
+
+non_diegetic_music: diegetic ambient only; no score unless the shot calls for it

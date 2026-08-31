@@ -1,0 +1,19 @@
+For the target video, at 0.00 seconds into the target video, <Picture 1> (from [Shot 1]) is fully referenced.
+
+integrated_multimodal_description:
+Style: Mycenaean Greece 1200 BC: cyclopean masonry, rough timber pillars, crude bronze vessels, coarse undyed linen and animal hides; gritty realism, cinematic epic, chiaroscuro cinematic lighting, shot on 35mm lens, volumetric smoke, dark earthy low-saturation palette, film grain; reference: Troy (2004) texture, 300 dark oil-painting mood, The Northman primal rawness; no classical marble, no ornate temple architecture
+[Shot 1] Medium shot, slow tracking camera. Young Telemachus stands in the shadows of a massive stone pillar, watching the chaotic suitors; he wears a rough woven ancient tunic; his eyes are filled with suppressed anger and tears, fists clenched; dramatic side lighting illuminates half his face.
+Per-second directives:
+  0-1s: Telemachus stands still in the pillar's shadow, jaw tight; hearth glow rakes the right half of his face; camera: slow tracking camera drifts left; spatial: pillar shadow at frame-left, Telemachus left third, fire glow from the right; audio: his controlled breathing + faint distant laughter; handoff: stillness against the chaos
+  1-2s: his fists clench at his sides; his eyes track a suitor off-frame, teeth grit; camera: slow tracking continues, slight push toward his eyes; spatial: fists lower third, eye-line toward frame-right; audio: breath-held tension, the hall roar pushed far away; handoff: anger suppressed, not released
+  2-3s: he swallows hard; one fist tightens; smoke drifts past his silhouette; camera: hold on his half-lit face; spatial: his face center-left, shadowed stone wall behind; audio: hall roar fades to a distant murmur; handoff: holds his gaze for the hard cut up to Penelope
+  3-4s: he watches the off-frame suitors; a single ember falls across the frame; camera: hold, micro-drift; spatial: same composition; audio: distant murmur + faint ember hiss; handoff: tail hold (edit trims at 3s)
+  4-5s: his jaw works; the fire swells, his half-lit face flares; camera: hold; spatial: same composition; audio: fire swell + low murmur; handoff: tail hold
+Fixed landmarks: stone-wall: background; central-hearth: warm off-frame right
+Character positions: Telemachus=left third, midground, standing in the pillar shadow, facing frame-right
+Lighting baseline: key: hearth fire raking from the right, half his face lit (chiaroscuro); left half in deep shadow
+Continuity handoff: HARD CUT to Telemachus in the pillar shadow; same hall (stone wall + hearth glow visible), his eye-line lands on the suitors; his clenched fists set up his mother's grief in the final shot.
+
+overall_soundscape: suppressed-breath; distant-hall-murmur; ember-hiss; fire-swelling; hook: expression-beat
+
+non_diegetic_music: diegetic ambient only; no score unless the shot calls for it
