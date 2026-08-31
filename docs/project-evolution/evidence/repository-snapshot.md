@@ -2,11 +2,11 @@
 
 > 本文件由脚本生成。它只陈述可扫描事实，不代表完整架构分析。
 
-- 扫描时间：`2026-08-31T15:39:16+08:00`
+- 扫描时间：`2026-08-31T16:38:05+08:00`
 - 项目：`h3-director-desk`
 - 根目录：`D:\workspace\deepseekSpace\h3-director-desk`
 - Git 分支：`main`
-- Git 提交：`f05a837`
+- Git 提交：`edfa13c`
 - Git 变更条目：`7`
 - 扫描文件数：`58`
 - 是否截断：`否`
@@ -54,4 +54,4 @@
 - ` M docs/project-evolution/evidence/repository-snapshot.md`
 - ` M docs/project-evolution/mindmaps/iterations.md`
 - ` M docs/project-evolution/mindmaps/repository-structure.md`
-- `?? "docs/project-evolution/iterations/I-0004-\351\252\214\350\257\201-spark1-\345\257\274\346\274\224\345\217\260\345\210\260-spark2-comfyui-h3-\351\223\276\350\267\257.md"`
+- `?? "docs/project-evolution/iterations/I-0005-\345\256\214\346\210\220-10-\347\247\222-h3-\347\234\237\345\256\236\347\224\237\346\210\220\346\265\213\350\257\225.md"`

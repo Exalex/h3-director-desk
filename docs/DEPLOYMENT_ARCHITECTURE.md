@@ -108,6 +108,20 @@ python director\serve.py --host 127.0.0.1 --port 8088 --comfy http://<gpu-host-i
 
 直接从 5800H 访问 `spark1:8188` 或 `spark2:8188` 不通是预期现象：ComfyUI 监听 `127.0.0.1:8188`，SSH 隧道终点在 spark1，5800H 只需要访问 `http://192.168.3.75:8088`。本次验证只读取 `/api/director` 和 ComfyUI `/system_stats`，没有提交实际视频生成任务。
 
+## 10 秒生成测试（2026-08-31）
+
+已提交一个独立的单镜头 T2V 测试项目，没有运行正式奥德赛项目，也没有提交整集任务。
+
+| 项目 | 结果 |
+|---|---|
+| 任务 | `b02f70ae5e` |
+| 参数 | `480x832`、243 帧、24fps、seed `42` |
+| ComfyUI 任务 | 完成，Director Desk 状态 `done` |
+| 输出 | `gen/h3_10s_connectivity_test/S01.mp4` |
+| 媒体校验 | H.264、`480x832`、243 帧、`10.125s`、约 `1.0MB` |
+
+这次测试证明了 Director Desk → spark1 转发 → ComfyUI/H3/GPU 的真实生成链路可用。测试项目和视频输出保留在 spark1，便于后续在导演台中预览；正式生成前仍应补齐测试项目的逐秒指令质量门禁。
+
 ## 对 5800H 本机的建议
 
 5800H 只承担浏览器、Python 标准库服务、项目 JSON、Prompt 编译、任务轮询和轻量 ffmpeg/QC。不要把 H3 模型权重或 ComfyUI 的 GPU 推理放在这台机器上，除非它另外具备可用的 NVIDIA GPU、CUDA 和足够显存。
