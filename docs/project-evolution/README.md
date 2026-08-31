@@ -2,8 +2,8 @@
 
 > 这里记录项目当前结构、技术实现、决策依据和不可丢失的迭代历史。
 
-- 文档更新时间：`2026-08-31T16:38:05+08:00`
-- 当前迭代：`I-0005 · 完成 10 秒 H3 真实生成测试 / completed`
+- 文档更新时间：`2026-08-31T17:34:38+08:00`
+- 当前迭代：`I-0006 · 部署 5800H 导演台控制 spark1 ComfyUI / in-progress`
 
 ## 建议阅读顺序
 
@@ -16,6 +16,7 @@
 
 ## 最近迭代
 
+- [I-0006 · 部署 5800H 导演台控制 spark1 ComfyUI](iterations/I-0006-部署-5800h-导演台控制-spark1-comfyui.md) — 2026-08-31 / `in-progress`
 - [I-0005 · 完成 10 秒 H3 真实生成测试](iterations/I-0005-完成-10-秒-h3-真实生成测试.md) — 2026-08-31 / `completed`
 - [I-0004 · 验证 spark1 导演台到 spark2 ComfyUI/H3 链路](iterations/I-0004-验证-spark1-导演台到-spark2-comfyui-h3-链路.md) — 2026-08-31 / `completed`
 - [I-0003 · 明确控制机与 H3 推理机分离架构](iterations/I-0003-明确控制机与-h3-推理机分离架构.md) — 2026-08-31 / `completed`

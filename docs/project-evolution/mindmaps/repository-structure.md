@@ -7,25 +7,25 @@ mindmap
   root((h3-director-desk))
     Git 基线
       分支 main
-      提交 edfa13c
-      未提交条目 7
+      提交 910f65d
+      未提交条目 8
     顶层模块
       output
         文件数 45
       director
         文件数 6
+      root
+        文件数 4
       docs
         文件数 4
-      root
-        文件数 3
     主要文件类型
       .md 29
       .py 17
       .txt 3
+      .bat 2
       .js 2
       .json 2
       no extension 1
-      .bat 1
       .html 1
       .css 1
       .sh 1
