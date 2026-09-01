@@ -29,6 +29,7 @@ mindmap
       ComfyUI队列观测
       状态轮询与定时刷新
       同URL视频节点复用
+      五阶段百分比与ETA
       progress/meta/log镜头节点
       data-generation-summary整集汇总
       data-shot-preview镜头预览
@@ -49,6 +50,7 @@ mindmap
       同集自动创作幂等拦截
       阶段进度与最新日志
       日志时间戳与ComfyUI事件
+      队列pending/running探测
       完成数/处理中数/排队数
       HTML5播放与拖动
       播放期间不重建video元素
@@ -107,3 +109,4 @@ mindmap
 - 测试缝与可观测性：`check`、`plan`、`prompts`、HTTP API、ffprobe 属性和真实装配结果构成当前验证证据。
 - 生成日志：`director/serve.py` 的 `task_append` 为任务日志统一增加 `HH:MM:SS` 时间戳；`run_comfy_generate` 记录配置、JSON/提示词/角色引用、提交参数、产物大小、耗时和异常类型，`comfyui_gen.generate/poll` 通过 `on_event` 记录远端 prompt id、队列状态、重试和下载。
 - 预览稳定性：`director/assets/app.js` 的 `updateGenerationRow` 比较媒体 URL；同一 URL 的轮询只更新状态，不执行 `innerHTML` 替换，因此不会因 5 秒状态刷新把播放位置重置到开头。
+- 生成进度：`director/serve.py` 为任务暴露 `phase`、`percent`、`cur/total`；单镜生成使用五阶段百分比（10/25/45/80/90/100 的阶段边界），`comfyui_gen.poll` 在历史记录尚未生成时额外查询 `/queue` 区分 pending/running。前端基于已耗时和当前百分比给出“预计剩余约”（估算），远端重启任务没有开始时间时显示“等待开始”。

@@ -146,7 +146,11 @@ def poll(base: str, prompt_id: str, timeout: int = 1800, interval: int = 5, on_e
     """
     t0 = time.time()
     last_status = None
+    last_queue_status = None
     attempts = 0
+    def emit(message):
+        if on_event:
+            on_event(message)
     while time.time() - t0 < timeout:
         attempts += 1
         try:
@@ -156,11 +160,29 @@ def poll(base: str, prompt_id: str, timeout: int = 1800, interval: int = 5, on_e
                 on_event(f"poll /history 暂时失败 attempt={attempts} detail={e}")
             time.sleep(interval)
             continue
+        if prompt_id not in hist:
+            try:
+                queue = _get_json(base.rstrip("/") + "/queue", timeout=30)
+                queue_status = None
+                for item in queue.get("queue_running", []) or []:
+                    if isinstance(item, list) and len(item) > 1 and item[1] == prompt_id:
+                        queue_status = "running"
+                        break
+                if queue_status is None:
+                    for item in queue.get("queue_pending", []) or []:
+                        if isinstance(item, list) and len(item) > 1 and item[1] == prompt_id:
+                            queue_status = "pending"
+                            break
+                if queue_status and queue_status != last_queue_status:
+                    emit(f"queue_status={queue_status} elapsed={time.time() - t0:.1f}s")
+                    last_queue_status = queue_status
+            except Exception:
+                pass
         if prompt_id in hist:
             e = hist[prompt_id]
             status = e.get("status", {}).get("status_str", "unknown")
             if on_event and status != last_status:
-                on_event(f"queue_status={status} elapsed={time.time() - t0:.1f}s")
+                emit(f"queue_status={status} elapsed={time.time() - t0:.1f}s")
                 last_status = status
             if status in ("success", "error", "fatal"):
                 files = []
@@ -171,7 +193,7 @@ def poll(base: str, prompt_id: str, timeout: int = 1800, interval: int = 5, on_e
                         "messages": e.get("status", {}).get("messages", [])}
         time.sleep(interval)
     if on_event:
-        on_event(f"poll timeout elapsed={time.time() - t0:.1f}s")
+        emit(f"poll timeout elapsed={time.time() - t0:.1f}s")
     return {"status": "timeout", "outputs": {}, "files": []}
 
 

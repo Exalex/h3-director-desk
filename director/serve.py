@@ -76,7 +76,7 @@ def new_task(kind, title, total=None):
     with TASKS_LOCK:
         TASKS[tid] = {"id": tid, "kind": kind, "title": title, "status": "running",
                       "started": time.time(), "done": None, "total": total, "cur": 0,
-                      "log": [], "result": None, "error": None}
+                      "percent": 0, "phase": "等待任务", "log": [], "result": None, "error": None}
     return tid
 
 
@@ -118,7 +118,9 @@ def remote_generations(base):
                     found.append({"id": f"comfy:{prompt_id}", "kind": "generate",
                                   "title": f"generate {shot_id}", "status": "running",
                                   "started": None, "path": "", "shot_id": shot_id,
-                                  "cur": 1 if group == "queue_running" else 0, "total": 3,
+                                  "cur": 3 if group == "queue_running" else 2, "total": 5,
+                                  "percent": 45 if group == "queue_running" else 25,
+                                  "phase": "GPU 生成中" if group == "queue_running" else "排队等待 GPU",
                                   "error": None, "remote": True,
                                   "queue_group": group, "queue_position": queue_index + 1,
                                   "log": ["H3 正在运行" if group == "queue_running"
@@ -140,12 +142,18 @@ def task_append(tid, line):
             TASKS[tid]["log"] = TASKS[tid]["log"][-500:]
 
 
-def task_progress(tid, cur, total=None):
+def task_progress(tid, cur, total=None, phase=None, percent=None):
     with TASKS_LOCK:
         if tid in TASKS:
             TASKS[tid]["cur"] = cur
             if total is not None:
                 TASKS[tid]["total"] = total
+            if phase is not None:
+                TASKS[tid]["phase"] = phase
+            if percent is not None:
+                TASKS[tid]["percent"] = max(0, min(100, int(percent)))
+            elif total:
+                TASKS[tid]["percent"] = max(0, min(99, round(cur / total * 100)))
 
 
 def task_finish(tid, result=None, error=None):
@@ -155,6 +163,11 @@ def task_finish(tid, result=None, error=None):
             TASKS[tid]["done"] = time.time()
             TASKS[tid]["result"] = result
             TASKS[tid]["error"] = error
+            TASKS[tid]["phase"] = "失败" if error else "已完成"
+            if not error:
+                TASKS[tid]["percent"] = 100
+                if TASKS[tid].get("total"):
+                    TASKS[tid]["cur"] = TASKS[tid]["total"]
 
 
 # ---------------------------------------------------------------------------
@@ -430,6 +443,7 @@ def run_comfy_generate(rel, shot_id, tid, params):
     try:
         task_append(tid, f"开始生成 path={rel} shot={shot_id} backend={params.get('backend', 'comfy')} "
                           f"comfy={base} size={width}x{height} steps={steps} timeout={timeout}s")
+        task_progress(tid, 1, 5, phase="准备生成", percent=10)
         d, err = _load_project_doc(rel)
         if err:
             task_append(tid, f"读取集数 JSON 失败 detail={err}")
@@ -478,9 +492,10 @@ def run_comfy_generate(rel, shot_id, tid, params):
         backend = params.get("backend", "comfy")
         if backend == "accel" and not first:
             # pure T2V -> accelerate REST service
+            task_progress(tid, 2, 5, phase="提交加速服务", percent=25)
             _run_accel_shot(shot, tid, clip, ptext, width, height, length, seed, steps, out_dir)
             task_append(tid, f"DONE(accel) -> {clip}")
-            task_progress(tid, 3, 3)
+            task_progress(tid, 5, 5, phase="已完成", percent=100)
             task_finish(tid, result={"shot_id": shot.shot_id,
                                      "clip": os.path.relpath(clip, REPO).replace("\\", "/"),
                                      "seed": seed, "mode": "T2V@accel",
@@ -488,15 +503,29 @@ def run_comfy_generate(rel, shot_id, tid, params):
             return
         if backend == "accel":
             task_append(tid, "I2V 镜头(有首帧)加速服务不支持图生图 → 自动回退到 ComfyUI 保身份锁定")
-        task_progress(tid, 1, 3)
+        task_progress(tid, 2, 5, phase="排队等待 GPU", percent=25)
+
+        def on_comfy_event(message):
+            task_append(tid, f"[ComfyUI] {message}")
+            if message.startswith("queued prompt_id=") or "queue_status=pending" in message:
+                task_progress(tid, 2, 5, phase="排队等待 GPU", percent=25)
+            elif "queue_status=running" in message:
+                task_progress(tid, 3, 5, phase="GPU 生成中", percent=45)
+            elif "queue_status=success" in message:
+                task_progress(tid, 4, 5, phase="生成完成，准备下载", percent=80)
+            elif message.startswith("downloading "):
+                task_progress(tid, 4, 5, phase="下载视频", percent=90)
+            elif message.startswith("downloaded "):
+                task_progress(tid, 5, 5, phase="已完成", percent=100)
+
         comfyui_gen.generate(base, ptext, clip, width=width,
                              height=height, length=length, seed=seed,
                              steps=steps, first_frame=first, filename=shot.shot_id,
                              timeout=timeout, verbose=False,
-                             on_event=lambda message: task_append(tid, f"[ComfyUI] {message}"))
+                             on_event=on_comfy_event)
         size = os.path.getsize(clip) if os.path.isfile(clip) else 0
         task_append(tid, f"生成完成 output={clip} bytes={size} elapsed={time.monotonic() - started_at:.1f}s")
-        task_progress(tid, 3, 3)
+        task_progress(tid, 5, 5, phase="已完成", percent=100)
         task_finish(tid, result={"shot_id": shot.shot_id, "clip": os.path.relpath(clip, REPO).replace("\\", "/"),
                                  "seed": seed, "mode": "I2V" if first else "T2V",
                                  "first_frame": first, "prompt_preview": ptext[:400]})
