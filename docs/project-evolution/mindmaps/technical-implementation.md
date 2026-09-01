@@ -27,6 +27,7 @@ mindmap
       状态轮询与定时刷新
       progress/meta/log镜头节点
       data-generation-summary整集汇总
+      data-shot-preview镜头预览
       视频输出
     接口与数据结构
       Director HTTP API
@@ -40,6 +41,7 @@ mindmap
       同镜头幂等拦截
       阶段进度与最新日志
       完成数/处理中数/排队数
+      HTML5播放与拖动
       有限瞬时错误重试
       加速服务回退ComfyUI
       QC失败回退阶梯
