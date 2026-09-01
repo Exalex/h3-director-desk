@@ -49,6 +49,7 @@ mindmap
       完成数/处理中数/排队数
       HTML5播放与拖动
       有限瞬时错误重试
+      服务退出自动重启
       加速服务回退ComfyUI
       QC失败回退阶梯
     配置与环境
@@ -57,6 +58,7 @@ mindmap
       OPENAI/DEEPSEEK key
       ffmpeg与模型权重
       start_local.bat
+      director/run_server.bat
     测试与可观测性
       check命令
       Qwen自动创作真实任务
@@ -96,5 +98,6 @@ mindmap
 - 工作台状态：浏览器保存当前项目/集数路径；切换时清空旧集状态并重新请求 `episode.json` 与 `/api/director`。
 - 并发、队列或缓存：使用进程内任务注册表；自动创作通过 `WORKFLOW_LOCK` 阻止同一集重复提交；生成入口查询 ComfyUI `/queue` 识别服务重启后的远端任务；聊天会话仍主要在内存中。
 - 错误、重试与降级：ComfyUI 对瞬时网络错误有限重试；加速服务的 I2V 自动回退 ComfyUI。
+- Windows 启动：`start_local.bat` 启动独立最小化窗口，`run_server.bat` 监护 `serve.py`；退出原因追加到 `director/server.log`，该日志被 Git 忽略。
 - 配置与环境变量：ComfyUI 地址、加速地址、LLM 地址/模型和密钥均来自环境或命令行；文档不记录密钥值。
 - 测试缝与可观测性：`check`、`plan`、`prompts`、HTTP API、ffprobe 属性和真实装配结果构成当前验证证据。

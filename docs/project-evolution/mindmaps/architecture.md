@@ -50,6 +50,7 @@ mindmap
       QC与装配
     部署与运行边界
       本地Windows Web服务
+      Windows watchdog 启动器
       Linux spark1部署
       ComfyUI独立运行
       模型权重外置
@@ -81,3 +82,4 @@ mindmap
 - 有首帧/I2V 的镜头优先使用 ComfyUI；可选加速服务主要承担纯 T2V。
 - 生成服务、模型权重、ffmpeg 和外部 LLM 不属于仓库内部部署内容。
 - 自动创作只提交文本给 Qwen；资产图和视频生成仍是显式的后续操作。
+- Windows 本地服务通过独立启动脚本监护 Python 进程；页面访问失败首先检查 8088 服务生命周期。

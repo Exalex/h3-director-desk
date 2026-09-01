@@ -28,8 +28,9 @@ From PowerShell:
 python director\serve.py --host 127.0.0.1 --port 8088 --comfy http://127.0.0.1:8188
 ```
 
-Or double-click `start_local.bat`. Open <http://127.0.0.1:8088/> in a browser.
-Stop the service with `Ctrl+C` in the service window.
+Or double-click `start_local.bat`. It starts a minimized watchdog window and
+opens <http://127.0.0.1:8088/>. The watchdog restarts the desk if the Python
+process exits; close the minimized **H3 Director Desk** window to stop it.
 
 The desk itself uses only the Python standard library. `8088` is the desk UI
 port; `8188` is ComfyUI's separate generation port. ComfyUI is optional for
@@ -100,6 +101,10 @@ and mirrored locally on spark1 under:
 - `director/assets/style.css`: desk styling
 - `output/scripts/h3_short_drama/`: H3 project model, prompt compiler,
   validation, ComfyUI generation and assembly
+
+The Windows launcher is split into `start_local.bat` and
+`director/run_server.bat`. The latter keeps the service alive and appends
+restart diagnostics to the ignored `director/server.log`.
 
 ## Local verification
 

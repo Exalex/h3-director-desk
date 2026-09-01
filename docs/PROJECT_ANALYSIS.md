@@ -87,6 +87,10 @@ flowchart LR
 
 该流程只自动完成前期规划和提示词编译，不自动提交 ComfyUI 视频任务。这样“输入创意”不会在用户尚未确认时消耗远端 GPU；视频生成仍从制作计划的“视频生成”阶段逐镜提交。实现证据见 [`director/serve.py`](../director/serve.py) 的 `run_chat_workflow`、`_write_asset_plan` 和 `Handler._post`，前端状态显示见 [`director/assets/app.js`](../director/assets/app.js) 的 `pollWorkflow`。
 
+## 四点六、Windows 服务稳定性
+
+导演台页面依赖 `director/serve.py` 提供静态文件和 API。若该 Python 进程退出，浏览器表现为“连接被拒绝”，看起来像前端崩溃，但页面代码本身不会继续运行。Windows 入口现在由 [`start_local.bat`](../start_local.bat) 启动 [`director/run_server.bat`](../director/run_server.bat)，后者在服务退出后自动重启并记录 `director/server.log`。验证方式是访问首页和 `/api/projects` 都返回 HTTP 200；也可观察 8088 端口是否处于监听状态。
+
 ## 三、关键数据模型
 
 ```text
