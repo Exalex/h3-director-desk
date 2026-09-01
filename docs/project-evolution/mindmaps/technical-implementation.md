@@ -25,6 +25,7 @@ mindmap
       后台任务
       ComfyUI队列观测
       状态轮询与定时刷新
+      progress/meta/log镜头节点
       视频输出
     接口与数据结构
       Director HTTP API
@@ -36,6 +37,7 @@ mindmap
     状态与错误处理
       内存任务状态与远端队列状态
       同镜头幂等拦截
+      阶段进度与最新日志
       有限瞬时错误重试
       加速服务回退ComfyUI
       QC失败回退阶梯
@@ -72,13 +74,13 @@ mindmap
 | `/api/director`、`/api/projects`、`/api/project` | GET | 项目库、当前集总览与集数读取 | JSON；路径受限于仓库根目录 | 不存在项目返回错误 |
 | `/api/stage/check`、`prompts`、`plan`、`qc` | GET | 检查、编译、规划、QC | JSON 或文件列表 | 纯读取/计算 |
 | `/api/stage/generate`、`series`、`assemble` | POST | 启动长任务 | task id 或 existing | 生成先检查内存任务与 ComfyUI `/queue`；后台执行，失败写 task error |
-| `/api/tasks` | GET | 当前导演台任务与 ComfyUI 队列 | 任务列表 | 兼容历史无路径任务，远端任务标记 `remote` |
+| `/api/tasks` | GET | 当前导演台任务与 ComfyUI 队列 | 任务列表、最近 8 条日志 | 兼容历史无路径任务，远端任务标记 `remote`，队列任务包含位置 |
 | `/api/stage/save_project`、`patch` | POST | 整体或局部保存 | JSON | 直接落盘项目文件 |
 | `Project/Shot` schema | JSON | 描述短剧和镜头 | dataclass | 未知字段在 `Shot.from_dict` 中忽略 |
 
 ## 运行机制
 
-- 状态与生命周期：生成/串联/装配由后台线程执行，task id 作为前后端关联键；生成窗口按集数和镜头维护状态，避免重复轮询。
+- 状态与生命周期：生成/串联/装配由后台线程执行，task id 作为前后端关联键；生成窗口按集数和镜头维护状态，显示 `cur/total`、耗时和最新日志，避免重复轮询。
 - 工作台状态：浏览器保存当前项目/集数路径；切换时清空旧集状态并重新请求 `episode.json` 与 `/api/director`。
 - 并发、队列或缓存：使用进程内任务注册表，并在生成入口查询 ComfyUI `/queue` 识别服务重启后的远端任务；聊天会话仍主要在内存中。
 - 错误、重试与降级：ComfyUI 对瞬时网络错误有限重试；加速服务的 I2V 自动回退 ComfyUI。

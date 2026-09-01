@@ -143,7 +143,7 @@ function openStage(id) {
   if (id === "brief") body.innerHTML=`<div class="chat-block"><b>故事概念</b><br>${esc(d.what_if || "待填写")}</div><div class="chat-block"><b>目标情绪</b><br>${esc(d.target_feeling || "待填写")}</div><div class="chat-block"><b>视觉风格</b><br>${esc(d.visual_style || "待填写")}</div>`;
   else if (id === "assets") { const items=[...(d.characters||[]).map(c=>({name:c.name,path:c.image_path})),...(d.scenes||[]).map(s=>({name:s.name,path:s.image_path}))]; body.innerHTML=items.length?`<div class="modal-assets">${items.map(x=>x.path?`<div><img src="${MEDIA(assetPath(x.path))}" alt="${esc(x.name)}"><p class="form-note">${esc(x.name)}</p></div>`:`<div class="asset-missing">无参考图<div>${esc(x.name)}</div></div>`).join("")}</div>`:'<div class="library-empty">当前集数还没有角色或场景资产。</div>'; }
   else if (id === "storyboard") body.innerHTML=`<div class="modal-shot-list">${(d.shots||[]).map(s=>`<div class="modal-shot"><b>${esc(s.shot_id)}</b> · ${s.duration_s||0}s · ${esc(s.mode||"H3")}<br>${esc(s.shot_description||"暂无描述")}<br><span class="form-note">提示词文件位于 ${esc(activeFolder())}/prompts</span></div>`).join("")}</div><div class="modal-action"><button class="primary-button" id="run-prompts">重新编译本集提示词</button><span id="stage-message" class="form-note"></span></div>`;
-  else if (id === "generate") body.innerHTML=`<div class="chat-block">当前 ComfyUI：<b>${esc(S.comfy)}</b><br>提交后会显示任务状态；同一集同一镜头在运行中不能重复提交。</div><div class="modal-shot-list">${(d.shots||[]).map(s=>`<div class="modal-shot generation-row"><div class="generation-copy"><b>${esc(s.shot_id)}</b> · ${esc((s.shot_description||"").slice(0,150))}<span class="generation-status" data-shot-status="${esc(s.shot_id)}">等待提交</span></div><button class="primary-button" style="padding:6px 10px;font-size:11px;flex:none" data-generate="${esc(s.shot_id)}">生成</button></div>`).join("")}</div>`;
+  else if (id === "generate") body.innerHTML=`<div class="chat-block">当前 ComfyUI：<b>${esc(S.comfy)}</b><br>任务会在后台运行，下面显示阶段进度、耗时和最新日志；同一集同一镜头在运行中不能重复提交。</div><div class="modal-shot-list">${(d.shots||[]).map(s=>`<div class="modal-shot generation-row"><div class="generation-copy"><b>${esc(s.shot_id)}</b> · ${esc((s.shot_description||"").slice(0,150))}<span class="generation-status" data-shot-status="${esc(s.shot_id)}">等待提交</span><div class="generation-meter"><i data-shot-progress="${esc(s.shot_id)}"></i></div><span class="generation-meta" data-shot-meta="${esc(s.shot_id)}">尚未提交</span><details class="generation-details"><summary>查看日志</summary><pre data-shot-log="${esc(s.shot_id)}">暂无日志</pre></details></div><button class="primary-button" style="padding:6px 10px;font-size:11px;flex:none" data-generate="${esc(s.shot_id)}">生成</button></div>`).join("")}</div>`;
   else body.innerHTML=`<div class="chat-block">后期合成会读取当前集数的独立 outputs 目录。完成所有镜头后，可以在这里继续装配和查看成片。</div><button class="primary-button" id="refresh-state">刷新生成状态</button><div class="form-note" id="stage-message">${esc(getOutputFiles())}</div><div id="output-preview" class="modal-shot-list" style="margin-top:14px"><div class="form-note">正在读取当前集视频…</div></div>`;
   $("#stage-mask").classList.add("open");
   const promptBtn=$("#run-prompts"); if(promptBtn) promptBtn.onclick=async()=>{promptBtn.disabled=true;try{await API.get(`/api/stage/prompts?path=${encodeURIComponent(S.activeEpisode.path)}`);$("#stage-message").textContent="提示词已写入当前集 prompts 目录";toast("提示词编译完成","ok");}catch(e){$("#stage-message").textContent=e.message;}finally{promptBtn.disabled=false;}};
@@ -154,16 +154,21 @@ function openStage(id) {
 }
 function generationKey(shotId, episodePath=S.activeEpisode?.path || "") { return `${episodePath}::${shotId}`; }
 function setGenerationTask(shotId, task) { S.generationTasks[generationKey(shotId)] = task; }
+function elapsedText(started) { if (!started) return ""; const seconds=Math.max(0,Math.floor(Date.now()/1000-started)); return `${Math.floor(seconds/60)}分${String(seconds%60).padStart(2,"0")}秒`; }
 function updateGenerationRow(shotId) {
   const statusEl=document.querySelector(`[data-shot-status="${CSS.escape(shotId)}"]`);
   const btn=document.querySelector(`[data-generate="${CSS.escape(shotId)}"]`);
+  const progressEl=document.querySelector(`[data-shot-progress="${CSS.escape(shotId)}"]`), metaEl=document.querySelector(`[data-shot-meta="${CSS.escape(shotId)}"]`), logEl=document.querySelector(`[data-shot-log="${CSS.escape(shotId)}"]`);
   if (!statusEl || !btn) return;
   const task=S.generationTasks[generationKey(shotId)];
-  if (!task) { statusEl.textContent="等待提交"; statusEl.className="generation-status"; btn.disabled=false; btn.textContent="生成"; return; }
+  if (!task) { statusEl.textContent="等待提交"; statusEl.className="generation-status"; if(progressEl)progressEl.style.width="0%"; if(metaEl)metaEl.textContent="尚未提交"; if(logEl)logEl.textContent="暂无日志"; btn.disabled=false; btn.textContent="生成"; return; }
   const progress=task.total ? ` ${task.cur || 0}/${task.total}` : "";
-  const labels={running:task.pending ? "正在提交…" : (task.cur ? `H3 处理中${progress}…` : "已进入 ComfyUI 队列…"),done:"已完成，可播放",error:`失败：${task.error || "未知错误"}`};
+  const labels={running:task.pending ? "正在提交…" : (task.remote && !task.cur ? "ComfyUI 排队中" : (task.cur ? `H3 处理中${progress}…` : "已进入 ComfyUI 队列…")),done:"已完成，可播放",error:`失败：${task.error || "未知错误"}`};
   statusEl.textContent=labels[task.status] || "已提交，等待任务状态";
   statusEl.className=`generation-status ${task.status}`;
+  if(progressEl) progressEl.style.width=`${task.total ? Math.min(100,Math.round((task.cur||0)/task.total*100)) : 0}%`;
+  if(metaEl) { const queue=task.remote && task.queue_group === "queue_pending" && task.queue_position ? ` · 队列第 ${task.queue_position} 位` : ""; const elapsed=elapsedText(task.started); metaEl.textContent=`阶段 ${task.cur||0}/${task.total||3}${queue}${elapsed ? ` · 已耗时 ${elapsed}` : ""}`; }
+  if(logEl) logEl.textContent=(task.log||[]).slice(-8).join("\n") || (task.remote ? "已从 ComfyUI 远端队列识别" : "等待后台日志");
   btn.disabled=task.status === "running";
   btn.textContent=task.status === "running" ? "生成中" : (task.status === "done" ? "重新生成" : "重试");
 }
@@ -197,11 +202,11 @@ async function loadOutputPreview() {
 }
 async function generateShot(shotId, btn) {
   const key=generationKey(shotId), existing=S.generationTasks[key];
-  if (existing?.status === "running") { toast(`${shotId} 正在生成中，请等待完成`, "info"); updateGenerationRow(shotId); pollTask(existing.id, shotId); return; }
+  if (existing?.status === "running") { toast(`${shotId} 正在生成中，请等待完成`, "info"); updateGenerationRow(shotId); if(existing.id) startGenerationPoll(existing.id, shotId, S.activeEpisode.path); return; }
   btn.disabled=true; btn.textContent="提交中"; setGenerationTask(shotId,{status:"running",pending:true}); updateGenerationRow(shotId);
   try {
     const r=await API.post("/api/stage/generate",{path:S.activeEpisode.path,shot_id:shotId,comfy:S.comfy});
-    setGenerationTask(shotId,{id:r.task,status:"running"}); updateGenerationRow(shotId);
+    setGenerationTask(shotId,{id:r.task,status:"running",started:Date.now()/1000,log:[r.status === "existing" ? (r.message || "已在后台任务中") : "已提交到 ComfyUI"]}); updateGenerationRow(shotId);
     toast(r.status === "existing" ? `${shotId} 已在后台生成中` : `已提交 ${shotId} 到 ComfyUI`, "ok");
     if (r.task) startGenerationPoll(r.task, shotId, S.activeEpisode.path);
   } catch(e) { setGenerationTask(shotId,{status:"error",error:e.message}); updateGenerationRow(shotId); toast("提交失败: "+e.message,"bad"); }

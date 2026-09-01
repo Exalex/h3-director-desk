@@ -41,6 +41,7 @@ mindmap
       Prompt编译
       单镜或串联生成
       任务去重与状态轮询
+      进度与日志观测
       QC与装配
     部署与运行边界
       本地Windows Web服务

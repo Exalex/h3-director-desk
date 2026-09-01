@@ -103,7 +103,7 @@ def remote_generations(base):
     found = []
     seen = set()
     for group in ("queue_running", "queue_pending"):
-        for item in queue.get(group, []):
+        for queue_index, item in enumerate(queue.get(group, [])):
             if not isinstance(item, list) or len(item) < 3:
                 continue
             prompt_id, workflow = item[1], item[2]
@@ -118,7 +118,10 @@ def remote_generations(base):
                                   "title": f"generate {shot_id}", "status": "running",
                                   "started": None, "path": "", "shot_id": shot_id,
                                   "cur": 1 if group == "queue_running" else 0, "total": 3,
-                                  "error": None, "remote": True})
+                                  "error": None, "remote": True,
+                                  "queue_group": group, "queue_position": queue_index + 1,
+                                  "log": ["H3 正在运行" if group == "queue_running"
+                                          else f"等待 GPU 调度，队列第 {queue_index + 1} 位"]})
                     seen.add(prompt_id)
     return found
 
@@ -1094,7 +1097,7 @@ class Handler(BaseHTTPRequestHandler):
                 tasks = [{"id": t["id"], "kind": t["kind"], "title": t["title"], "status": t["status"],
                       "started": t["started"], "path": t.get("path", ""),
                       "shot_id": t.get("shot_id") or t.get("title", "").removeprefix("generate "), "cur": t["cur"],
-                      "total": t["total"], "error": t["error"]}
+                      "total": t["total"], "error": t["error"], "log": t.get("log", [])[-8:]}
                      for t in TASKS.values()]
                 known_shots = {t.get("shot_id") for t in tasks if t.get("status") == "running"}
                 for remote in remote_generations(CFG["comfy_base"]):
