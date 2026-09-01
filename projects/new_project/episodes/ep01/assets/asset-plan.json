@@ -1,0 +1,30 @@
+{
+  "episode": "projects/new_project/episodes/ep01/episode.json",
+  "status": "planned",
+  "characters": [
+    {
+      "name": "阿海",
+      "identity_note": "Male, 30s, lean, rugged, short black hair wet and messy, wearing a tattered yellow raincoat and rubber boots, determined expression",
+      "reference_path": "",
+      "status": "reference_pending"
+    },
+    {
+      "name": "巨浪",
+      "identity_note": "A massive, towering wave with a glowing blue eye in the center, terrifying and supernatural",
+      "reference_path": "",
+      "status": "reference_pending"
+    }
+  ],
+  "scenes": [
+    {
+      "name": "海滩",
+      "description": "A desolate beach during a violent storm, waves crashing against rocks, rain pouring heavily, dark clouds",
+      "landmarks": [
+        "Lighthouse: background left",
+        "Rock formation: foreground right"
+      ],
+      "reference_path": "",
+      "status": "reference_pending"
+    }
+  ]
+}

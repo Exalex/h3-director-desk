@@ -64,6 +64,7 @@ TASKS = {}
 TASKS_LOCK = threading.Lock()
 SERIES_LOCK = threading.Lock()
 GENERATION_LOCK = threading.Lock()
+WORKFLOW_LOCK = threading.Lock()
 
 # conversational iteration: session key -> {history:[{role,content}], path}
 CHAT_SESSIONS = {}
@@ -280,6 +281,105 @@ def run_prompts(rel, out_dir=""):
             "prompts": {sid: {"chars": len(p), "preview": p[:1600]}
                         for sid, p in comp.items()},
             "full": comp}
+
+
+def _is_blank_episode(doc):
+    """Recognize the blank template so the first creative prompt creates a full episode."""
+    if not isinstance(doc, dict):
+        return True
+    concept = str(doc.get("what_if") or "").strip()
+    title = str(doc.get("title") or "").strip()
+    shots = doc.get("shots") or []
+    placeholder = "（待填写）"
+    return (not concept or concept.startswith(placeholder) or
+            (not title and not shots) or
+            all(not str(s.get("shot_description") or "").strip() or
+                str(s.get("shot_description") or "").startswith(placeholder)
+                for s in shots if isinstance(s, dict)))
+
+
+def _write_asset_plan(rel, doc):
+    """Persist an asset inventory even before reference images are generated."""
+    episode_dir = _project_dir(rel)
+    if not episode_dir:
+        return ""
+    asset_dir = os.path.join(episode_dir, "assets")
+    os.makedirs(asset_dir, exist_ok=True)
+    plan = {
+        "episode": rel,
+        "status": "planned",
+        "characters": [
+            {"name": c.get("name", ""), "identity_note": c.get("identity_note", ""),
+             "reference_path": c.get("image_path", ""),
+             "status": "ready" if c.get("image_path") else "reference_pending"}
+            for c in doc.get("characters", []) if isinstance(c, dict)
+        ],
+        "scenes": [
+            {"name": s.get("name", ""), "description": s.get("description", ""),
+             "landmarks": s.get("landmarks", []), "reference_path": s.get("image_path", ""),
+             "status": "ready" if s.get("image_path") else "reference_pending"}
+            for s in doc.get("scenes", []) if isinstance(s, dict)
+        ],
+    }
+    target = os.path.join(asset_dir, "asset-plan.json")
+    with open(target, "w", encoding="utf-8") as f:
+        json.dump(plan, f, ensure_ascii=False, indent=2)
+    return os.path.relpath(target, REPO).replace("\\", "/")
+
+
+def run_chat_workflow(data, tid):
+    """Run the workbench creative prompt through planning and prompt compilation."""
+    path = data.get("path", "")
+    feedback = (data.get("feedback") or "").strip()
+    try:
+        if not feedback:
+            task_finish(tid, error="请输入故事创意")
+            return
+        doc, err = _load_project_doc(path)
+        if err:
+            task_finish(tid, error=err)
+            return
+        requested_mode = data.get("mode", "auto")
+        mode = ("create" if requested_mode == "create" else
+                "iterate" if requested_mode == "iterate" else
+                "create" if _is_blank_episode(doc) else "iterate")
+        mode_label = "整集创作" if mode == "create" else "当前集迭代"
+        task_append(tid, f"已接收创意，模式：{mode_label}")
+        task_progress(tid, 1, 5)
+
+        result = chat_iter({"path": path, "mode": mode, "feedback": feedback})
+        if result.get("error"):
+            task_finish(tid, error=result["error"])
+            return
+        project = result["project"]
+        task_append(tid, f"分镜规划完成：{len(project.get('shots', []))} 个镜头，"
+                          f"{len(project.get('characters', []))} 个角色，"
+                          f"{len(project.get('scenes', []))} 个场景")
+        task_progress(tid, 2, 5)
+
+        asset_path = _write_asset_plan(path, project)
+        task_append(tid, f"资产清单已写入 {asset_path or '当前集 assets 目录'}")
+        task_progress(tid, 3, 5)
+
+        prompts = run_prompts(path)
+        if prompts.get("error"):
+            task_finish(tid, error=prompts["error"])
+            return
+        task_append(tid, f"已编译 {prompts.get('n', 0)} 个镜头提示词")
+        task_progress(tid, 4, 5)
+
+        check = run_check(path)
+        if check.get("pass"):
+            task_append(tid, "分镜规则检查通过，可进入视频生成")
+        else:
+            task_append(tid, f"分镜规则检查发现 {len(check.get('failures', []))} 项待修复内容")
+        task_progress(tid, 5, 5)
+        task_finish(tid, result={"path": path, "mode": mode, "project": project,
+                                 "summary": result.get("summary"), "assets": asset_path,
+                                 "prompts": prompts.get("n", 0), "check": check,
+                                 "next": "规划完成后，请在视频生成阶段逐镜提交 ComfyUI"})
+    except Exception as e:
+        task_finish(tid, error=str(e))
 
 
 def run_plan(vram, aspect="9:16", seconds=5.0, quality="fast", face=False):
@@ -1295,6 +1395,25 @@ class Handler(BaseHTTPRequestHandler):
         if path == "/api/chat/iter":
             res = chat_iter(data)
             return self._send(200, res)
+        # ---- workbench creative workflow (LLM -> assets -> prompts -> check) ----
+        if path == "/api/chat/workflow":
+            rel = data.get("path", "")
+            if not rel or not _abs(rel) or not os.path.isfile(_abs(rel)):
+                return self._send(400, {"error": "请先选择一个有效集数"})
+            with WORKFLOW_LOCK:
+                with TASKS_LOCK:
+                    existing = next((t for t in TASKS.values()
+                                     if t.get("kind") == "chat_workflow" and
+                                     t.get("path") == rel and t.get("status") == "running"), None)
+                if existing:
+                    return self._send(202, {"task": existing["id"], "status": "existing",
+                                            "message": "当前集的自动创作仍在进行中"})
+                tid = new_task("chat_workflow", "自动创作当前集", total=5)
+                with TASKS_LOCK:
+                    TASKS[tid]["path"] = rel
+            t = threading.Thread(target=run_chat_workflow, args=(data, tid), daemon=True)
+            t.start()
+            return self._send(202, {"task": tid, "status": "started"})
         return self._send(404, {"error": "unknown POST " + path})
 
 

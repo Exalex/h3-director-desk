@@ -1,0 +1,20 @@
+For the target video, at 0.00 seconds into the target video, <Picture 1> (from [Shot 1]) is fully referenced.
+
+integrated_multimodal_description:
+Style: Cinematic, high-contrast, stormy atmosphere, desaturated blue and gray tones, wet texture, dynamic camera movement, 4K, photorealistic
+[Shot 1] Wide shot of 阿海 standing on the rocks, the wave has calmed, the eye is visible but no longer aggressive, just watching
+Per-second directives:
+  0-1s: Wave calms down, eye still visible; camera: Slow zoom out; spatial: Wide shot; audio: Rain stops, silence; handoff: Eye blinks
+  1-2s: Eye blinks slowly, no aggression; camera: Static; spatial: Medium shot of the eye; audio: Soft, ethereal sound; handoff: Cut to 阿海
+  2-3s: 阿海 lowers his guard, confused; camera: Quick zoom in on 阿海's face; spatial: Close-up of 阿海; audio: Slow breathing; handoff: Look at the eye
+  3-4s: 阿海 looks at the eye, realizes it's not a threat; camera: Static; spatial: Close-up of 阿海's face; audio: Silence; handoff: Cut to wide shot
+  4-5s: Wide shot of 阿海 and the eye, peaceful; camera: Static wide shot; spatial: Wide view; audio: Gentle wave sounds; handoff: End of scene
+Fixed landmarks: Lighthouse: background left
+Character positions: 阿海=Center frame, standing on rocks; 巨浪=Background, eye visible but calm
+Lighting baseline: Dark, blueish, soft glow from eye
+Continuity handoff: The twist: the eye is not attacking, but watching
+Dialogue: <Subject> (S1) says, <d>[Chinese] 原来...你是守护者</d>
+
+overall_soundscape: Rain stops; Gentle waves; Ethereal hum; hook: reversal
+
+non_diegetic_music: diegetic ambient only; no score unless the shot calls for it

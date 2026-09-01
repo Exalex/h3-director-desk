@@ -1,0 +1,18 @@
+integrated_multimodal_description:
+Style: Cinematic, high-contrast, stormy atmosphere, desaturated blue and gray tones, wet texture, dynamic camera movement, 4K, photorealistic
+[Shot 1] Wide shot of a stormy beach, rain pouring, a man in a yellow raincoat standing alone against the massive waves, looking up at the towering water
+Per-second directives:
+  0-1s: Rain hits the lens, waves crash in background; camera: Static wide shot; spatial: Wide view of beach and sea; audio: Loud rain and crashing waves; handoff: Cut to character's face
+  1-2s: 阿海 looks up, expression tense; camera: Quick zoom in; spatial: Medium shot of 阿海; audio: Thunder rumble; handoff: Hold on face
+  2-3s: Lightning flashes, illuminating the storm; camera: Static; spatial: Wide shot; audio: Loud thunder clap; handoff: Cut to close-up
+  3-4s: 阿海 takes a step forward, determined; camera: Low angle, looking up at 阿海; spatial: Low angle shot; audio: Waves getting louder; handoff: Cut to wave
+  4-5s: A huge wave starts to rise; camera: Tilt up to the wave; spatial: Wide shot of the wave; audio: Deep low rumble; handoff: Transition to next shot
+Fixed landmarks: Lighthouse: background left
+Character positions: 阿海=Center frame, back to camera, facing the sea
+Lighting baseline: Dark, blueish, high contrast
+Continuity handoff: Establishing the storm intensity and character's isolation
+Dialogue: <Subject> (S1) says, <d>[Chinese] 它要来了...</d>
+
+overall_soundscape: Heavy rain; Crashing waves; Thunder; hook: suspense
+
+non_diegetic_music: diegetic ambient only; no score unless the shot calls for it

@@ -75,6 +75,18 @@ flowchart LR
 
 `series.py` 将上一镜尾帧作为下一镜的输入，或者使用 latent pin 保留上下文。完成后，`assemble.py` 负责统一尺寸、帧率和音频采样率，再执行硬切/xfade、BGM 混音和可选字幕。
 
+## 四点五、工作台自动创作流程
+
+工作台右侧输入框现在支持“一句话创意 -> 规划资产与分镜”的异步流程。前端调用 `POST /api/chat/workflow`，后端通过 task id 把长耗时过程拆成 5 个可观测阶段：
+
+1. 读取当前集并自动判断模式：空白集进入整集创作，已有内容进入当前集迭代；
+2. 使用文本型 Qwen 生成完整项目 JSON，包含简案、角色卡、场景卡、分镜和逐秒指令；
+3. 将角色/场景描述写入当前集 `assets/asset-plan.json`，参考图片仍标记为待生成；
+4. 调用 `prompt.compile_all` 把每个镜头写入当前集 `prompts/S*.txt`；
+5. 调用分镜六规则自检，将通过或待修复内容写回任务日志。
+
+该流程只自动完成前期规划和提示词编译，不自动提交 ComfyUI 视频任务。这样“输入创意”不会在用户尚未确认时消耗远端 GPU；视频生成仍从制作计划的“视频生成”阶段逐镜提交。实现证据见 [`director/serve.py`](../director/serve.py) 的 `run_chat_workflow`、`_write_asset_plan` 和 `Handler._post`，前端状态显示见 [`director/assets/app.js`](../director/assets/app.js) 的 `pollWorkflow`。
+
 ## 三、关键数据模型
 
 ```text

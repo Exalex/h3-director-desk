@@ -1,0 +1,20 @@
+For the target video, at 0.00 seconds into the target video, <Picture 1> (from [Shot 1]) is fully referenced.
+
+integrated_multimodal_description:
+Style: Cinematic, high-contrast, stormy atmosphere, desaturated blue and gray tones, wet texture, dynamic camera movement, 4K, photorealistic
+[Shot 1] Tracking shot of 阿海 running desperately towards the rocks, waves crashing behind him, rain hitting his face
+Per-second directives:
+  0-1s: 阿海 starts running, rain hits his face; camera: Tracking shot, moving right; spatial: Medium shot, 阿海 in center; audio: Heavy breathing, rain; handoff: Continue running
+  1-2s: Wave crashes behind, water splashes; camera: Static; spatial: Wide shot; audio: Loud crash; handoff: 阿海 dodges
+  2-3s: 阿海 dodges a splash, almost falls; camera: Quick pan to follow 阿海; spatial: Medium shot; audio: Sliding sound; handoff: Recover balance
+  3-4s: 阿海 reaches the rocks, grabs onto them; camera: Low angle, looking up at 阿海; spatial: Low angle shot; audio: Gripping sound; handoff: Look back at sea
+  4-5s: 阿海 looks back, sees the eye glowing in the water; camera: Static; spatial: Close-up of 阿海's face; audio: Eerie hum returns; handoff: Transition to final shot
+Fixed landmarks: Rock formation: foreground right
+Character positions: 阿海=Moving from left to right, running towards the rocks
+Lighting baseline: Dark, blueish, wet surface
+Continuity handoff: 阿海 runs for survival, showing the urgency
+Dialogue: <Subject> (S1) says, <d>[Chinese] 快...快跑！</d>
+
+overall_soundscape: Heavy breathing; Rain; Crashing waves; Sliding; hook: chase
+
+non_diegetic_music: diegetic ambient only; no score unless the shot calls for it

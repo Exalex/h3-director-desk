@@ -15,7 +15,7 @@ const MEDIA = p => p ? `/api/media?path=${encodeURIComponent(p)}` : "";
 const dirname = p => (p || "").split("/").slice(0,-1).join("/");
 function toast(message, kind="info") { const el=document.createElement("div"); el.className=`toast ${kind}`; el.textContent=message; $("#toast-wrap").appendChild(el); setTimeout(()=>el.remove(), 4000); }
 
-const S = {projects:[], activeProject:null, activeEpisode:null, episodeDoc:null, director:null, selectedShot:"", busy:false, comfy:"http://127.0.0.1:8188", generationTasks:{}, generationPolls:{}, generationStatusTimer:null};
+const S = {projects:[], activeProject:null, activeEpisode:null, episodeDoc:null, director:null, selectedShot:"", busy:false, comfy:"http://127.0.0.1:8188", generationTasks:{}, generationPolls:{}, generationStatusTimer:null, workflowPolls:{}};
 const PLAN = [
   {id:"brief", label:"制作简案", detail:"从项目概念开始"},
   {id:"assets", label:"资产", detail:"角色与场景参考"},
@@ -50,7 +50,7 @@ async function selectProject(path, remember=true) {
   if (remember) localStorage.setItem("director-project", path);
   const savedEp = localStorage.getItem(`director-episode:${path}`);
   const ep = project.episodes?.find(e => e.path === savedEp) || project.episodes?.[0];
-  S.activeEpisode = ep || null; S.episodeDoc = null; S.director = null; S.selectedShot = "";
+  S.activeEpisode = ep || null; S.episodeDoc = null; S.director = null; S.selectedShot = ""; S.busy=false; $("#btn-chat-send").disabled=false; setWorkflowStatus("");
   renderAll();
   if (ep) await loadEpisode(ep.path);
 }
@@ -59,7 +59,7 @@ async function selectEpisode(path) {
   if (!S.activeProject) return;
   const ep = S.activeProject.episodes.find(e => e.path === path);
   if (!ep) return;
-  S.activeEpisode = ep; S.episodeDoc = null; S.director = null; S.selectedShot = "";
+  S.activeEpisode = ep; S.episodeDoc = null; S.director = null; S.selectedShot = ""; S.busy=false; $("#btn-chat-send").disabled=false; setWorkflowStatus("");
   localStorage.setItem(`director-episode:${S.activeProject.path}`, path);
   renderAll();
   await loadEpisode(path);
@@ -238,7 +238,41 @@ async function pollTask(id, shotId, episodePath) {
     setTimeout(()=>pollTask(id,shotId,episodePath),2500);
   } catch(e){setTimeout(()=>pollTask(id,shotId,episodePath),4000);}
 }
-async function sendChat() { const input=$("#chat-input"), feedback=input.value.trim(); if(!feedback||!S.activeEpisode||S.busy){if(!S.activeEpisode) toast("请先选择一集","bad");return;} S.busy=true;$("#btn-chat-send").disabled=true; try { const r=await API.post("/api/chat/iter",{path:S.activeEpisode.path,mode:"iterate",feedback}); if(r.error) throw new Error(r.error); input.value=""; toast("AI 已更新当前集数","ok"); await loadEpisode(S.activeEpisode.path); } catch(e){toast("对话更新失败: "+e.message,"bad");} finally {S.busy=false;$("#btn-chat-send").disabled=false;} }
+function setWorkflowStatus(text, kind="running") { const el=$("#workflow-status"); if (!el) return; el.textContent=text || ""; el.className=`workflow-status ${kind}`; }
+async function pollWorkflow(id, episodePath) {
+  const key=`${episodePath}::${id}`;
+  try {
+    if (S.activeEpisode?.path !== episodePath) { delete S.workflowPolls[key]; return; }
+    const t=await API.get(`/api/task/${id}`), progress=`${t.cur || 0}/${t.total || 5}`;
+    const latest=(t.log || []).slice(-1)[0] || (t.status === "running" ? "正在处理…" : "任务已结束");
+    if (t.status === "running") setWorkflowStatus(`自动创作 ${progress} · ${latest}`, "running");
+    if (t.status === "done") {
+      delete S.workflowPolls[key]; S.busy=false; $("#btn-chat-send").disabled=false;
+      const passed=t.result?.check?.pass;
+      setWorkflowStatus(`自动创作完成 · ${t.result?.prompts || 0} 个提示词${passed === false ? " · 有规则待修复" : " · 可进入视频生成"}`, passed === false ? "warn" : "done");
+      toast(passed === false ? "规划完成，但有分镜规则待修复" : "简案、资产、分镜和提示词已完成", passed === false ? "info" : "ok");
+      await loadEpisode(episodePath);
+      return;
+    }
+    if (t.status === "error") {
+      delete S.workflowPolls[key]; S.busy=false; $("#btn-chat-send").disabled=false;
+      setWorkflowStatus(`自动创作失败 · ${t.error || latest}`, "error"); toast("自动创作失败: "+(t.error || latest), "bad"); return;
+    }
+    setTimeout(()=>pollWorkflow(id, episodePath), 1800);
+  } catch(e) { setTimeout(()=>pollWorkflow(id, episodePath), 3000); }
+}
+async function sendChat() {
+  const input=$("#chat-input"), feedback=input.value.trim();
+  if(!feedback||!S.activeEpisode||S.busy){if(!S.activeEpisode) toast("请先选择一集","bad");return;}
+  const episodePath=S.activeEpisode.path; S.busy=true; $("#btn-chat-send").disabled=true; setWorkflowStatus("正在提交自动创作任务…", "running");
+  try {
+    const r=await API.post("/api/chat/workflow",{path:episodePath,mode:"auto",feedback});
+    if(r.error) throw new Error(r.error);
+    input.value=""; toast(r.status === "existing" ? "当前集已有自动创作任务，继续显示进度" : "已提交自动创作任务", "ok");
+    if (r.task) { S.workflowPolls[`${episodePath}::${r.task}`]=true; pollWorkflow(r.task, episodePath); }
+    else { S.busy=false; $("#btn-chat-send").disabled=false; setWorkflowStatus(r.message || "任务已提交", "running"); }
+  } catch(e) { S.busy=false; $("#btn-chat-send").disabled=false; setWorkflowStatus("提交失败 · "+e.message, "error"); toast("自动创作失败: "+e.message,"bad"); }
+}
 
 function bindUi() {
   $("#btn-new-project").onclick=()=>$("#new-mask").classList.add("open"); $("#new-close").onclick=()=>$("#new-mask").classList.remove("open");

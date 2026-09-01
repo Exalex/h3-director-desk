@@ -68,10 +68,15 @@ http://192.168.3.75:8088/
 1. Select an existing project in the left project switcher, or click **New
    Project**.
 2. Create the project namespace first.
-3. Enter the natural-language prompt in the following dialogue step.
-4. Review the generated project and storyboard.
-5. Run validation before submitting GPU work.
-6. Submit one serial generation task and monitor its progress.
+3. Enter a story idea in the workbench composer. The asynchronous workflow
+   generates the brief, character and scene asset plan, storyboard, and H3
+   prompts in one pass.
+4. Review the generated project and storyboard; the composer shows the current
+   workflow stage and latest log line.
+5. Resolve any validation warnings before submitting GPU work.
+6. Submit one serial generation task and monitor its progress. Video generation
+   remains an explicit action so a text prompt cannot unexpectedly occupy the
+   remote GPU.
 
 Each run is archived as:
 
@@ -88,7 +93,7 @@ and mirrored locally on spark1 under:
 ## Main Source Files
 
 - `director/serve.py`: HTTP API, task registry, project switching, Qwen and
-  spark2 orchestration
+  spark2 orchestration, and the workbench creative workflow
 - `director/index.html`: desk layout and project controls
 - `director/assets/app.js`: client state, project switching, task polling
 - `director/assets/panels.js`: workflow panels
@@ -116,7 +121,7 @@ projects/<project>/
   assets/            shared project materials
   episodes/<episode>/
     episode.json     this episode's storyboard and metadata
-    assets/          scene references for this episode
+    assets/          generated asset plan and scene references for this episode
     references/      character/reference images
     prompts/         compiled H3 prompts for this episode
     outputs/         generated clips and assembled video (ignored)

@@ -2,8 +2,8 @@
 
 > 这里记录项目当前结构、技术实现、决策依据和不可丢失的迭代历史。
 
-- 文档更新时间：`2026-09-01T17:37:26+08:00`
-- 当前迭代：`I-0017 · 在生成镜头下提供可点击视频预览 / completed`
+- 文档更新时间：`2026-09-01T18:32:51+08:00`
+- 当前迭代：`I-0018 · 工作台一句话自动创作流程 / completed`
 
 ## 建议阅读顺序
 
@@ -16,6 +16,7 @@
 
 ## 最近迭代
 
+- [I-0018 · 工作台一句话自动创作流程](iterations/I-0018-工作台一句话自动创作流程.md) — 2026-09-01 / `completed`
 - [I-0017 · 在生成镜头下提供可点击视频预览](iterations/I-0017-在生成镜头下提供可点击视频预览.md) — 2026-09-01 / `completed`
 - [I-0016 · 增加整集生成总进度并恢复本地导演台服务](iterations/I-0016-增加整集生成总进度并恢复本地导演台服务.md) — 2026-09-01 / `completed`
 - [I-0015 · 补充 H3 生成进度与后台日志可视化](iterations/I-0015-补充-h3-生成进度与后台日志可视化.md) — 2026-09-01 / `completed`
@@ -23,10 +24,10 @@
 - [I-0013 · 补齐生成视频回显并完成真实单镜验证](iterations/I-0013-补齐生成视频回显并完成真实单镜验证.md) — 2026-09-01 / `completed`
 - [I-0012 · 验证 H3 生成并修复任务列表监控](iterations/I-0012-验证-h3-生成并修复任务列表监控.md) — 2026-09-01 / `completed`
 - [I-0011 · 修复浏览器旧 ComfyUI 地址覆盖](iterations/I-0011-修复浏览器旧-comfyui-地址覆盖.md) — 2026-09-01 / `completed`
-- [I-0010 · 恢复新版工作台启动入口](iterations/I-0010-恢复新版工作台启动入口.md) — 2026-09-01 / `completed`
 
 ## 最近决策
 
+- [ADR-0006 · 工作台自动创作与视频生成分离](decisions/ADR-0006-工作台自动创作与视频生成分离.md) — `accepted`
 - [ADR-0005 · 生成任务以 ComfyUI 远端队列为幂等边界](decisions/ADR-0005-生成任务以-comfyui-远端队列为幂等边界.md) — `accepted`
 - [ADR-0004 · 以项目为入口并按集隔离工作空间](decisions/ADR-0004-以项目为入口并按集隔离工作空间.md) — `accepted`
 - [ADR-0003 · split control and inference hosts](decisions/ADR-0003-split-control-and-inference-hosts.md) — `unknown`

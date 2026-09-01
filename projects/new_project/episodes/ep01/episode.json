@@ -1,0 +1,460 @@
+{
+  "title": "海眼之怒",
+  "what_if": "当暴风雨吞噬海岸线，被抛弃的灯塔守夜人必须与巨浪搏斗，却发现风暴的源头竟是海底沉睡的古老诅咒。",
+  "target_feeling": "紧张、敬畏、反转、释然",
+  "aspect": "9:16",
+  "duration_s": 24,
+  "dialogue_mode": "有对白",
+  "dialogue_language": "中文",
+  "visual_style": "Cinematic, high-contrast, stormy atmosphere, desaturated blue and gray tones, wet texture, dynamic camera movement, 4K, photorealistic",
+  "characters": [
+    {
+      "name": "阿海",
+      "identity_note": "Male, 30s, lean, rugged, short black hair wet and messy, wearing a tattered yellow raincoat and rubber boots, determined expression",
+      "image_path": "",
+      "do_not_change": [
+        "face",
+        "raincoat",
+        "build"
+      ]
+    },
+    {
+      "name": "巨浪",
+      "identity_note": "A massive, towering wave with a glowing blue eye in the center, terrifying and supernatural",
+      "image_path": "",
+      "do_not_change": [
+        "blue eye",
+        "scale"
+      ]
+    }
+  ],
+  "scenes": [
+    {
+      "name": "海滩",
+      "description": "A desolate beach during a violent storm, waves crashing against rocks, rain pouring heavily, dark clouds",
+      "landmarks": [
+        "Lighthouse: background left",
+        "Rock formation: foreground right"
+      ],
+      "light_baseline": "Dark, blueish ambient light from storm, occasional lightning flashes",
+      "image_path": ""
+    }
+  ],
+  "shots": [
+    {
+      "shot_id": "S01",
+      "duration_s": 5,
+      "edit_target_s": 4,
+      "continuity_handoff": "Establishing the storm intensity and character's isolation",
+      "fixed_landmarks": [
+        "Lighthouse: background left"
+      ],
+      "char_positions": {
+        "阿海": "Center frame, back to camera, facing the sea"
+      },
+      "exited_chars": [],
+      "lighting_baseline": "Dark, blueish, high contrast",
+      "hook_type": "suspense",
+      "shot_description": "Wide shot of a stormy beach, rain pouring, a man in a yellow raincoat standing alone against the massive waves, looking up at the towering water",
+      "per_second": [
+        {
+          "rng": "0-1s",
+          "action": "Rain hits the lens, waves crash in background",
+          "camera": "Static wide shot",
+          "spatial": "Wide view of beach and sea",
+          "audio": "Loud rain and crashing waves",
+          "handoff": "Cut to character's face"
+        },
+        {
+          "rng": "1-2s",
+          "action": "阿海 looks up, expression tense",
+          "camera": "Quick zoom in",
+          "spatial": "Medium shot of 阿海",
+          "audio": "Thunder rumble",
+          "handoff": "Hold on face"
+        },
+        {
+          "rng": "2-3s",
+          "action": "Lightning flashes, illuminating the storm",
+          "camera": "Static",
+          "spatial": "Wide shot",
+          "audio": "Loud thunder clap",
+          "handoff": "Cut to close-up"
+        },
+        {
+          "rng": "3-4s",
+          "action": "阿海 takes a step forward, determined",
+          "camera": "Low angle, looking up at 阿海",
+          "spatial": "Low angle shot",
+          "audio": "Waves getting louder",
+          "handoff": "Cut to wave"
+        },
+        {
+          "rng": "4-5s",
+          "action": "A huge wave starts to rise",
+          "camera": "Tilt up to the wave",
+          "spatial": "Wide shot of the wave",
+          "audio": "Deep low rumble",
+          "handoff": "Transition to next shot"
+        }
+      ],
+      "narration": "",
+      "dialogue": [
+        {
+          "text": "它要来了...",
+          "speaker_id": "阿海",
+          "tone": "Whispering, tense",
+          "time_range": "1-2s",
+          "is_diegetic": true
+        }
+      ],
+      "sfx": [
+        "Heavy rain",
+        "Crashing waves",
+        "Thunder"
+      ],
+      "mode": "T2VA",
+      "video_model": "H3",
+      "resolution_tier": "768P",
+      "aspect": "9:16",
+      "references": [],
+      "first_frame": "",
+      "last_frame": "",
+      "negative": "morphing, flickering, distorted face, extra limbs, blurry text",
+      "continuity_type": "hard_cut",
+      "airlock_s": 0.0,
+      "seed": 0
+    },
+    {
+      "shot_id": "S02",
+      "duration_s": 4,
+      "edit_target_s": 3,
+      "continuity_handoff": "The wave approaches, revealing the supernatural element",
+      "fixed_landmarks": [
+        "Lighthouse: background left"
+      ],
+      "char_positions": {
+        "阿海": "Center frame, facing the wave",
+        "巨浪": "Background, towering over the character"
+      },
+      "exited_chars": [],
+      "lighting_baseline": "Dark, blueish, glowing eye in wave",
+      "hook_type": "reveal",
+      "shot_description": "Close-up of the wave rising, revealing a glowing blue eye in the center, 阿海 looks up in shock",
+      "per_second": [
+        {
+          "rng": "0-1s",
+          "action": "Wave rises, eye starts to glow",
+          "camera": "Slow zoom in on the wave",
+          "spatial": "Medium shot of the wave",
+          "audio": "Deep, eerie hum",
+          "handoff": "Eye fully visible"
+        },
+        {
+          "rng": "1-2s",
+          "action": "Eye opens fully, glowing blue",
+          "camera": "Static",
+          "spatial": "Close-up of the eye",
+          "audio": "Intense, low frequency sound",
+          "handoff": "Cut to 阿海's reaction"
+        },
+        {
+          "rng": "2-3s",
+          "action": "阿海's eyes widen, mouth open in shock",
+          "camera": "Quick zoom in on 阿海's face",
+          "spatial": "Close-up of 阿海",
+          "audio": "Sharp inhale",
+          "handoff": "Cut to wave crashing"
+        },
+        {
+          "rng": "3-4s",
+          "action": "Wave starts to crash down",
+          "camera": "Wide shot",
+          "spatial": "Wide view of the crash",
+          "audio": "Loud crashing sound",
+          "handoff": "Transition to next shot"
+        }
+      ],
+      "narration": "",
+      "dialogue": [
+        {
+          "text": "不...不可能",
+          "speaker_id": "阿海",
+          "tone": "Shocked, fearful",
+          "time_range": "2-3s",
+          "is_diegetic": true
+        }
+      ],
+      "sfx": [
+        "Eerie hum",
+        "Crashing waves"
+      ],
+      "mode": "I2VA",
+      "video_model": "H3",
+      "resolution_tier": "768P",
+      "aspect": "9:16",
+      "references": [],
+      "first_frame": "",
+      "last_frame": "",
+      "negative": "morphing, flickering, distorted face, extra limbs, blurry text",
+      "continuity_type": "hard_cut",
+      "airlock_s": 0.0,
+      "seed": 0
+    },
+    {
+      "shot_id": "S03",
+      "duration_s": 5,
+      "edit_target_s": 4,
+      "continuity_handoff": "阿海 runs for survival, showing the urgency",
+      "fixed_landmarks": [
+        "Rock formation: foreground right"
+      ],
+      "char_positions": {
+        "阿海": "Moving from left to right, running towards the rocks"
+      },
+      "exited_chars": [],
+      "lighting_baseline": "Dark, blueish, wet surface",
+      "hook_type": "chase",
+      "shot_description": "Tracking shot of 阿海 running desperately towards the rocks, waves crashing behind him, rain hitting his face",
+      "per_second": [
+        {
+          "rng": "0-1s",
+          "action": "阿海 starts running, rain hits his face",
+          "camera": "Tracking shot, moving right",
+          "spatial": "Medium shot, 阿海 in center",
+          "audio": "Heavy breathing, rain",
+          "handoff": "Continue running"
+        },
+        {
+          "rng": "1-2s",
+          "action": "Wave crashes behind, water splashes",
+          "camera": "Static",
+          "spatial": "Wide shot",
+          "audio": "Loud crash",
+          "handoff": "阿海 dodges"
+        },
+        {
+          "rng": "2-3s",
+          "action": "阿海 dodges a splash, almost falls",
+          "camera": "Quick pan to follow 阿海",
+          "spatial": "Medium shot",
+          "audio": "Sliding sound",
+          "handoff": "Recover balance"
+        },
+        {
+          "rng": "3-4s",
+          "action": "阿海 reaches the rocks, grabs onto them",
+          "camera": "Low angle, looking up at 阿海",
+          "spatial": "Low angle shot",
+          "audio": "Gripping sound",
+          "handoff": "Look back at sea"
+        },
+        {
+          "rng": "4-5s",
+          "action": "阿海 looks back, sees the eye glowing in the water",
+          "camera": "Static",
+          "spatial": "Close-up of 阿海's face",
+          "audio": "Eerie hum returns",
+          "handoff": "Transition to final shot"
+        }
+      ],
+      "narration": "",
+      "dialogue": [
+        {
+          "text": "快...快跑！",
+          "speaker_id": "阿海",
+          "tone": "Urgent, shouting",
+          "time_range": "0-1s",
+          "is_diegetic": true
+        }
+      ],
+      "sfx": [
+        "Heavy breathing",
+        "Rain",
+        "Crashing waves",
+        "Sliding"
+      ],
+      "mode": "I2VA",
+      "video_model": "H3",
+      "resolution_tier": "768P",
+      "aspect": "9:16",
+      "references": [],
+      "first_frame": "",
+      "last_frame": "",
+      "negative": "morphing, flickering, distorted face, extra limbs, blurry text",
+      "continuity_type": "hard_cut",
+      "airlock_s": 0.0,
+      "seed": 0
+    },
+    {
+      "shot_id": "S04",
+      "duration_s": 5,
+      "edit_target_s": 4,
+      "continuity_handoff": "The twist: the eye is not attacking, but watching",
+      "fixed_landmarks": [
+        "Lighthouse: background left"
+      ],
+      "char_positions": {
+        "阿海": "Center frame, standing on rocks",
+        "巨浪": "Background, eye visible but calm"
+      },
+      "exited_chars": [],
+      "lighting_baseline": "Dark, blueish, soft glow from eye",
+      "hook_type": "reversal",
+      "shot_description": "Wide shot of 阿海 standing on the rocks, the wave has calmed, the eye is visible but no longer aggressive, just watching",
+      "per_second": [
+        {
+          "rng": "0-1s",
+          "action": "Wave calms down, eye still visible",
+          "camera": "Slow zoom out",
+          "spatial": "Wide shot",
+          "audio": "Rain stops, silence",
+          "handoff": "Eye blinks"
+        },
+        {
+          "rng": "1-2s",
+          "action": "Eye blinks slowly, no aggression",
+          "camera": "Static",
+          "spatial": "Medium shot of the eye",
+          "audio": "Soft, ethereal sound",
+          "handoff": "Cut to 阿海"
+        },
+        {
+          "rng": "2-3s",
+          "action": "阿海 lowers his guard, confused",
+          "camera": "Quick zoom in on 阿海's face",
+          "spatial": "Close-up of 阿海",
+          "audio": "Slow breathing",
+          "handoff": "Look at the eye"
+        },
+        {
+          "rng": "3-4s",
+          "action": "阿海 looks at the eye, realizes it's not a threat",
+          "camera": "Static",
+          "spatial": "Close-up of 阿海's face",
+          "audio": "Silence",
+          "handoff": "Cut to wide shot"
+        },
+        {
+          "rng": "4-5s",
+          "action": "Wide shot of 阿海 and the eye, peaceful",
+          "camera": "Static wide shot",
+          "spatial": "Wide view",
+          "audio": "Gentle wave sounds",
+          "handoff": "End of scene"
+        }
+      ],
+      "narration": "",
+      "dialogue": [
+        {
+          "text": "原来...你是守护者",
+          "speaker_id": "阿海",
+          "tone": "Soft, realizing",
+          "time_range": "2-3s",
+          "is_diegetic": true
+        }
+      ],
+      "sfx": [
+        "Rain stops",
+        "Gentle waves",
+        "Ethereal hum"
+      ],
+      "mode": "I2VA",
+      "video_model": "H3",
+      "resolution_tier": "768P",
+      "aspect": "9:16",
+      "references": [],
+      "first_frame": "",
+      "last_frame": "",
+      "negative": "morphing, flickering, distorted face, extra limbs, blurry text",
+      "continuity_type": "hard_cut",
+      "airlock_s": 0.0,
+      "seed": 0
+    },
+    {
+      "shot_id": "S05",
+      "duration_s": 5,
+      "edit_target_s": 4,
+      "continuity_handoff": "Final shot: 阿海 walks away, the eye closes, peace restored",
+      "fixed_landmarks": [
+        "Lighthouse: background left"
+      ],
+      "char_positions": {
+        "阿海": "Moving away from camera, towards the lighthouse",
+        "巨浪": "Background, eye closing"
+      },
+      "exited_chars": [],
+      "lighting_baseline": "Soft, blueish, dawn approaching",
+      "hook_type": "tender",
+      "shot_description": "Wide shot of 阿海 walking away towards the lighthouse, the eye in the wave slowly closes, the storm clears, dawn light appears",
+      "per_second": [
+        {
+          "rng": "0-1s",
+          "action": "阿海 walks away, back to camera",
+          "camera": "Static wide shot",
+          "spatial": "Wide view",
+          "audio": "Footsteps on wet sand",
+          "handoff": "Eye starts to close"
+        },
+        {
+          "rng": "1-2s",
+          "action": "Eye closes slowly, wave calms",
+          "camera": "Static",
+          "spatial": "Medium shot of the eye",
+          "audio": "Soft, peaceful sound",
+          "handoff": "Storm clears"
+        },
+        {
+          "rng": "2-3s",
+          "action": "Storm clouds clear, dawn light appears",
+          "camera": "Slow pan up to the sky",
+          "spatial": "Wide shot of the sky",
+          "audio": "Birds chirping",
+          "handoff": "Cut to 阿海"
+        },
+        {
+          "rng": "3-4s",
+          "action": "阿海 reaches the lighthouse, looks back",
+          "camera": "Static",
+          "spatial": "Medium shot of 阿海",
+          "audio": "Gentle waves",
+          "handoff": "Smile"
+        },
+        {
+          "rng": "4-5s",
+          "action": "阿海 smiles, turns to enter the lighthouse",
+          "camera": "Static",
+          "spatial": "Close-up of 阿海's face",
+          "audio": "Silence",
+          "handoff": "Fade to black"
+        }
+      ],
+      "narration": "",
+      "dialogue": [
+        {
+          "text": "谢谢你",
+          "speaker_id": "阿海",
+          "tone": "Soft, grateful",
+          "time_range": "3-4s",
+          "is_diegetic": true
+        }
+      ],
+      "sfx": [
+        "Footsteps",
+        "Birds chirping",
+        "Gentle waves"
+      ],
+      "mode": "I2VA",
+      "video_model": "H3",
+      "resolution_tier": "768P",
+      "aspect": "9:16",
+      "references": [],
+      "first_frame": "",
+      "last_frame": "",
+      "negative": "morphing, flickering, distorted face, extra limbs, blurry text",
+      "continuity_type": "hard_cut",
+      "airlock_s": 0.0,
+      "seed": 0
+    }
+  ]
+}

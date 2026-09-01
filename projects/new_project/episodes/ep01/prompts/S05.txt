@@ -1,0 +1,20 @@
+For the target video, at 0.00 seconds into the target video, <Picture 1> (from [Shot 1]) is fully referenced.
+
+integrated_multimodal_description:
+Style: Cinematic, high-contrast, stormy atmosphere, desaturated blue and gray tones, wet texture, dynamic camera movement, 4K, photorealistic
+[Shot 1] Wide shot of 阿海 walking away towards the lighthouse, the eye in the wave slowly closes, the storm clears, dawn light appears
+Per-second directives:
+  0-1s: 阿海 walks away, back to camera; camera: Static wide shot; spatial: Wide view; audio: Footsteps on wet sand; handoff: Eye starts to close
+  1-2s: Eye closes slowly, wave calms; camera: Static; spatial: Medium shot of the eye; audio: Soft, peaceful sound; handoff: Storm clears
+  2-3s: Storm clouds clear, dawn light appears; camera: Slow pan up to the sky; spatial: Wide shot of the sky; audio: Birds chirping; handoff: Cut to 阿海
+  3-4s: 阿海 reaches the lighthouse, looks back; camera: Static; spatial: Medium shot of 阿海; audio: Gentle waves; handoff: Smile
+  4-5s: 阿海 smiles, turns to enter the lighthouse; camera: Static; spatial: Close-up of 阿海's face; audio: Silence; handoff: Fade to black
+Fixed landmarks: Lighthouse: background left
+Character positions: 阿海=Moving away from camera, towards the lighthouse; 巨浪=Background, eye closing
+Lighting baseline: Soft, blueish, dawn approaching
+Continuity handoff: Final shot: 阿海 walks away, the eye closes, peace restored
+Dialogue: <Subject> (S1) says, <d>[Chinese] 谢谢你</d>
+
+overall_soundscape: Footsteps; Birds chirping; Gentle waves; hook: tender
+
+non_diegetic_music: diegetic ambient only; no score unless the shot calls for it

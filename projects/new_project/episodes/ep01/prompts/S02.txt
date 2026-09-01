@@ -1,0 +1,19 @@
+For the target video, at 0.00 seconds into the target video, <Picture 1> (from [Shot 1]) is fully referenced.
+
+integrated_multimodal_description:
+Style: Cinematic, high-contrast, stormy atmosphere, desaturated blue and gray tones, wet texture, dynamic camera movement, 4K, photorealistic
+[Shot 1] Close-up of the wave rising, revealing a glowing blue eye in the center, 阿海 looks up in shock
+Per-second directives:
+  0-1s: Wave rises, eye starts to glow; camera: Slow zoom in on the wave; spatial: Medium shot of the wave; audio: Deep, eerie hum; handoff: Eye fully visible
+  1-2s: Eye opens fully, glowing blue; camera: Static; spatial: Close-up of the eye; audio: Intense, low frequency sound; handoff: Cut to 阿海's reaction
+  2-3s: 阿海's eyes widen, mouth open in shock; camera: Quick zoom in on 阿海's face; spatial: Close-up of 阿海; audio: Sharp inhale; handoff: Cut to wave crashing
+  3-4s: Wave starts to crash down; camera: Wide shot; spatial: Wide view of the crash; audio: Loud crashing sound; handoff: Transition to next shot
+Fixed landmarks: Lighthouse: background left
+Character positions: 阿海=Center frame, facing the wave; 巨浪=Background, towering over the character
+Lighting baseline: Dark, blueish, glowing eye in wave
+Continuity handoff: The wave approaches, revealing the supernatural element
+Dialogue: <Subject> (S1) says, <d>[Chinese] 不...不可能</d>
+
+overall_soundscape: Eerie hum; Crashing waves; hook: reveal
+
+non_diegetic_music: diegetic ambient only; no score unless the shot calls for it
