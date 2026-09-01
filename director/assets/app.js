@@ -171,7 +171,7 @@ function updateGenerationRow(shotId) {
   if(metaEl) { const queue=task.remote && task.queue_group === "queue_pending" && task.queue_position ? ` · 队列第 ${task.queue_position} 位` : ""; const elapsed=elapsedText(task.started); metaEl.textContent=`阶段 ${task.cur||0}/${task.total||3}${queue}${elapsed ? ` · 已耗时 ${elapsed}` : ""}`; }
   if(logEl) logEl.textContent=(task.log||[]).slice(-8).join("\n") || (task.remote ? "已从 ComfyUI 远端队列识别" : "等待后台日志");
   const outputPath=task.outputPath || task.result?.clip;
-  if(previewEl) { if(task.status === "done" && outputPath) { previewEl.innerHTML=`<video class="generation-video" controls playsinline preload="metadata" src="${MEDIA(outputPath)}" title="点击播放或暂停 ${esc(shotId)} 预览"></video>`; const video=previewEl.querySelector("video"); video.onclick=()=>video.paused ? video.play() : video.pause(); } else if(task.status === "done") previewEl.innerHTML='<span class="generation-preview-note">已完成，正在准备预览…</span>'; else previewEl.innerHTML=""; }
+  if(previewEl) { if(task.status === "done" && outputPath) { previewEl.innerHTML=`<video class="generation-video" controls playsinline preload="auto" src="${MEDIA(outputPath)}" title="点击播放或暂停 ${esc(shotId)} 预览"></video><span class="generation-preview-note" data-video-error></span>`; const video=previewEl.querySelector("video"); video.onclick=()=>video.paused ? video.play() : video.pause(); video.onerror=()=>{const note=previewEl.querySelector("[data-video-error]");if(note)note.textContent="视频读取失败，请刷新后重试";}; } else if(task.status === "done") previewEl.innerHTML='<span class="generation-preview-note">已完成，正在准备预览…</span>'; else previewEl.innerHTML=""; }
   btn.disabled=task.status === "running";
   btn.textContent=task.status === "running" ? "生成中" : (task.status === "done" ? "重新生成" : "重试");
 }
@@ -207,7 +207,8 @@ async function loadOutputPreview() {
   try {
     const r=await API.get(`/api/files?path=${encodeURIComponent(activeFolder()+"/outputs")}`);
     const videos=(r.files||[]).filter(f=>f.kind === "vid");
-    root.innerHTML=videos.length ? videos.map(f=>`<div class="modal-shot"><b>${esc(f.name)}</b><br><video controls playsinline preload="metadata" style="width:min(260px,100%);margin-top:9px;border-radius:8px;background:#111" src="${MEDIA(f.path)}"></video></div>`).join("") : '<div class="form-note">当前集还没有可播放的视频。</div>';
+    root.innerHTML=videos.length ? videos.map(f=>`<div class="modal-shot"><b>${esc(f.name)}</b><br><video controls playsinline preload="auto" style="width:min(260px,100%);margin-top:9px;border-radius:8px;background:#111" src="${MEDIA(f.path)}"></video><span class="generation-preview-note" data-video-error></span></div>`).join("") : '<div class="form-note">当前集还没有可播放的视频。</div>';
+    root.querySelectorAll("video").forEach(video=>video.onerror=()=>{const note=video.parentElement.querySelector("[data-video-error]");if(note)note.textContent="视频读取失败，请刷新后重试";});
   } catch(e) { root.innerHTML=`<div class="form-note">视频读取失败：${esc(e.message)}</div>`; }
 }
 async function generateShot(shotId, btn) {

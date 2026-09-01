@@ -1126,23 +1126,37 @@ class Handler(BaseHTTPRequestHandler):
         return True
 
     def _serve_file(self, p, ctype):
-        # range support for video seeking
+        # Range support keeps browser video playback and seeking reliable.
         rng = self.headers.get("Range")
         size = os.path.getsize(p)
         start, end = 0, size - 1
         if rng:
             m = re.match(r"bytes=(\d*)-(\d*)", rng)
-            if m and m.group(1):
+            if not m or (not m.group(1) and not m.group(2)):
+                self.send_response(416)
+                self.send_header("Content-Range", f"bytes */{size}")
+                self.end_headers()
+                return
+            if m.group(1):
                 start = int(m.group(1))
-            if m and m.group(2):
-                end = int(m.group(2))
+                if m.group(2):
+                    end = int(m.group(2))
+            else:
+                suffix = int(m.group(2))
+                start = max(size - suffix, 0)
             end = min(end, size - 1)
+            if start >= size or start > end:
+                self.send_response(416)
+                self.send_header("Content-Range", f"bytes */{size}")
+                self.end_headers()
+                return
             self.send_response(206)
             self.send_header("Content-Range", f"bytes {start}-{end}/{size}")
-            self.send_header("Accept-Ranges", "bytes")
         else:
             self.send_response(200)
         self.send_header("Content-Type", ctype)
+        self.send_header("Accept-Ranges", "bytes")
+        self.send_header("Cache-Control", "no-cache")
         length = end - start + 1
         self.send_header("Content-Length", str(length))
         self.send_header("Access-Control-Allow-Origin", "*")

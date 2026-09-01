@@ -2,20 +2,20 @@
 
 > 本文件由脚本生成。它只陈述可扫描事实，不代表完整架构分析。
 
-- 扫描时间：`2026-09-01T18:32:51+08:00`
+- 扫描时间：`2026-09-01T18:46:28+08:00`
 - 项目：`h3-director-desk`
 - 根目录：`D:\workspace\deepseekSpace\h3-director-desk`
 - Git 分支：`main`
-- Git 提交：`fc328b6`
-- Git 变更条目：`16`
-- 扫描文件数：`111`
+- Git 提交：`38ed316`
+- Git 变更条目：`8`
+- 扫描文件数：`112`
 - 是否截断：`否`
 
 ## 顶层模块/目录
 
 | 路径 | 文件数 |
 |---|---:|
-| `projects` | 52 |
+| `projects` | 53 |
 | `output` | 45 |
 | `director` | 6 |
 | `(root)` | 4 |
@@ -33,10 +33,10 @@
 | `[no extension]` | 4 |
 | `.bat` | 2 |
 | `.js` | 2 |
+| `.mp4` | 2 |
 | `.html` | 1 |
 | `.css` | 1 |
 | `.sh` | 1 |
-| `.mp4` | 1 |
 
 ## 清单与构建文件
 
@@ -54,19 +54,11 @@
 
 ## 当前 Git 状态
 
-- ` M README.md`
 - ` M director/assets/app.js`
-- ` M director/assets/style.css`
-- ` M director/index.html`
 - ` M director/serve.py`
-- ` M docs/PROJECT_ANALYSIS.md`
 - ` M docs/project-evolution/.project-evolution.json`
 - ` M docs/project-evolution/README.md`
 - ` M docs/project-evolution/evidence/repository-snapshot.md`
-- ` M docs/project-evolution/mindmaps/architecture.md`
-- ` M docs/project-evolution/mindmaps/project-overview.md`
 - ` M docs/project-evolution/mindmaps/repository-structure.md`
-- ` M docs/project-evolution/mindmaps/technical-implementation.md`
-- `?? "docs/project-evolution/decisions/ADR-0006-\345\267\245\344\275\234\345\217\260\350\207\252\345\212\250\345\210\233\344\275\234\344\270\216\350\247\206\351\242\221\347\224\237\346\210\220\345\210\206\347\246\273.md"`
-- `?? "docs/project-evolution/iterations/I-0018-\345\267\245\344\275\234\345\217\260\344\270\200\345\217\245\350\257\235\350\207\252\345\212\250\345\210\233\344\275\234\346\265\201\347\250\213.md"`
-- `?? projects/new_project/`
+- `?? "docs/project-evolution/iterations/I-0019-\344\277\256\345\244\215\346\210\220\347\211\207\351\242\204\350\247\210\345\210\206\346\256\265\346\222\255\346\224\276.md"`
+- `?? projects/new_project/episodes/ep01/outputs/`

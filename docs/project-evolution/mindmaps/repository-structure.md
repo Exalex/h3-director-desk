@@ -7,11 +7,11 @@ mindmap
   root((h3-director-desk))
     Git 基线
       分支 main
-      提交 fc328b6
-      未提交条目 16
+      提交 38ed316
+      未提交条目 8
     顶层模块
       projects
-        文件数 52
+        文件数 53
       output
         文件数 45
       director
@@ -29,8 +29,8 @@ mindmap
       no extension 4
       .bat 2
       .js 2
+      .mp4 2
       .html 1
-      .css 1
     清单与构建
       未发现
 ```

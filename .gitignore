@@ -31,6 +31,7 @@ Thumbs.db
 
 # Generated media, local archives, and runtime configuration
 gen/
+projects/*/episodes/*/outputs/
 h3Movie/
 libraries/
 notes/
