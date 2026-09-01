@@ -137,7 +137,7 @@ def queue(base: str, workflow: Dict) -> str:
     return out["prompt_id"]
 
 
-def poll(base: str, prompt_id: str, timeout: int = 1800, interval: int = 5) -> Dict:
+def poll(base: str, prompt_id: str, timeout: int = 1800, interval: int = 5, on_event=None) -> Dict:
     """Poll /history until the prompt completes; return {status, outputs}.
 
     Transient network errors (server under load, flaky LAN) are retried within
@@ -145,15 +145,23 @@ def poll(base: str, prompt_id: str, timeout: int = 1800, interval: int = 5) -> D
     still be generating server-side.
     """
     t0 = time.time()
+    last_status = None
+    attempts = 0
     while time.time() - t0 < timeout:
+        attempts += 1
         try:
             hist = _get_json(base + f"/history/{prompt_id}", timeout=60)
-        except Exception:
+        except Exception as e:
+            if on_event and (attempts == 1 or attempts % 3 == 0):
+                on_event(f"poll /history 暂时失败 attempt={attempts} detail={e}")
             time.sleep(interval)
             continue
         if prompt_id in hist:
             e = hist[prompt_id]
             status = e.get("status", {}).get("status_str", "unknown")
+            if on_event and status != last_status:
+                on_event(f"queue_status={status} elapsed={time.time() - t0:.1f}s")
+                last_status = status
             if status in ("success", "error", "fatal"):
                 files = []
                 for o in (e.get("outputs") or {}).values():
@@ -162,6 +170,8 @@ def poll(base: str, prompt_id: str, timeout: int = 1800, interval: int = 5) -> D
                 return {"status": status, "outputs": e.get("outputs", {}), "files": files,
                         "messages": e.get("status", {}).get("messages", [])}
         time.sleep(interval)
+    if on_event:
+        on_event(f"poll timeout elapsed={time.time() - t0:.1f}s")
     return {"status": "timeout", "outputs": {}, "files": []}
 
 
@@ -204,22 +214,30 @@ def upload_image(base: str, local_path: str, subfolder: str = "", overwrite: boo
 def generate(base: str, prompt: str, out_path: str, width: int = 480, height: int = 832,
              length: int = 124, seed: int = 42, steps: int = 20,
              first_frame: str = "", last_frame: str = "", filename: str = "h3_clip",
-             timeout: int = 1800, verbose: bool = True, loras: Optional[list] = None) -> str:
+             timeout: int = 1800, verbose: bool = True, loras: Optional[list] = None,
+             on_event=None) -> str:
     """Full T2V/I2V generation -> out_path. Returns the saved file path."""
     wf = (build_i2v(prompt, width, height, length, seed, steps, filename, first_frame, last_frame, loras)
           if first_frame else
           build_t2v(prompt, width, height, length, seed, steps, filename, loras))
+    def emit(message):
+        if verbose:
+            print(message)
+        if on_event:
+            on_event(message)
+
     pid = queue(base, wf)
-    if verbose:
-        print(f"[comfy] queued {pid} ({'I2V' if first_frame else 'T2V'} {width}x{height}x{length} seed={seed})")
-    res = poll(base, pid, timeout=timeout)
-    if verbose:
-        print(f"[comfy] status={res['status']} files={res.get('files')}")
+    emit(f"queued prompt_id={pid} ({'I2V' if first_frame else 'T2V'} {width}x{height}x{length} seed={seed})")
+    res = poll(base, pid, timeout=timeout, on_event=on_event)
+    emit(f"status={res['status']} files={res.get('files')}")
     if res["status"] != "success":
         raise RuntimeError(f"H3 generation failed: {res.get('messages', res.get('status'))}")
     f = next((f for f in res["files"] if str(f.get("filename", "")).endswith(".mp4")),
              res["files"][0])
-    return download(base, f["filename"], out_path, f.get("subfolder", ""))
+    emit(f"downloading filename={f['filename']} subfolder={f.get('subfolder', '')}")
+    result = download(base, f["filename"], out_path, f.get("subfolder", ""))
+    emit(f"downloaded output={result}")
+    return result
 
 
 def extract_last_frame(video_path: str, out_png: str) -> str:

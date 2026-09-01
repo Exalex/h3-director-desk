@@ -135,7 +135,8 @@ def remote_generation(base, shot_id):
 def task_append(tid, line):
     with TASKS_LOCK:
         if tid in TASKS:
-            TASKS[tid]["log"].append(str(line))
+            stamp = time.strftime("%H:%M:%S")
+            TASKS[tid]["log"].append(f"[{stamp}] {line}")
             TASKS[tid]["log"] = TASKS[tid]["log"][-500:]
 
 
@@ -425,9 +426,13 @@ def run_comfy_generate(rel, shot_id, tid, params):
     height = int(params.get("height") or CFG["height"])
     steps = int(params.get("steps") or CFG["steps"])
     timeout = int(params.get("timeout") or 3000)
+    started_at = time.monotonic()
     try:
+        task_append(tid, f"开始生成 path={rel} shot={shot_id} backend={params.get('backend', 'comfy')} "
+                          f"comfy={base} size={width}x{height} steps={steps} timeout={timeout}s")
         d, err = _load_project_doc(rel)
         if err:
+            task_append(tid, f"读取集数 JSON 失败 detail={err}")
             task_finish(tid, error=err)
             return
         proj = _as_project(d)
@@ -437,11 +442,13 @@ def run_comfy_generate(rel, shot_id, tid, params):
             # maybe generate all
             shot = shots[0] if shots else None
         if shot is None:
+            task_append(tid, "未找到可生成镜头")
             task_finish(tid, error="shot_not_found")
             return
-        task_append(tid, f"[{shot.shot_id}] {shot.mode} {width}x{height}")
+        task_append(tid, f"已读取集数 JSON，镜头={shot.shot_id} mode={shot.mode} duration={shot.duration_s}s")
         prompts = prompt.compile_all(proj)
         ptext = prompts[shot.shot_id]
+        task_append(tid, f"提示词编译完成 chars={len(ptext)} all_shots={len(prompts)}")
         chars = None
         try:
             from h3_short_drama.character_lock import characters_from
@@ -450,11 +457,14 @@ def run_comfy_generate(rel, shot_id, tid, params):
             chars = {}
         lead = next((n for n in shot.char_positions.keys() if n in chars), None)
         first = chars.get(lead, "") if lead else ""
+        task_append(tid, f"角色引用检查 lead={lead or 'none'} local_first_frame={'yes' if first else 'no'}")
         if first and not os.path.exists(first):
+            task_append(tid, f"首帧文件不存在，降级为无首帧：{first}")
             first = ""
         if first:
-            task_append(tid, f"uploading first_frame {first}")
+            task_append(tid, f"开始上传首帧 first_frame={first}")
             first = comfyui_gen.upload_image(base, first)
+            task_append(tid, f"首帧上传完成 remote_image={first}")
         seed = shot.seed or (42 + 0 * 7919) % (2 ** 31)
         if out_dir and out_dir.startswith("auto"):
             out_dir = ""
@@ -463,7 +473,7 @@ def run_comfy_generate(rel, shot_id, tid, params):
         clip = os.path.join(od, f"{shot.shot_id}.mp4")
         length = max(5, int(round(shot.duration_s * 24)))
         length += (5 - (length % 17)) % 17
-        task_append(tid, f"generating {shot.shot_id} length={length}f seed={seed} first={'yes' if first else 'no'}")
+        task_append(tid, f"准备提交 ComfyUI frames={length} seed={seed} first={'yes' if first else 'no'} output={clip}")
 
         backend = params.get("backend", "comfy")
         if backend == "accel" and not first:
@@ -482,14 +492,16 @@ def run_comfy_generate(rel, shot_id, tid, params):
         comfyui_gen.generate(base, ptext, clip, width=width,
                              height=height, length=length, seed=seed,
                              steps=steps, first_frame=first, filename=shot.shot_id,
-                             timeout=timeout, verbose=False)
-        task_append(tid, f"DONE -> {clip}")
+                             timeout=timeout, verbose=False,
+                             on_event=lambda message: task_append(tid, f"[ComfyUI] {message}"))
+        size = os.path.getsize(clip) if os.path.isfile(clip) else 0
+        task_append(tid, f"生成完成 output={clip} bytes={size} elapsed={time.monotonic() - started_at:.1f}s")
         task_progress(tid, 3, 3)
         task_finish(tid, result={"shot_id": shot.shot_id, "clip": os.path.relpath(clip, REPO).replace("\\", "/"),
                                  "seed": seed, "mode": "I2V" if first else "T2V",
                                  "first_frame": first, "prompt_preview": ptext[:400]})
     except Exception as e:
-        task_append(tid, f"ERROR {e}")
+        task_append(tid, f"ERROR type={type(e).__name__} elapsed={time.monotonic() - started_at:.1f}s detail={e}")
         task_finish(tid, error=str(e))
 
 

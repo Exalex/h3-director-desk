@@ -14,6 +14,7 @@ mindmap
       shot_table.check_project
       prompt.compile_all
       comfyui_gen.queue/poll/download
+      comfyui_gen.generate on_event
       remote_generations/remote_generation
       GENERATION_LOCK
       run_chat_workflow/_write_asset_plan
@@ -27,6 +28,7 @@ mindmap
       后台任务
       ComfyUI队列观测
       状态轮询与定时刷新
+      同URL视频节点复用
       progress/meta/log镜头节点
       data-generation-summary整集汇总
       data-shot-preview镜头预览
@@ -46,8 +48,10 @@ mindmap
       同镜头幂等拦截
       同集自动创作幂等拦截
       阶段进度与最新日志
+      日志时间戳与ComfyUI事件
       完成数/处理中数/排队数
       HTML5播放与拖动
+      播放期间不重建video元素
       有限瞬时错误重试
       服务退出自动重启
       加速服务回退ComfyUI
@@ -101,3 +105,5 @@ mindmap
 - Windows 启动：`start_local.bat` 启动独立最小化窗口，`run_server.bat` 监护 `serve.py`；退出原因追加到 `director/server.log`，该日志被 Git 忽略。
 - 配置与环境变量：ComfyUI 地址、加速地址、LLM 地址/模型和密钥均来自环境或命令行；文档不记录密钥值。
 - 测试缝与可观测性：`check`、`plan`、`prompts`、HTTP API、ffprobe 属性和真实装配结果构成当前验证证据。
+- 生成日志：`director/serve.py` 的 `task_append` 为任务日志统一增加 `HH:MM:SS` 时间戳；`run_comfy_generate` 记录配置、JSON/提示词/角色引用、提交参数、产物大小、耗时和异常类型，`comfyui_gen.generate/poll` 通过 `on_event` 记录远端 prompt id、队列状态、重试和下载。
+- 预览稳定性：`director/assets/app.js` 的 `updateGenerationRow` 比较媒体 URL；同一 URL 的轮询只更新状态，不执行 `innerHTML` 替换，因此不会因 5 秒状态刷新把播放位置重置到开头。

@@ -169,9 +169,20 @@ function updateGenerationRow(shotId) {
   statusEl.className=`generation-status ${task.status}`;
   if(progressEl) progressEl.style.width=`${task.total ? Math.min(100,Math.round((task.cur||0)/task.total*100)) : 0}%`;
   if(metaEl) { const queue=task.remote && task.queue_group === "queue_pending" && task.queue_position ? ` · 队列第 ${task.queue_position} 位` : ""; const elapsed=elapsedText(task.started); metaEl.textContent=`阶段 ${task.cur||0}/${task.total||3}${queue}${elapsed ? ` · 已耗时 ${elapsed}` : ""}`; }
-  if(logEl) logEl.textContent=(task.log||[]).slice(-8).join("\n") || (task.remote ? "已从 ComfyUI 远端队列识别" : "等待后台日志");
+  if(logEl) logEl.textContent=(task.log||[]).slice(-30).join("\n") || (task.remote ? "已从 ComfyUI 远端队列识别" : "等待后台日志");
   const outputPath=task.outputPath || task.result?.clip;
-  if(previewEl) { if(task.status === "done" && outputPath) { previewEl.innerHTML=`<video class="generation-video" controls playsinline preload="auto" src="${MEDIA(outputPath)}" title="点击播放或暂停 ${esc(shotId)} 预览"></video><span class="generation-preview-note" data-video-error></span>`; const video=previewEl.querySelector("video"); video.onclick=()=>video.paused ? video.play() : video.pause(); video.onerror=()=>{const note=previewEl.querySelector("[data-video-error]");if(note)note.textContent="视频读取失败，请刷新后重试";}; } else if(task.status === "done") previewEl.innerHTML='<span class="generation-preview-note">已完成，正在准备预览…</span>'; else previewEl.innerHTML=""; }
+  if(previewEl) {
+    if(task.status === "done" && outputPath) {
+      const src=MEDIA(outputPath), video=previewEl.querySelector("video");
+      // Status polling must update text without replacing a playing video node.
+      if (!video || video.getAttribute("src") !== src) {
+        previewEl.innerHTML=`<video class="generation-video" controls playsinline preload="auto" src="${src}" title="点击播放或暂停 ${esc(shotId)} 预览"></video><span class="generation-preview-note" data-video-error></span>`;
+        const nextVideo=previewEl.querySelector("video");
+        nextVideo.onerror=()=>{const note=previewEl.querySelector("[data-video-error]");if(note)note.textContent="视频读取失败，请刷新后重试";};
+      }
+    } else if(task.status === "done") previewEl.innerHTML='<span class="generation-preview-note">已完成，正在准备预览…</span>';
+    else previewEl.innerHTML="";
+  }
   btn.disabled=task.status === "running";
   btn.textContent=task.status === "running" ? "生成中" : (task.status === "done" ? "重新生成" : "重试");
 }
