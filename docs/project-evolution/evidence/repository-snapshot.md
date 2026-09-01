@@ -2,12 +2,12 @@
 
 > 本文件由脚本生成。它只陈述可扫描事实，不代表完整架构分析。
 
-- 扫描时间：`2026-09-01T08:10:24+08:00`
+- 扫描时间：`2026-09-01T15:11:11+08:00`
 - 项目：`h3-director-desk`
 - 根目录：`D:\workspace\deepseekSpace\h3-director-desk`
 - Git 分支：`main`
-- Git 提交：`da0b174`
-- Git 变更条目：`12`
+- Git 提交：`9ed8894`
+- Git 变更条目：`10`
 - 扫描文件数：`103`
 - 是否截断：`否`
 
@@ -56,13 +56,11 @@
 
 - ` M director/assets/app.js`
 - ` M director/assets/style.css`
-- ` M director/serve.py`
 - ` M docs/project-evolution/.project-evolution.json`
 - ` M docs/project-evolution/README.md`
 - ` M docs/project-evolution/evidence/repository-snapshot.md`
-- ` M docs/project-evolution/mindmaps/architecture.md`
 - ` M docs/project-evolution/mindmaps/iterations.md`
 - ` M docs/project-evolution/mindmaps/project-overview.md`
 - ` M docs/project-evolution/mindmaps/repository-structure.md`
 - ` M docs/project-evolution/mindmaps/technical-implementation.md`
-- `?? "docs/project-evolution/iterations/I-0015-\350\241\245\345\205\205-h3-\347\224\237\346\210\220\350\277\233\345\272\246\344\270\216\345\220\216\345\217\260\346\227\245\345\277\227\345\217\257\350\247\206\345\214\226.md"`
+- `?? "docs/project-evolution/iterations/I-0016-\345\242\236\345\212\240\346\225\264\351\233\206\347\224\237\346\210\220\346\200\273\350\277\233\345\272\246\345\271\266\346\201\242\345\244\215\346\234\254\345\234\260\345\257\274\346\274\224\345\217\260\346\234\215\345\212\241.md"`
