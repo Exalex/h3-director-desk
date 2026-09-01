@@ -175,7 +175,7 @@ function updateGenerationRow(shotId) {
   if (!statusEl || !btn) return;
   const task=S.generationTasks[generationKey(shotId)];
   if (!task) { statusEl.textContent="等待提交"; statusEl.className="generation-status"; if(progressEl)progressEl.style.width="0%"; if(meterEl){meterEl.setAttribute("aria-valuenow","0");meterEl.classList.remove("is-running");} if(percentEl)percentEl.textContent="0%"; if(metaEl)metaEl.textContent="尚未提交"; if(logEl)logEl.textContent="暂无日志"; if(previewEl)previewEl.innerHTML=""; btn.disabled=false; btn.textContent="生成"; return; }
-  const percent=taskPercent(task), current=task.cur || 0, total=task.total || 5, progress=total ? ` ${current}/${total}` : "";
+  const percent=taskPercent(task), total=task.total || 5, current=task.status === "done" ? total : (task.cur || 0), progress=total ? ` ${current}/${total}` : "";
   const fallback=task.remote && !task.cur ? "ComfyUI 排队中" : (task.cur ? `H3 处理中${progress}…` : "已进入 ComfyUI 队列…");
   const labels={running:task.pending ? "正在提交…" : (task.phase || fallback),done:"已完成，可播放",error:`失败：${task.error || "未知错误"}`};
   statusEl.textContent=labels[task.status] || "已提交，等待任务状态";
